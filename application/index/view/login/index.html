@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>掌钱管家</title>
+		<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="/static/css/login.css" />
+	</head>
+
+	<body>
+		<div class="from-wrap">
+			<form action="/index/login/index" method="post">
+			<h3>用户名</h3>
+			<input type="text" id="username" name="username" autocomplete="off" placeholder="用户名/邮   箱" required="required" />
+			</br>
+			<h3>密   码</h3>
+			<input type="password" id="password" name="password" autocomplete="off" placeholder="请输入密码" required="required" /></br>
+			<span class="notice">{$error}</span>
+			<button class="to-login">登 &nbsp;&nbsp;录</button>
+			<div class="newuser">
+				<a href="#">忘记密码</a>
+				<a href="#">现在注册</a>
+			</div>
+		</form>
+		</div>
+	</body>
+<script src="/static/js/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/login.js" type="text/javascript" charset="utf-8"></script>
+</html>
