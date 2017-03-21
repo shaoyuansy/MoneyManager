@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>用户注册</title>
+		<link rel="stylesheet" type="text/css" href="/static/css/register.css" />
+	</head>
+
+	<body>
+		<h3>用户注册</h3>
+		<form action="/index/Register/index" method="post">
+			<div>
+				<label for="username">用户名</label>
+				<input type="text" name="username" id="username" required="required" autocomplete="off" placeholder="4~16个字符（数字、字母、下划线）" value="{$infor.username}"/>
+				<span class="mi">*</span><span class="musthas">必填</span>
+			</div>
+
+			<div>
+				<label for="password">密码</label>
+				<input type="password" name="password" id="password" required="required" autocomplete="off" placeholder="6~16个字符，请注意大小写" />
+				<span class="mi">*</span><span class="musthas">必填</span>
+			</div>
+
+			<div>
+				<label for="confirm">确认密码</label>
+				<input type="password" required="required" id="confirm" autocomplete="off" placeholder="请再次输入您要设置的密码" />
+				<span class="mi">*</span><span class="musthas">必填</span>
+			</div>
+
+			<div>
+				<label for="email">电子邮箱</label>
+				<input type="text" required="required" name="email" id="email" autocomplete="off" placeholder="忘记密码时可使用邮箱找回密码" value="{$infor.email}"/>
+				<span class="mi">*</span><span class="musthas">必填</span>
+			</div>
+			
+			<div>
+				<label for="code">验证码</label>
+				<input type="text" id="code" name="code" />
+				<p class="getcode" >
+				点击获取
+				</p>
+				<img class="re-getcode" src={:captcha_src()}  onclick="this.src='{:captcha_src()}?d='+Math.random();">
+				<span class="re-notice"><span class="mi">*</span>点击重新获取</span>
+			</div>
+			<p class="notice reg-false">{$infor.error}</p>
+			<div>
+				<button class="reset-all" type="reset">重新填写</button>
+				<button class="to-reginster" disabled="disabled" >注册</button>
+			</div>
+		</form>
+	</body>
+
+</html>
+<script src="/static/js/bg-animation.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/jquery-3.1.0.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/static/js/register.js" type="text/javascript" charset="utf-8"></script>
