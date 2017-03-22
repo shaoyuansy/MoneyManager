@@ -12,7 +12,7 @@ class Register extends Controller
 			/*实例化User模型，获取注册数据*/
 			$username = input('post.username');
 			$password = input('post.password');
-			$nickname = input('post.nickname');
+			$phone= input('post.phone');
 			$email = input('post.email');
 			$captcha = input('post.code');//验证code
 			if(!captcha_check($captcha)){
@@ -20,6 +20,7 @@ class Register extends Controller
 				$infor['username'] = $username;
 				$infor['password'] = '';
 				$infor['email'] = $email;
+				$infor['phone'] = $phone;
 				$infor['error'] = '验证码错误';
 				$this->assign('infor',$infor);
 				return view('index');
@@ -27,13 +28,16 @@ class Register extends Controller
 				//验证成功
 				$user = new UserModel;
 				if(isset($username) && isset($password) && isset($email) && $username!='' && $password!='' && $email!=''){
-					$uid = $user->regist($username,$password,$nickname,$email);
+					$uid = $user->regist($username,$password,$phone,$email);
 					if($uid >= 0){
-						$this->redirect('register');
+						$jsonData = array('success'=>'true','data'=>$uid);
+						return json($jsonData);
+						//$this->redirect('register');
 					}else{
 						$infor['username'] = $username;
 						$infor['password'] = '';
 						$infor['email'] = $email;
+						$infor['phone'] = $phone;
 						$infor['error'] = '用户注册失败！';
 						$this->assign('infor',$infor);
 						return view('index');
@@ -42,6 +46,7 @@ class Register extends Controller
 					$infor['username'] = $username;
 					$infor['password'] = '';
 					$infor['email'] = $email;
+					$infor['phone'] = $phone;
 					$infor['error'] = '用户名或密码填写不完整';
 					$this->assign('infor',$infor);
 					return view('index');
@@ -51,6 +56,7 @@ class Register extends Controller
 			$infor['username'] = '';
 			$infor['password'] = '';
 			$infor['email'] = '';
+			$infor['phone'] = '';
 			$infor['error'] = '';
 			$this->assign('infor',$infor);
 			return view('index');

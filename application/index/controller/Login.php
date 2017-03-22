@@ -28,10 +28,8 @@ class Login extends Controller
 				);
 				session('user_auth',$auth);
 				session('user_auth_sign',data_auth_sign($auth));
-				if($uid == 1) {
-					$this->redirect('admin/index');
-				}else{
-					$this->redirect('index/index');
+				if($uid >= 0) {
+					$this->redirect('home/index');
 				}
 			}else if($uid < 0){
 				switch($uid){

@@ -18,7 +18,7 @@
     <!-- Custom styles for this template -->
     <link href="/dist/css/style.css" rel="stylesheet">
     <link href="/dist/css/style-responsive.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="/dist/css/register.css" />
+	<link rel="stylesheet" type="text/css" href="/static/css/register.css" />
 	</head>
 	
 	<body>
@@ -31,32 +31,34 @@
 						<tr>
 							<td><label for="username">用户名:</label></td>
 							<td><input type="text" id="username" name="username" class="form-control" required="required" 
-							autocomplete="off" placeholder="4~16个字符（数字、字母、下划线）"  autofocus value="{$infor.username}"/>
+							autocomplete="off" placeholder="4~16个字符（数字、字母、下划线）" autofocus value="{$infor.username}"/>
 							<span class="mi">*必填</span></td>
 						</tr>				
 		
 						<tr>
 							<td><label for="password">密   码:</label></td>
-							<td><input type="password" id="password" class="form-control"  required="required" autocomplete="off" placeholder="6~16个字符，请注意大小写" />
+							<td><input type="password" id="password" name="password" class="form-control"  required="required" autocomplete="off"
+							value="{$infor.password}" placeholder="6~16个字符，请注意大小写" />
 							<span class="mi">*必填</span></td>
 						</tr>
 					
 						<tr>
 							<td><label for="rpassword">重复密码:</label></td>
-							<td><input type="password" id="confirm" class="form-control"  required="required" autocomplete="off" placeholder="请再次输入您要设置的密码" />
+							<td><input type="password" id="confirm" class="form-control"  required="required" autocomplete="off"
+							value="{$infor.password}" placeholder="请再次输入您要设置的密码" />
 							<span class="mi">*必填</span></td>
 						</tr>
 
 						<tr>
 							<td><label for="email">邮箱账号:</label></td>
 							<td><input type="text" class="form-control" required="required" name="email" id="email" 
-							autocomplete="off" placeholder="忘记密码时可使用邮箱找回密码" value="{$infor.email}"/>
+							value="{$infor.email}" autocomplete="off" placeholder="忘记密码时可使用邮箱找回密码" value="{$infor.email}"/>
 							<span class="mi">*必填</span></td>
 						</tr>
 
 						<tr>
 							<td><label for="phone">手机号码:</label></td>
-							<td><input type="text" id="phone" name="phone" class="form-control"  placeholder="手机号码"></td>
+							<td><input type="text" id="phone" name="phone" class="form-control" value="{$infor.phone}" placeholder="手机号码"></td>
 						</tr>
 						<tr>
 							<td><label for="code">验证码:</label></td>
@@ -76,7 +78,7 @@
 						<button class="btn btn-theme btn-block register" href="#.html" type="submit"><i class="fa fa-lock"></i>  注    册</button>
 						<button class="btn btn-warning btn-block reset" href="#.html"><i class="fa fa-lock"></i>  重新填写</button>
 					</div>
-					<div class="error">错误信息</div>
+					<div class="error">{$infor.error}</div>
 					<div class="tologin">
 						已注册可单击<a href="/index/login/index">登录</a>
 					</div>
@@ -109,7 +111,7 @@
     <!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
     <script type="text/javascript" src="/dist/js/jquery.backstretch.min.js"></script>
     <script>
-        $.backstretch("/static/img/login-bg.jpg", {speed: 500});
+        $.backstretch("/static/img/login-bg.jpg", {speed: 100});
 		$("#checkbox").change(function() { 
 			if($("#checkbox").prop("checked")){
 				$(".register").prop("disabled",false);

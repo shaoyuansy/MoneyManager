@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
@@ -18,35 +17,27 @@
 		<!-- Custom styles for this template -->
 		<link href="/dist/css/style.css" rel="stylesheet">
 		<link href="/dist/css/style-responsive.css" rel="stylesheet">
-
-	  </head>
-	  
+		<link rel="stylesheet" type="text/css" href="/static/css/login.css" >
+	</head>
 	<body>	  
-	
-	  <!-- **********************************************************************************************************************************************************
-      MAIN CONTENT
-      *********************************************************************************************************************************************************** -->
-
 	  <div id="login-page">
 	  	<div class="container">
-	  	
 		      <form action="/index/login/index" method="post" class="form-login">
 		        <h2 class="form-login-heading">欢 迎 登 录</h2>
 		        <div class="login-wrap">
 		            <input type="text" class="form-control" id="username" name="username" autocomplete="off" placeholder="用户名/邮箱" required="required" />
 		            <br>
-		            <input type="password" class="form-control" id="password" name="password" autocomplete="off" placeholder="密  码" required="required" /></br>
+		            <input type="password" class="form-control" id="password" name="password" autocomplete="off" placeholder="密  码" required="required" />
 		            <br>
-					<span class="notice">{$error}</span>
 		            <button class="btn btn-theme btn-block" href="index.html" type="submit"><i class="fa fa-lock"></i>  登&nbsp;&nbsp;录</button>
 					<br>
 					<label class="checkbox">
+						<span class="pull-left error">{$error}</span>
 		                <span class="pull-right">
 		                    <a data-toggle="modal" href="login.html#myModal">忘记密码</a>    |
 							<a href="/index/register/index">免费注册</a>	
 		                </span>
 		            </label>		    
-	
 		        </div>
 		          <!-- Modal -->
 		          <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
@@ -69,11 +60,9 @@
 		              </div>
 		          </div>
 		          <!-- modal -->
-		
 		      </form>	  	
-	  	
 	  	</div>
-	  </div>
+	</div>
 
     <!-- js placed at the end of the document so the pages load faster -->
     <script src="/dist/js/jquery.js"></script>
@@ -84,7 +73,7 @@
     <script type="text/javascript" src="/dist/js/jquery.backstretch.min.js"></script>
 
     <script>
-        $.backstretch("/static/img/login-bg.jpg", {speed: 500});
+        $.backstretch("/static/img/login-bg.jpg", {speed: 200});
     </script>
 
   </body>

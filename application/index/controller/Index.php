@@ -10,13 +10,13 @@ class Index extends Controller
         if(!is_login()){
            return redirect('login/index');
         }else{
-            if(session('user_auth.uid') == 1){
-            	$this->redirect('admin/index');
-            }else{
-            	$username = session('user_auth.username');
-            	$this->assign('username',$username);
+            //if(session('user_auth.uid') == 1){
+            //	$this->redirect('admin/index');
+           // }else{
+            $username = session('user_auth.username');
+            $this->assign('username',$username);
            	return view('index/index');
-        	}
+        	//}
         }
     }
 
