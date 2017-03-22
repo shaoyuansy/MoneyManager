@@ -1,0 +1,66 @@
+
+	table tr td:first-child{
+		width:120px;
+		font-size:16px;
+		text-align: right;
+	}
+	table tr td:last-child{
+		padding:8px 0px;
+		width:400px;
+		padding-left:30px; 
+	}
+	table tr td:last-child input[type='text'],
+	table tr td:last-child input[type='password']{
+		width: 80%;
+	}
+	.mi{
+		display: inline;
+	}
+	.form-control{
+		display: inline;
+	}
+	#code{
+		width: 120px;
+	}
+	.re-getcode{
+		width: 150px;
+		margin-right: 20px;
+	}
+	.reset,
+	.register{
+		width: 200px;
+		display: inline;
+	}
+	.reset{
+		margin-left: 20px;
+	}
+	.btn-block + .btn-block{
+		margin-top: 0px;
+	}
+	.foot-btn{
+		border-top: 1px solid #f0f0f0;
+		padding:20px;
+		margin: 0 auto;
+		text-align: center;
+	}
+	.tologin{
+		font-size: 14px;
+		width: 120px;
+		display: inline;
+		float: right;
+		margin-right: 55px;
+	}
+	.error{
+		font-size: 14px;
+		display: inline;
+		width: 120px;
+		margin: 0;
+		padding-left: 65px;
+		color: red;
+	}
+    #protocol{
+        top: 10px;
+    }
+    #protocol .modal-content{
+        width: 700px;
+    }
