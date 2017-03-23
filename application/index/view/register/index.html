@@ -30,53 +30,53 @@
 					<table>
 						<tr>
 							<td><label for="username">用户名:</label></td>
-							<td><input type="text" id="username" name="username" class="form-control" required="required" 
-							autocomplete="off" placeholder="4~16个字符（数字、字母、下划线）" autofocus value="{$infor.username}"/>
+							<td><input type="text" id="username" name="username" class="form-control " required="required" onblur="chkUsername()"
+							autocomplete="off" placeholder="5~16个字符（数字、字母、下划线）" value="{$infor.username}"/>
 							<span class="mi">*必填</span></td>
 						</tr>				
 		
 						<tr>
 							<td><label for="password">密   码:</label></td>
-							<td><input type="password" id="password" name="password" class="form-control"  required="required" autocomplete="off"
-							value="{$infor.password}" placeholder="6~16个字符，请注意大小写" />
+							<td><input type="password" id="password" name="password" class="form-control"  required="required" onblur="chkPassword()"
+							autocomplete="off" value="{$infor.password}" placeholder="6~16个字符，请注意大小写" />
 							<span class="mi">*必填</span></td>
 						</tr>
 					
 						<tr>
 							<td><label for="rpassword">重复密码:</label></td>
-							<td><input type="password" id="confirm" class="form-control"  required="required" autocomplete="off"
+							<td><input type="password" id="rpassword" class="form-control"  required="required" autocomplete="off" onblur="chkRpassword()"
 							value="{$infor.password}" placeholder="请再次输入您要设置的密码" />
 							<span class="mi">*必填</span></td>
 						</tr>
 
 						<tr>
 							<td><label for="email">邮箱账号:</label></td>
-							<td><input type="text" class="form-control" required="required" name="email" id="email" 
+							<td><input type="text" class="form-control" required="required" name="email" id="email" onblur="chkEmail()"
 							value="{$infor.email}" autocomplete="off" placeholder="忘记密码时可使用邮箱找回密码" value="{$infor.email}"/>
 							<span class="mi">*必填</span></td>
 						</tr>
 
 						<tr>
 							<td><label for="phone">手机号码:</label></td>
-							<td><input type="text" id="phone" name="phone" class="form-control" value="{$infor.phone}" placeholder="手机号码"></td>
+							<td><input type="text" id="phone" name="phone" class="form-control" value="{$infor.phone}" onblur="chkPhone()" placeholder="手机号码"></td>
 						</tr>
 						<tr>
 							<td><label for="code">验证码:</label></td>
 							<td>
 								<img class="re-getcode" src={:captcha_src()}  onclick="this.src='{:captcha_src()}?d='+Math.random();">
-								<input type="text" id="code" name="code"  class="form-control"  placeholder="验证码">
+								<input type="text" id="code" name="code"  class="form-control" required="required" placeholder="验证码">
 							</td>
 						</tr>
 						<tr>
 							<td></td>
 							<td style="font-size:14px;">
-								<input type="checkbox" id="checkbox"> 我已阅读并同意mk.manager.com的<a data-toggle="modal" href="register.html#protocol">《用户服务条款》</a>
+								<input type="checkbox" id="checkbox"> 我已同意mk.manager.com的<a data-toggle="modal" href="register.html#protocol">《用户服务条款》</a>
 							</td>	
 						</tr>
 					</table>
 					<div class="foot-btn">						
 						<button class="btn btn-theme btn-block register" href="#.html" type="submit"><i class="fa fa-lock"></i>  注    册</button>
-						<button class="btn btn-warning btn-block reset" href="#.html"><i class="fa fa-lock"></i>  重新填写</button>
+						<button class="btn btn-warning btn-block reset" type="reset"><i class="fa fa-lock"></i>  重新填写</button>
 					</div>
 					<div class="error">{$infor.error}</div>
 					<div class="tologin">
@@ -112,6 +112,9 @@
     <script type="text/javascript" src="/dist/js/jquery.backstretch.min.js"></script>
     <script>
         $.backstretch("/static/img/login-bg.jpg", {speed: 100});
+		
+		$(".register").prop("disabled",true);
+		
 		$("#checkbox").change(function() { 
 			if($("#checkbox").prop("checked")){
 				$(".register").prop("disabled",false);
@@ -119,6 +122,74 @@
 				$(".register").prop("disabled",true);
 			}
 		});
+		
+		$('input').focus(function (){
+			$('.error').text(''); 
+		});
+		
+		function chkUsername(){
+			$("#username").removeClass("has-error");
+			$("#username").removeClass("has-success");
+			var usernameReg = /^\w{5,16}$/;
+			var username = $("#username").val();
+			if(usernameReg.test(username)){
+				$("#username").addClass("has-success");
+			}else{
+				$("#username").addClass("has-error");
+			}
+		};
+		
+		function chkPassword(){
+			$("#password").removeClass("has-error");
+			$("#password").removeClass("has-success");
+			var password = $("#password").val();
+			var rpassword = $("#rpassword").val();
+			if(password.length < 6){
+				$("#password").addClass("has-error");
+			}else{
+				$("#password").addClass("has-success");
+			}
+			if(rpassword!="")
+			this.chkRpassword();
+		};
+		
+		function chkRpassword(){
+			$("#rpassword").removeClass("has-error");
+			$("#rpassword").removeClass("has-success");
+			var password = $("#password").val();
+			var rpassword = $("#rpassword").val();
+			if(password != rpassword){
+				$("#rpassword").addClass("has-error");
+			}else{
+				$("#rpassword").addClass("has-success");
+			}
+		};
+		
+		function chkEmail(){
+			$("#email").removeClass("has-error");
+			$("#email").removeClass("has-success");
+			var emailReg = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			var email = $("#email").val();
+			if(!emailReg.test(email)){
+				$("#email").addClass("has-error");
+			}else{
+				$("#email").addClass("has-success");
+			}
+		};
+		
+		function chkPhone(){
+			$("#phone").removeClass("has-error");
+			$("#phone").removeClass("has-success");
+			var phoneReg = /^(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
+			var phone = $("#phone").val();
+			if(phone != ""){
+				if(!phoneReg.test(phone)){
+					$("#phone").addClass("has-error");
+				}else{
+					$("#phone").addClass("has-success");
+				}
+			}
+		};
     </script>
 
   </body>

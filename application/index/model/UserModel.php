@@ -52,7 +52,7 @@ class UserModel extends Model{
 			'registered_time'=>think_now_time()
 		];
 		$uid = db('user')->insertGetId($data);
-		if($uid = 0){
+		if($uid >= 0){
 			return $uid;
 		}else{
 			return -1;

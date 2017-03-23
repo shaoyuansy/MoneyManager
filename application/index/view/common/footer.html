@@ -40,9 +40,9 @@
             // (bool | optional) if you want it to fade out on its own or just sit there
             sticky: true,
             // (int | optional) the time you want it to be alive for before fading out
-            time: '',
+            time: '1000',
             // (string | optional) the class name you want to apply to that specific message
-            class_name: 'my-sticky-class'
+            class_name: 'welcome-msg'
         });
 
         return false;
@@ -81,6 +81,10 @@
             var nav = $("#" + id).data("navigation");
             var to = $("#" + id).data("to");
             console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
+        }
+
+        function logout(){
+            location.href="/logout";
         }
     </script>
   

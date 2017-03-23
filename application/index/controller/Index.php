@@ -15,7 +15,7 @@ class Index extends Controller
            // }else{
             $username = session('user_auth.username');
             $this->assign('username',$username);
-           	return view('index/index');
+           	return view('home/index');
         	//}
         }
     }
