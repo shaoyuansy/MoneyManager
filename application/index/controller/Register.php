@@ -28,19 +28,35 @@ class Register extends Controller
 				//验证成功
 				$user = new UserModel;
 				if(isset($username) && isset($password) && isset($email) && $username!='' && $password!='' && $email!=''){
-					$uid = $user->regist($username,$password,$phone,$email);
-					if($uid >= 0){
-						$jsonData = array('success'=>'true','data'=>$uid);
-						return json($jsonData);
-						//$this->redirect('register');
-					}else{
+					if($user -> uid_by_username($username) >= 0 ){
 						$infor['username'] = $username;
 						$infor['password'] = '';
 						$infor['email'] = $email;
 						$infor['phone'] = $phone;
-						$infor['error'] = '用户注册失败！';
+						$infor['error'] = '该用户名已存在！';
 						$this->assign('infor',$infor);
 						return view('index');
+					}else if($user -> uid_by_email($email) >= 0){
+						$infor['username'] = $username;
+						$infor['password'] = '';
+						$infor['email'] = $email;
+						$infor['phone'] = $phone;
+						$infor['error'] = '该邮箱已被注册！';
+						$this->assign('infor',$infor);
+						return view('index');
+					}else{
+						$uid = $user->regist($username,$password,$phone,$email);
+						if($uid >= 0){
+							return view('registok');
+						}else{
+							$infor['username'] = $username;
+							$infor['password'] = '';
+							$infor['email'] = $email;
+							$infor['phone'] = $phone;
+							$infor['error'] = '用户注册失败！';
+							$this->assign('infor',$infor);
+							return view('index');
+						}
 					}
 				}else{
 					$infor['username'] = $username;
@@ -62,5 +78,4 @@ class Register extends Controller
 			return view('index');
 		}
     }
-
 }

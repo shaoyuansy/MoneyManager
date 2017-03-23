@@ -59,6 +59,25 @@ class UserModel extends Model{
 		}
 	}
 	
+	public function uid_by_username($username){
+		$data = db('user')->where('username',$username)->field('uid')->select();
+		if($data){
+			return $data[0]['uid'];
+		}else{
+			return -1;
+		}
+	}
+	
+	public function uid_by_email($email){//根据邮箱获取用户id
+		$data = db('user')->where('email',$email)->field('uid')->select();
+		if($data){
+			return $data[0]['uid'];
+		}else{
+			return -1;
+		}
+		
+	}
+	
 	public function get_user_hash($uid){//获取用户密码
 		$data = db('user')->where('uid',$uid)->field('password')->select();
 		return $data[0]['password'];

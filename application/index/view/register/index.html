@@ -70,7 +70,7 @@
 						<tr>
 							<td></td>
 							<td style="font-size:14px;">
-								<input type="checkbox" id="checkbox"> 我已同意mk.manager.com的<a data-toggle="modal" href="register.html#protocol">《用户服务条款》</a>
+								<input type="checkbox" required="required" id="checkbox"> 我已同意mk.manager.com的<a data-toggle="modal" href="register.html#protocol">《用户服务条款》</a>
 							</td>	
 						</tr>
 					</table>
@@ -113,16 +113,6 @@
     <script>
         $.backstretch("/static/img/login-bg.jpg", {speed: 100});
 		
-		$(".register").prop("disabled",true);
-		
-		$("#checkbox").change(function() { 
-			if($("#checkbox").prop("checked")){
-				$(".register").prop("disabled",false);
-			}else{
-				$(".register").prop("disabled",true);
-			}
-		});
-		
 		$('input').focus(function (){
 			$('.error').text(''); 
 		});
@@ -158,7 +148,7 @@
 			$("#rpassword").removeClass("has-success");
 			var password = $("#password").val();
 			var rpassword = $("#rpassword").val();
-			if(password != rpassword){
+			if(rpassword=="" || password != rpassword){
 				$("#rpassword").addClass("has-error");
 			}else{
 				$("#rpassword").addClass("has-success");

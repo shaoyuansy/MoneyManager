@@ -1,0 +1,31 @@
+.container{
+	position:relative;
+	top:200px;
+	width:500px;
+}
+.panel-ok{
+	margin-left:auto;
+	margin-right:auto;
+	width:330px;
+}
+.panel-title{
+	text-align:center;
+}
+.panel-body{
+	height:160px;
+}
+p{
+	text-align:center;
+	font-size:20px;
+	position:relative;
+	top:50px;
+}
+.panel-footer{
+	height:45px;
+	text-align:center;
+}
+.goto-login{
+	height:25px;
+	padding:2px 2px;
+	width:75px;
+}
