@@ -20,9 +20,6 @@
 	text-align: center;
 }
 
-.box0{
-    margin: 40px 40px 40px 100px;
-}
 
 .box0:hover .box1 {
 	border-bottom: 1px solid #ffffff;
@@ -41,4 +38,7 @@
 .box0:hover {
 	background: #ffffff;
 	box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+.ds{
+	background:none;
 }

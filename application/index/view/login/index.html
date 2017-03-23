@@ -25,22 +25,24 @@
 		    <form action="/index/login/index" method="post" class="form-login">
 		        <h2 class="form-login-heading">欢 迎 登 录</h2>
 		        <div class="login-wrap">
-		            <input type="text" class="form-control" id="username" name="username" autocomplete="off" placeholder="用户名/邮箱" required="required" />
+		            <input type="text" class="form-control" id="username" name="username" autocomplete="off"
+					onblur="chkUsername()" placeholder="用户名/邮箱" required="required" />
 		            <br>
-		            <input type="password" class="form-control" id="password" name="password" autocomplete="off" placeholder="密  码" required="required" />
+		            <input type="password" class="form-control" id="password" name="password" autocomplete="off" 
+					onblur="chkPassword()" placeholder="密  码" required="required" />
 		            <br>
 		            <button class="btn btn-theme btn-block" href="index.html" type="submit"><i class="fa fa-lock"></i>  登&nbsp;&nbsp;录</button>
 					<br>
 					<label class="checkbox">
 						<span class="pull-left error">{$error}</span>
 		                <span class="pull-right">
-		                    <a data-toggle="modal" href="login.html#myModal">忘记密码</a>    |
+		                    <a data-toggle="modal" href="login.html#forgetpwd">忘记密码</a>    |
 							<a href="/index/register/index">免费注册</a>	
 		                </span>
 		            </label>		    
 		        </div>
 		        <!-- Modal -->
-		        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+		        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="forgetpwd" class="modal fade">
 		            <div class="modal-dialog">
 		                <div class="modal-content">
 		                    <div class="modal-header">
@@ -49,12 +51,12 @@
 		                    </div>
 		                    <div class="modal-body">
 		                        <p>请输入您的邮箱以便于重置您的密码：</p>
-		                        <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
-		
+		                        <input type="text" id="qemail" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
 		                    </div>
 		                    <div class="modal-footer">
+								<span class="pull-left email-note"></span>
 		                        <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-		                        <button class="btn btn-theme" type="button">提交</button>
+		                        <button class="btn btn-theme" type="button" onclick="forget()" >提交</button>
 		                    </div>
 		                </div>
 		            </div>
@@ -74,6 +76,50 @@
 
     <script>
         $.backstretch("/static/img/login-bg.jpg", {speed: 200});
+		
+		$('input').focus(function (){
+			$('.error').text(''); 
+		});
+		
+		function chkUsername(){
+			$("#username").removeClass("has-error");
+			$("#username").removeClass("has-success");
+			var usernameReg = /^\w{5,16}$/;
+			var username = $("#username").val();
+			if(usernameReg.test(username)){
+				$("#username").addClass("has-success");
+			}else{
+				$("#username").addClass("has-error");
+			}
+		};
+		
+		function chkPassword(){
+			$("#password").removeClass("has-error");
+			$("#password").removeClass("has-success");
+			var password = $("#password").val();
+			if(password.length < 6){
+				$("#password").addClass("has-error");
+			}else{
+				$("#password").addClass("has-success");
+			}
+		};
+		
+		function forget(){
+			var email = $("#qemail").val();
+			$.ajax({
+                type: "post",
+                url: '/index/login/forgetpwd',
+                dataType: "json",
+                data: {email:email},
+                async: false,
+                success: function (msg) {
+					$(".email-note").text(msg.errorMessage);
+                },
+                error: function (e) {
+                    console.log(e);
+                }
+            })
+		};
     </script>
 
   </body>
