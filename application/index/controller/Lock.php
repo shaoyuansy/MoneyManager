@@ -4,20 +4,11 @@ use think\Controller;
 use app\index\model\UserModel;
 use think\Request;
 
-class Index extends Controller
+class Lock extends Controller
 {
     public function index(){
-        if(!is_login()){
-           return redirect('home/index');
-        }else{
-            //if(session('user_auth.uid') == 1){
-            //	$this->redirect('admin/index');
-           // }else{
-            $username = session('user_auth.username');
-            $this->assign('username',$username);
-           	return view('login/index');
-        	//}
-        }
+       
+        return view('index');
     }
 
 	public function _empty($name)
