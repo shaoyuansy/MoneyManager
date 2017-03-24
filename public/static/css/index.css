@@ -42,3 +42,39 @@
 .ds{
 	background:none;
 }
+/*启用禁用*/
+.active {
+	background: #00A0E9;
+	color: #FFFFFF;
+}
+.on_off_but{
+	display: inline-block;
+	position: relative;
+	margin:0 25px 0 5px;
+	border: 1px solid #E6E6E6;
+	background: #FFFFFF;
+	border-radius: 5px;
+	box-shadow: 0 0 5px 0  #E6E6E6;
+}
+button{
+	background: #FFFFFF;
+}
+.off_but{
+	padding: 1px 5px 2px;
+	font-size: 12px;
+	border-radius: 0 5px 5px 0;
+	margin-left: -5px;
+}
+.on_but{
+	padding: 1px 5px 2px;
+	font-size: 12px;
+	border-radius: 5px 0 0 5px;
+}
+.on_off_notice{
+	color: #d2d2d2;
+	position: absolute;
+	top: 0;
+	left:70px;
+	width: 140px;
+	display: inline-block;
+}

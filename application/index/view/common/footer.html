@@ -28,31 +28,27 @@
     <script src="/dist/js/sparkline-chart.js"></script>    
 	<script src="/dist/js/zabuto_calendar.js"></script>	
 	
-	<script type="text/javascript">
+	<script>
         $(document).ready(function () {
-        var unique_id = $.gritter.add({
-            // (string | mandatory) the heading of the notification
-            title: '欢迎来到xx的账簿!',
-            // (string | mandatory) the text inside the notification
-            text: '理财的目标是钱越来越多吗？不不不，我们的目标是让你的未来都不缺钱花！不缺钱也不是钱多到怎么花都花不完，而是开源节流，平衡收支哦~',
-            // (string | optional) the image to display on the left
-            image: '/static/img/ui-sam.jpg',
-            // (bool | optional) if you want it to fade out on its own or just sit there
-            sticky: true,
-            // (int | optional) the time you want it to be alive for before fading out
-            time: '1000',
-            // (string | optional) the class name you want to apply to that specific message
-            class_name: 'welcome-msg'
-        });
-		
-		$("#gritter-item-"+unique_id).parent().addClass("bottom-right");
-		
-        return false;
-        });
-	</script>
-	
-	<script type="application/javascript">
-        $(document).ready(function () {
+			var unique_id = $.gritter.add({
+				// (string | mandatory) the heading of the notification
+				title: '欢迎来到xx的账簿!',
+				// (string | mandatory) the text inside the notification
+				text: '理财的目标是钱越来越多吗？不不不，我们的目标是让你的未来都不缺钱花！不缺钱也不是钱多到怎么花都花不完，而是开源节流，平衡收支哦~',
+				// (string | optional) the image to display on the left
+				image: '/static/img/ui-sam.jpg',
+				// (bool | optional) if you want it to fade out on its own or just sit there
+				sticky: true,
+				// (int | optional) the time you want it to be alive for before fading out
+				time: '1000',
+				// (string | optional) the class name you want to apply to that specific message
+				class_name: 'welcome-msg'
+			});
+			
+			$("#gritter-item-"+unique_id).parent().addClass("bottom-right");
+			
+			$("[data-toggle='popover']").popover(); 
+
             $("#date-popover").popover({html: true, trigger: "manual"});
             $("#date-popover").hide();
             $("#date-popover").click(function (e) {

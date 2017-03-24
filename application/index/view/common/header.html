@@ -33,42 +33,6 @@
 						</a>
 					</li>
 					<li>
-						<a href="index.html#">
-							<span class="photo"><img alt="avatar" src="/static/img/ui-divya.jpg"></span>
-							<span class="subject">
-							<span class="from">Divya Manian</span>
-							<span class="time">40 mins.</span>
-							</span>
-							<span class="message">
-							 Hi, I need your help with this.
-							</span>
-						</a>
-					</li>
-					<li>
-						<a href="index.html#">
-							<span class="photo"><img alt="avatar" src="/static/img/ui-danro.jpg"></span>
-							<span class="subject">
-							<span class="from">Dan Rogers</span>
-							<span class="time">2 hrs.</span>
-							</span>
-							<span class="message">
-								Love your new Dashboard.
-							</span>
-						</a>
-					</li>
-					<li>
-						<a href="index.html#">
-							<span class="photo"><img alt="avatar" src="/static/img/ui-sherman.jpg"></span>
-							<span class="subject">
-							<span class="from">Dj Sherman</span>
-							<span class="time">4 hrs.</span>
-							</span>
-							<span class="message">
-								Please, answer asap.
-							</span>
-						</a>
-					</li>
-					<li>
 						<a href="index.html#">See all messages</a>
 					</li>
 				</ul>
@@ -80,11 +44,14 @@
 
 	<div class="top-menu">
 		<ul class="nav pull-right top-menu top-tools">
-			<li>
-				<img class="logout-img" src="/static/img/logout.png" width="30px" onclick="logout()"/>
-			</li>
-			<li>
+			<li data-container="body" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="备份到本地">
 				<img class="backup-img" src="/static/img/backup.png" width="30px" onclick="backup()"/>
+			</li>
+			<li data-container="body" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="锁屏">
+				<img class="locked-img" src="/static/img/locked.png" width="30px" />
+			</li>
+			<li data-container="body" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="注销登录">
+				<img class="logout-img" src="/static/img/logout.png" width="30px" onclick="logout()"/>
 			</li>
 		</ul>
 	</div>  
