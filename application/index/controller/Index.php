@@ -7,7 +7,7 @@ use think\Request;
 class Index extends Controller
 {
     public function index(){
-        if(!is_login()){
+        if(is_login() != 0){
            return redirect('home/index');
         }else{
             //if(session('user_auth.uid') == 1){
@@ -15,20 +15,9 @@ class Index extends Controller
            // }else{
             $username = session('user_auth.username');
             $this->assign('username',$username);
-           	return view('login/index');
+           	return redirect('login/index');
         	//}
         }
     }
 
-	public function _empty($name)
-    {
-        //把所有空的操作解析到showfan方法
-        return $this->showFun($name);
-    }
-
-    //注意 本身是 protected 方法
-    protected function showFun($name)
-    {
-         return view($name);
-    }
 }

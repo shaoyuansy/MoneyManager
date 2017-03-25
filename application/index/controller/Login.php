@@ -64,26 +64,20 @@ class Login extends Controller
 				$jsonData = array('success'=>false,'errorMessage'=>'邮箱不能为空','data'=>'');
 				return json($jsonData);
 			}
-			if(captcha_check($captcha)){
-				$uid = $user->chk_user_email($email);
-				if($uid >= 0){
-					$hash = randchar(30);
-					Cache::set('uid',$uid);
-					Cache::set('hash',$hash);
-					if($this->sendmail($email,$hash)){
-						$jsonData = array('status'=>'success','msg'=>'邮件发送成功，请查收','data'=>true);
-						return json($jsonData);
-					}else{
-						$jsonData = array('status'=>'error','errorCode'=>'6001','msg'=>'system error','data'=>false);
-						return json($jsonData);
-					}
-				}else{
-					$jsonData = array('status'=>'error','errorCode'=>'2001','msg'=>'该邮箱未注册','data'=>false);
+			$uid = $user->uid_by_email($email);
+			if($uid >= 0){
+				/* $hash = randchar(30);
+				Cache::set('uid',$uid);
+				Cache::set('hash',$hash);
+				if($this->sendmail($email,$hash)){ */
+					$jsonData = array('success'=>true,'data'=>'邮件发送成功。请登录您的邮箱查看。');
 					return json($jsonData);
-				}
+				/* }else{
+					$jsonData = array('success'=>false,'errorMessage'=>'邮件发送失败','data'=>'');
+					return json($jsonData);
+				} */
 			}else{
-				//验证失败
-				$jsonData = array('status'=>'error','errorCode'=>'3001','msg'=>'验证码错误','data'=>false);
+				$jsonData = array('success'=>false,'errorMessage'=>'该邮箱未注册','data'=>'');
 				return json($jsonData);
 			}
 		}
