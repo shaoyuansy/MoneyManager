@@ -1,13 +1,6 @@
 {layout name="layout"}
 	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<meta name="description" content="">
-		<meta name="author" content="Dashboard">
-		<meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
-
-		<link href="/static/css/index.css" rel="stylesheet">
-
+		<link href="/static/css/home.css" rel="stylesheet">
 	</head>
 <!--中间上方 -->
 <!--main content start-->
@@ -42,61 +35,48 @@
 				
 				<!-- 中间中部 -->
 				<div class="row mt">
-					<div class="border-head">
-						<h3>收支表</h3>
-					</div>
 					<!-- SERVER STATUS PANELS -->
-					<div class="col-md-2 mb">
-						<div class="on_off_but">							
-							<button class="select-btn on_but">支出</button>
-							<button class="select-btn off_but active">收入</button>
-						</div>
-					</div>
+					<div class="col-md-12 mb">
+	                  	<div class="content-panel">
+	                          <table class="table table-hover table-all">
+	                  	  	  <h4><i class="fa fa-angle-right"></i> 概况总览</h4>
+	                  	  	  <hr>
+	                              <thead>
+	                              <tr>
+	                                  <th></th>
+	                                  <th>本周</th>
+	                                  <th>本月</th>
+	                                  <th>本年</th>
+	                              </tr>
+	                              </thead>
+	                              <tbody>
+	                              <tr>
+	                                  <td><i class="fa fa-plus-square"> 收入</td>
+	                                  <td>￥1000.00</td>
+	                                  <td>￥3000.00</td>
+	                                  <td>￥10000.00</td>
+	                              </tr>
+	                              <tr>
+	                                  <td><i class="fa fa-minus-square"> 支出</td>
+	                                  <td>￥1000.00</td>
+	                                  <td>￥3000.00</td>
+	                                  <td>￥10000.00</td>
+	                              </tr>
+	                              </tbody>
+	                          </table>
+	                  	  </div><! --/content-panel -->
+	                </div><!-- /col-md-12 -->
 				</div>
 				<!-- /row -->
 				
 				<!-- 中间下方-图表 -->
 				<div class="row mt">
-					<!--CUSTOM CHART START -->
-					<div class="border-head">
-						<h3>收入表</h3>
-					</div>
-					<div class="custom-bar-chart">
-						<ul class="y-axis">
-							<li><span>10.000</span></li>
-							<li><span>8.000</span></li>
-							<li><span>6.000</span></li>
-							<li><span>4.000</span></li>
-							<li><span>2.000</span></li>
-							<li><span>0</span></li>
-						</ul>
-						<div class="bar">
-							<div class="title">9月</div>
-							<div class="value tooltips" data-original-title="8.500" data-toggle="tooltip" data-placement="top">85%</div>
+					<div class="col-md-12 mb">
+						<div class="border-head">
+							<h3>最近6个月的收支</h3>
 						</div>
-						<div class="bar ">
-							<div class="title">10月</div>
-							<div class="value tooltips" data-original-title="5.000" data-toggle="tooltip" data-placement="top">50%</div>
-						</div>
-						<div class="bar ">
-							<div class="title">11月</div>
-							<div class="value tooltips" data-original-title="6.000" data-toggle="tooltip" data-placement="top">60%</div>
-						</div>
-						<div class="bar ">
-							<div class="title">12月</div>
-							<div class="value tooltips" data-original-title="4.500" data-toggle="tooltip" data-placement="top">45%</div>
-						</div>
-						<div class="bar">
-							<div class="title">1月</div>
-							<div class="value tooltips" data-original-title="3.200" data-toggle="tooltip" data-placement="top">32%</div>
-						</div>
-						<div class="bar ">
-							<div class="title">2月</div>
-							<div class="value tooltips" data-original-title="6.200" data-toggle="tooltip" data-placement="top">62%</div>
-						</div>
-						<div class="bar">
-							<div class="title">3月</div>
-							<div class="value tooltips" data-original-title="7.500" data-toggle="tooltip" data-placement="top">75%</div>
+						<div id="sz-chart">
+							
 						</div>
 					</div>
 					<!--custom chart end-->
@@ -136,3 +116,65 @@
 	</section>
 </section>
 <!--main content end-->
+
+<script src="/dist/js/highcharts.js"></script>	
+<script>
+    $('#sz-chart').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: '月收入支出对比图'
+        },
+        xAxis: {
+            categories: [
+                '2016.10',
+                '2016.11',
+                '2016.12',
+				'2017.01',
+				'2017.02',
+				'2017.03',
+            ]
+        },
+		credits:{
+			enabled:false // 禁用版权信息
+		},
+        yAxis: [{
+            min: 0,
+            title: {
+                text: 'RMB'
+            }
+        }, {
+            title: {
+                text: ''
+            },
+            opposite: true
+        }],
+        legend: {
+            shadow: false
+        },
+        tooltip: {
+            shared: true
+        },
+        plotOptions: {
+            column: {
+                grouping: false,
+                shadow: false,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: '收入',
+            color: '#71C8E5',
+            data: [140, 90, 40,34,65,87],
+            pointPadding: 0.3,
+            pointPlacement: 0
+        },{
+            name: '支出',
+            color: '#ffd777',
+            data: [150, 73, 20,34,65,87],
+            pointPadding: 0.4,
+            pointPlacement: 0
+        }]
+    });
+</script>

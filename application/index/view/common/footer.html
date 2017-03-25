@@ -11,7 +11,6 @@
     </section>
 
     <!-- js placed at the end of the document so the pages load faster -->
-    <script src="/dist/js/jquery.js"></script>
     <script src="/dist/js/bootstrap.min.js"></script>
     <script class="include" type="text/javascript" src="/dist/js/jquery.dcjqaccordion.2.7.js"></script>
     <script src="/dist/js/jquery.scrollTo.min.js"></script>
@@ -27,14 +26,13 @@
     <!--script for this page-->
     <script src="/dist/js/sparkline-chart.js"></script>    
 	<script src="/dist/js/zabuto_calendar.js"></script>	
-	
 	<script>
         $(document).ready(function () {
 			var unique_id = $.gritter.add({
 				// (string | mandatory) the heading of the notification
-				title: '欢迎来到xx的账簿!',
+				title: '今天是您第1天记账!',
 				// (string | mandatory) the text inside the notification
-				text: '理财的目标是钱越来越多吗？不不不，我们的目标是让你的未来都不缺钱花！不缺钱也不是钱多到怎么花都花不完，而是开源节流，平衡收支哦~',
+				text: '本月预算额度0.00元，已使用0.00元，还剩0.00元可用。',
 				// (string | optional) the image to display on the left
 				image: '/static/img/ui-sam.jpg',
 				// (bool | optional) if you want it to fade out on its own or just sit there
