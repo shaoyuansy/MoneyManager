@@ -40,3 +40,12 @@ function md5crypt($num){
 	$num = md5(crypt($num,substr($num,0,2)));
 	return $num;
 }
+
+function randchar($length = ""){ 
+	$chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	$randchar = ""; 
+	for ($i = 0; $i < $length; $i++) { 
+		$randchar .= $chars[mt_rand(0,strlen($chars)-1)];
+	} 
+	return $randchar; 
+} 

@@ -66,16 +66,16 @@ class Login extends Controller
 			}
 			$uid = $user->uid_by_email($email);
 			if($uid >= 0){
-				/* $hash = randchar(30);
+				$hash = randchar(30);
 				Cache::set('uid',$uid);
 				Cache::set('hash',$hash);
-				if($this->sendmail($email,$hash)){ */
+				if($this->sendmail($email,$hash)){
 					$jsonData = array('success'=>true,'data'=>'邮件发送成功。请登录您的邮箱查看。');
 					return json($jsonData);
-				/* }else{
+				}else{
 					$jsonData = array('success'=>false,'errorMessage'=>'邮件发送失败','data'=>'');
 					return json($jsonData);
-				} */
+				}
 			}else{
 				$jsonData = array('success'=>false,'errorMessage'=>'该邮箱未注册','data'=>'');
 				return json($jsonData);
@@ -84,4 +84,41 @@ class Login extends Controller
 		$this->assign('error','');
 		return view('index');
 	}
+	
+	public function reset_code(){
+		if(request()->isGet()){
+			$hash = input('get.hash');
+			if(!Cache::get('uid') || !Cache::get('hash')){
+				Cache::rm('uid'); 
+				Cache::rm('hash'); 
+				return view('timeout');
+			}else if($hash == Cache::get('hash')){ 
+				return view('reset_code');
+			}
+		}
+	}
+	
+	public function sendmail($to,$hash){
+		$subject = 'mk.manager.com - 密码找回';
+		$message = "尊敬的".$to."您好："."\r\n\t"."欢迎使用找回密码功能。"."\r\n\t"."请您复制此链接到浏览器继续下一步操作："."\r\n\t"."http://".$_SERVER['HTTP_HOST']."/index/Login/reset_code.html?hash=".$hash."\r\n\t"."链接只可访问一次，10分钟内有效。"."\r\n\t"."如果您并未发过此请求，则可能是因为其他用户在尝试重设密码时误输入了您的电子邮件地址而使您收到这封邮件，那么您可以放心的忽略此邮件，无需进一步采取任何操作。"."\r\n"."此致"."\r\n\t".date("Y年m月d日");
+		$headers = 'From: 钱管家<no-reply@mk.com>' ; 
+		$send=mail($to, $subject, $message, $headers);
+		if($send){
+			return $send;
+		}else{
+			return $send;
+		}
+    }
+	
+	public function _empty($name)
+    {
+        //把所有空的操作解析到showfan方法
+        return $this->showFun($name);
+    }
+
+    //注意 本身是 protected 方法
+    protected function showFun($name)
+    {
+         return view($name);
+    }
 }
