@@ -33,10 +33,10 @@ class Login extends Controller
 				}
 			}else if($uid < 0){
 				switch($uid){
-		           		case -1: $error = '用户不存在或被禁用！'; break;
-		           		case -2: $error = '密码错误！'; break;
-		           		default: $error = '未知错误！'; break;
-		       		}	
+		           	case -1: $error = '用户不存在或被禁用！'; break;
+		           	case -2: $error = '密码错误！'; break;
+		           	default: $error = '未知错误！'; break;
+		       	}	
 				$this->assign('error',$error);
 				return view('index');
 			}

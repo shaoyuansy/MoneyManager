@@ -14,21 +14,21 @@
 							<span class="fa fa-cny"></span>
 							<h3>资产</h3>
 						</div>
-						<p>12332.00</p>
+						<p id="asset">0.00</p>
 					</div>
 					<div class="col-md-4 col-sm-4 box0">
 						<div class="box1">
 							<span class="fa fa-minus-square"></span>
 							<h3>负债</h3>
 						</div>
-						<p>0.00</p>
+						<p id="debtee">0.00</p>
 					</div>
 					<div class="col-md-4 col-sm-4 box0">
 						<div class="box1">
 							<span class="fa fa-money"></span>
 							<h3>净资产</h3>
 						</div>
-						<p>12332.00</p>
+						<p id="netasset">0.00</p>
 					</div>
 				</div>
 				<!-- /row mt -->
@@ -52,15 +52,15 @@
 	                              <tbody>
 	                              <tr>
 	                                  <td><i class="fa fa-plus-square"> 收入</td>
-	                                  <td>￥1000.00</td>
-	                                  <td>￥3000.00</td>
-	                                  <td>￥10000.00</td>
+	                                  <td id="w_in"></td>
+	                                  <td id="m_in"></td>
+	                                  <td id="y_in"></td>
 	                              </tr>
 	                              <tr>
 	                                  <td><i class="fa fa-minus-square"> 支出</td>
-	                                  <td>￥1000.00</td>
-	                                  <td>￥3000.00</td>
-	                                  <td>￥10000.00</td>
+	                                  <td id="w_out"></td>
+	                                  <td id="m_out"></td>
+	                                  <td id="y_out"></td>
 	                              </tr>
 	                              </tbody>
 	                          </table>
@@ -88,7 +88,7 @@
 			<div class="col-lg-3 ds">
 				<!-- 天气 -->
 				<div class="mb">
-					<div class="weather pn">
+					<div class="weather pn weather-on-time">
 						<i class="fa fa-cloud fa-4x"></i>
 						<h2>11º C</h2>
 						<h4>郑州</h4>
@@ -117,10 +117,82 @@
 </section>
 <!--main content end-->
 
+<script src="/dist/js/zabuto_calendar.js"></script>	
 <script src="/dist/js/highcharts.js"></script>	
     <script type="text/javascript" src="/dist/js/gritter/js/jquery.gritter.js"></script>
     <script type="text/javascript" src="/dist/js/gritter-conf.js"></script>
 <script>
+
+	$.ajax({
+		type: "get",
+		url: '/index/home/all',
+		async: false,
+		success: function (msg) {
+			if(msg.success){
+				$("#asset").text(msg.data.asset);
+				$("#debtee").text(msg.data.debtee);
+				$("#netasset").text(msg.data.netasset);
+			}
+		},
+		error: function (e) {
+			console.log(e);
+		}
+	});
+	
+	$.ajax({
+		type: "get",
+		url: '/index/home/income',
+		async: false,
+		success: function (msg) {
+			if(msg.success){
+				$("#w_in").text("￥"+msg.data.week_income);
+				$("#m_in").text("￥"+msg.data.month_income);
+				$("#y_in").text("￥"+msg.data.year_income);
+			}
+		},
+		error: function (e) {
+			console.log(e);
+		}
+	});
+	
+	$.ajax({
+		type: "get",
+		url: '/index/home/outgo',
+		async: false,
+		success: function (msg) {
+			if(msg.success){
+				$("#w_out").text("￥"+msg.data.week_outgo);
+				$("#m_out").text("￥"+msg.data.month_outgo);
+				$("#y_out").text("￥"+msg.data.year_outgo);
+			}
+		},
+		error: function (e) {
+			console.log(e);
+		}
+	});
+	
+	$.getJSON("http://wthrcdn.etouch.cn/weather_mini?city=郑州", function(data) {
+		$(".weather-on-time h2").text(data.data.wendu);
+		$(".weather-on-time h4").text(data.data.city);
+	});
+	
+	$("#my-calendar").zabuto_calendar({
+		action: function () {
+			return myDateFunction(this.id, false);
+		},
+		action_nav: function () {
+			return myNavFunction(this.id);
+		},
+		ajax: {
+			url: "#",
+			modal: true
+		},
+		legend: [
+			{type: "text", label: "Special event", badge: "00"},
+			{type: "block", label: "Regular event", }
+		]
+	});
+	
     $('#sz-chart').highcharts({
         chart: {
             type: 'column'
@@ -168,33 +240,33 @@
         series: [{
             name: '收入',
             color: '#71C8E5',
-            data: [140, 90, 40,34,65,87],
+            data: [4500, 5000, 4650,5100,4300,4321],
             pointPadding: 0.3,
             pointPlacement: 0
         },{
             name: '支出',
             color: '#ffd777',
-            data: [150, 73, 20,34,65,87],
+            data: [2700, 2100, 3000,2500,5400,3700],
             pointPadding: 0.4,
             pointPlacement: 0
         }]
     });
 
 	var unique_id = $.gritter.add({
-				// (string | mandatory) the heading of the notification
-				title: '今天是您第1天记账!',
-				// (string | mandatory) the text inside the notification
-				text: '本月预算额度0.00元，已使用0.00元，还剩0.00元可用。',
-				// (string | optional) the image to display on the left
-				image: '/static/img/ui-sam.jpg',
-				// (bool | optional) if you want it to fade out on its own or just sit there
-				sticky: true,
-				// (int | optional) the time you want it to be alive for before fading out
-				time: '1000',
-				// (string | optional) the class name you want to apply to that specific message
-				class_name: 'welcome-msg'
-			});
+		// (string | mandatory) the heading of the notification
+		title: '今天是您第1天记账!',
+		// (string | mandatory) the text inside the notification
+		text: '本月预算额度0.00元，已使用0.00元，还剩0.00元可用。',
+		// (string | optional) the image to display on the left
+		image: '/static/img/ui-sam.jpg',
+		// (bool | optional) if you want it to fade out on its own or just sit there
+		sticky: true,
+		// (int | optional) the time you want it to be alive for before fading out
+		time: '1000',
+		// (string | optional) the class name you want to apply to that specific message
+		class_name: 'welcome-msg'
+	});
 			
-			$("#gritter-item-"+unique_id).parent().addClass("bottom-right");
+	$("#gritter-item-"+unique_id).parent().addClass("bottom-right");
 			
 </script>

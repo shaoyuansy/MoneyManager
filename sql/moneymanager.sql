@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : php
+Source Server         : localhost_3306
 Source Server Version : 50617
-Source Host           : 127.0.0.1:3306
-Source Database       : moneymanger
+Source Host           : localhost:3306
+Source Database       : moneymanager
 
 Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-03-26 13:15:41
+Date: 2017-03-26 21:46:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,7 +23,7 @@ CREATE TABLE `account` (
   `aid` int(11) NOT NULL,
   `a_type` varchar(255) DEFAULT NULL,
   `a_money` varchar(255) DEFAULT NULL,
-  `a_uid` int(11) DEFAULT NULL,
+  `uid` int(11) DEFAULT NULL,
   `a_remark` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`aid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -31,6 +31,11 @@ CREATE TABLE `account` (
 -- ----------------------------
 -- Records of account
 -- ----------------------------
+INSERT INTO `account` VALUES ('0', '信用卡账户', '2700.01', '4', '我的信用卡账户');
+INSERT INTO `account` VALUES ('1', '现金账户', '0.00', '4', '我的现金账户');
+INSERT INTO `account` VALUES ('2', '虚拟账户', '0.00', '4', '我的虚拟账户');
+INSERT INTO `account` VALUES ('3', '债权账户', '100.00', '4', '我的债权账户');
+INSERT INTO `account` VALUES ('4', '债务账户', '200.00', '4', '我的债务账户');
 
 -- ----------------------------
 -- Table structure for budget
@@ -41,7 +46,9 @@ CREATE TABLE `budget` (
   `b_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '预算时间',
   `b_term` varchar(255) DEFAULT NULL COMMENT '预算期限',
   `b_money` varchar(255) DEFAULT NULL,
-  `b_remark` varchar(255) DEFAULT NULL COMMENT '备注'
+  `b_remark` varchar(255) DEFAULT NULL COMMENT '备注',
+  `uid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`bid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -58,12 +65,15 @@ CREATE TABLE `debtee` (
   `e_debtee` varchar(255) DEFAULT NULL,
   `e_debtor` varchar(255) DEFAULT NULL,
   `e_money` varchar(255) DEFAULT NULL,
-  `e_remark` varchar(255) DEFAULT NULL
+  `e_remark` varchar(255) DEFAULT NULL,
+  `uid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`eid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of debtee
 -- ----------------------------
+INSERT INTO `debtee` VALUES ('0', '2017-03-26 15:42:33', '本人', '李四', '200.00', null, '4');
 
 -- ----------------------------
 -- Table structure for debtor
@@ -75,106 +85,123 @@ CREATE TABLE `debtor` (
   `r_debtee` varchar(255) DEFAULT NULL,
   `r_debtor` varchar(255) DEFAULT NULL,
   `r_money` varchar(255) DEFAULT NULL,
-  `r_remark` varchar(255) DEFAULT NULL
+  `r_remark` varchar(255) DEFAULT NULL,
+  `uid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`rid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of debtor
 -- ----------------------------
+INSERT INTO `debtor` VALUES ('0', '2017-03-26 15:42:37', '张三', '本人', '100.00', null, '4');
 
 -- ----------------------------
--- Table structure for in
+-- Table structure for income
 -- ----------------------------
-DROP TABLE IF EXISTS `in`;
-CREATE TABLE `in` (
-  `iid` int(11) NOT NULL,
+DROP TABLE IF EXISTS `income`;
+CREATE TABLE `income` (
+  `iid` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `i_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `i_type` varchar(255) DEFAULT NULL,
-  `i_account` varchar(255) DEFAULT NULL,
-  `i_money` varchar(255) DEFAULT NULL,
-  `i_member` varchar(255) DEFAULT NULL,
-  `i_remark` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+  `i_type` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `i_account` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `i_money` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `i_member` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `i_remark` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `uid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`iid`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf32;
 
 -- ----------------------------
--- Records of in
+-- Records of income
 -- ----------------------------
+INSERT INTO `income` VALUES ('00000000001', '2017-01-12 16:39:05', '工资收入', '信用卡', '3000', null, null, '4');
+INSERT INTO `income` VALUES ('00000000002', '2017-02-26 21:09:46', '工资收入', '现金', '1000', null, null, '4');
+INSERT INTO `income` VALUES ('00000000003', '2017-03-26 21:18:36', '工资收入', '信用卡', '800', null, null, '4');
+INSERT INTO `income` VALUES ('00000000004', '2017-03-26 21:10:25', null, null, '111', null, null, '4');
 
 -- ----------------------------
--- Table structure for member
+-- Table structure for outgo
 -- ----------------------------
-DROP TABLE IF EXISTS `member`;
-CREATE TABLE `member` (
-  `mid` int(11) NOT NULL,
-  `m_name` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+DROP TABLE IF EXISTS `outgo`;
+CREATE TABLE `outgo` (
+  `oid` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `o_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `o_type` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `o_account` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `o_money` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `o_member` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `o_remark` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `uid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`oid`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf32;
 
 -- ----------------------------
--- Records of member
+-- Records of outgo
 -- ----------------------------
-INSERT INTO `member` VALUES ('1', '本人');
-INSERT INTO `member` VALUES ('2', '老公');
-INSERT INTO `member` VALUES ('3', '老婆');
-INSERT INTO `member` VALUES ('4', '子女');
-INSERT INTO `member` VALUES ('5', '父母');
-INSERT INTO `member` VALUES ('6', '家庭公用');
+INSERT INTO `outgo` VALUES ('00000000001', '2017-03-26 15:14:42', '衣物服饰', '信用卡', '300', '本人', null, '4');
+INSERT INTO `outgo` VALUES ('00000000002', '2017-02-26 15:14:42', '衣物服饰', '信用卡', '1000', '本人', null, '4');
+INSERT INTO `outgo` VALUES ('00000000003', '2017-03-10 15:14:42', '衣物服饰', '信用卡', '1000', '本人', null, '4');
 
 -- ----------------------------
--- Table structure for out
+-- Table structure for t_account
 -- ----------------------------
-DROP TABLE IF EXISTS `out`;
-CREATE TABLE `out` (
-  `oid` int(11) NOT NULL,
-  `o_time` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `o_sort` varchar(255) DEFAULT NULL,
-  `o_account` varchar(255) DEFAULT NULL,
-  `o_money` varchar(255) NOT NULL,
-  `o_member` varchar(255) DEFAULT NULL,
-  `o_remark` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+DROP TABLE IF EXISTS `t_account`;
+CREATE TABLE `t_account` (
+  `id` int(11) NOT NULL,
+  `type` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `uid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- ----------------------------
--- Records of out
+-- Records of t_account
 -- ----------------------------
+INSERT INTO `t_account` VALUES ('1', '{\"type\":[\"信用卡\",\"虚拟\",\"现金\",\"债权\",\"债务\"]}\r\n}', '4');
 
 -- ----------------------------
 -- Table structure for t_in
 -- ----------------------------
 DROP TABLE IF EXISTS `t_in`;
 CREATE TABLE `t_in` (
-  `tiid` int(11) NOT NULL,
-  `ti_name` varchar(255) DEFAULT NULL
+  `id` int(11) NOT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `uid` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_in
 -- ----------------------------
-INSERT INTO `t_in` VALUES ('1', '职业收入');
-INSERT INTO `t_in` VALUES ('2', '其他收入');
+INSERT INTO `t_in` VALUES ('1', '{\"type\":[\"职业收入\",\"其他收入\"]}', '4');
+
+-- ----------------------------
+-- Table structure for t_member
+-- ----------------------------
+DROP TABLE IF EXISTS `t_member`;
+CREATE TABLE `t_member` (
+  `id` int(11) NOT NULL,
+  `type` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `uid` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf32;
+
+-- ----------------------------
+-- Records of t_member
+-- ----------------------------
+INSERT INTO `t_member` VALUES ('1', '{\"type\":[\"本人\",\"丈夫\",\"妻子\",\"子女\",\"父母\",\"家庭公用\"]}', '4');
 
 -- ----------------------------
 -- Table structure for t_out
 -- ----------------------------
 DROP TABLE IF EXISTS `t_out`;
 CREATE TABLE `t_out` (
-  `toid` int(11) NOT NULL,
-  `to_name` varchar(255) DEFAULT NULL
+  `id` int(11) NOT NULL,
+  `type` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `uid` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf32;
 
 -- ----------------------------
 -- Records of t_out
 -- ----------------------------
-INSERT INTO `t_out` VALUES ('1', '衣服饰品');
-INSERT INTO `t_out` VALUES ('2', '食品酒水');
-INSERT INTO `t_out` VALUES ('3', '居家物业');
-INSERT INTO `t_out` VALUES ('4', '行车交通');
-INSERT INTO `t_out` VALUES ('5', '交流通讯');
-INSERT INTO `t_out` VALUES ('6', '休闲娱乐');
-INSERT INTO `t_out` VALUES ('7', '学习进修');
-INSERT INTO `t_out` VALUES ('8', '人情往来');
-INSERT INTO `t_out` VALUES ('9', '医疗保健');
-INSERT INTO `t_out` VALUES ('10', '金融保险');
-INSERT INTO `t_out` VALUES ('11', '其他款项');
+INSERT INTO `t_out` VALUES ('1', '{\"type\":[\"衣服饰品\",\"食品酒水\",\"居家物业\",\"行车交通\",\"交流通讯\",\"休闲娱乐\",\"学习进修\",\"人情往来\",\"医疗保健\",\"金融保险\",\"其他款项\"]}', '4');
 
 -- ----------------------------
 -- Table structure for user
@@ -205,5 +232,4 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('3', 'root', 'be57c7cee28c3f1354d1e4f3734c34ce', 'shaoyuansy@126.com', null, '', null, null, '2017-03-22 22:16:17', '8', '2017-03-22 22:16:17', null, null, null, null, null, null, null);
-INSERT INTO `user` VALUES ('4', 'admin', '89f0b495890138511edbca8d446aa63e', '123@123.COM', null, '', null, null, '2017-03-23 21:02:48', '1', '2017-03-23 21:02:48', null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('4', 'admin', '89f0b495890138511edbca8d446aa63e', '123@123.COM', null, '', null, null, '2017-03-26 20:27:18', '3', '2017-03-26 20:27:18', null, null, null, null, null, null, null);
