@@ -20,30 +20,13 @@
 
     <!--common script for all pages-->
     <script src="/dist/js/common-scripts.js"></script>
-    <script type="text/javascript" src="/dist/js/gritter/js/jquery.gritter.js"></script>
-    <script type="text/javascript" src="/dist/js/gritter-conf.js"></script>
+
 
     <!--script for this page-->
     <script src="/dist/js/sparkline-chart.js"></script>    
 	<script src="/dist/js/zabuto_calendar.js"></script>	
 	<script>
         $(document).ready(function () {
-			var unique_id = $.gritter.add({
-				// (string | mandatory) the heading of the notification
-				title: '今天是您第1天记账!',
-				// (string | mandatory) the text inside the notification
-				text: '本月预算额度0.00元，已使用0.00元，还剩0.00元可用。',
-				// (string | optional) the image to display on the left
-				image: '/static/img/ui-sam.jpg',
-				// (bool | optional) if you want it to fade out on its own or just sit there
-				sticky: true,
-				// (int | optional) the time you want it to be alive for before fading out
-				time: '1000',
-				// (string | optional) the class name you want to apply to that specific message
-				class_name: 'welcome-msg'
-			});
-			
-			$("#gritter-item-"+unique_id).parent().addClass("bottom-right");
 			
 			$("[data-toggle='popover']").popover(); 
 

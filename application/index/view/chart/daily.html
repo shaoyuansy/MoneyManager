@@ -1,25 +1,102 @@
 {layout name="layout"}
-
+	<head>
+		<link href="/static/css/chart.css" rel="stylesheet">
+	</head>
      <!--main content start-->
       <section id="main-content">
           <section class="wrapper site-min-height">
-          <h3><i class="fa fa-angle-right"></i> Morris Charts</h3>
+          <h3><i class="fa fa-bar-chart"></i> 日常收支表</h3>
               <!-- page start-->
               <div id="morris">
                   <div class="row mt">
-                      <div class="col-lg-6">
+                      <div class="col-lg-12">
                           <div class="content-panel">
-                              <h4><i class="fa fa-angle-right"></i> Chart Example 1</h4>
+                              <h4><i class="fa fa-angle-right"></i> 支出堆积表</h4>
                               <div class="panel-body">
-                                  
+                                    <div id="daily-zc-chart">
+							
+						            </div>
+                                  <div id="hero-graph" class="graph"></div>
                               </div>
                           </div>
                       </div>
-                      <div class="col-lg-6">
+                      <div class="col-lg-12">
                           <div class="content-panel">
-                              <h4><i class="fa fa-angle-right"></i> Chart Example 2</h4>
                               <div class="panel-body">
-                                  
+                            <table class="table table-hover table-all">
+	                  	  	  <hr>
+	                              <thead>
+	                              <tr>
+	                                  <th>一级分类</th>
+	                                  <th>二级分类</th>
+	                                  <th>金额</th>
+	                              </tr>
+	                              </thead>
+	                              <tbody>
+	                              <tr>
+	                                  <td>衣服饰品</td>
+	                                  <td></td>
+                                      <td>￥100.00</td>
+	                              </tr>
+                                  <tr>
+                                      <td></td>
+	                                  <td>衣服饰品</td>
+                                      <td>￥100.00</td>
+                                  </tr>
+	                              <tr>
+	                                  <td>食品酒水</td>
+                                      <td></td>
+                                      <td>￥100.00</td>
+	                              </tr>
+                                  <tr>
+                                      <td>居家物业</td>
+                                      <td></td>
+                                      <td>￥100.00</td>
+                                  </tr>
+                                  <tr>
+                                      <td>行车交通</td>
+                                      <td></td>
+                                      <td>￥100.00</td>
+                                  </tr>
+                                  <tr>
+                                      <td>交流通讯</td>
+                                      <td></td>
+                                      <td>￥100.00</td>    
+                                  </tr>
+                                  <tr>
+                                      <td>休闲娱乐</td>
+                                      <td></td>
+                                      <td>￥100.00</td>
+                                  </tr>
+                                  <tr>
+                                      <td>学习进修</td>
+                                      <td></td>
+                                      <td>￥100.00</td>
+                                  </tr>                                 
+                                  <tr>
+                                      <td>人情往来</td>
+                                      <td></td>
+                                      <td>￥100.00</td>
+                                  </tr>
+                                 <tr>
+                                      <td>医疗保健</td>
+                                      <td></td>
+                                      <td>￥500.00</td>
+                                  </tr>
+                                  <tr>
+                                      <td>金融保险</td>
+                                      <td></td>
+                                      <td>￥200.00</td>
+                                  </tr>
+                                  <tr>
+                                      <td>其他款项</td>
+                                      <td></td>
+                                      <td>￥1000.00</td>
+                                  </tr>
+
+	                              </tbody>
+	                          </table>
+
                               </div>
                           </div>
                       </div>
@@ -27,27 +104,224 @@
                   <div class="row mt">
                       <div class="col-lg-6">
                           <div class="content-panel">
-                              <h4><i class="fa fa-angle-right"></i> Chart Example 3</h4>
+                              <h4><i class="fa fa-angle-right"></i> 收入堆积表</h4>
                               <div class="panel-body">
-                                  
+                                    <div id="daily-sr-chart">
+							
+						            </div>
+                                  <div id="hero-area" class="graph"></div>
                               </div>
                           </div>
                       </div>
                       <div class="col-lg-6">
                           <div class="content-panel">
-                              <h4><i class="fa fa-angle-right"></i> Chart Example 4</h4>
                               <div class="panel-body">
-                                  
+                            <table class="table table-hover table-all">
+	                              <thead>
+	                              <tr>
+	                                  <th>一级分类</th>
+	                                  <th>二级分类</th>
+	                                  <th>金额</th>
+	                              </tr>
+	                              </thead>
+	                              <tbody>
+	                              <tr>
+	                                  <td>衣服饰品</td>
+	                                  <td></td>
+                                      <td>￥100.00</td>
+	                              </tr>
+                                  <tr>
+                                      <td></td>
+	                                  <td>衣服饰品</td>
+                                      <td>￥100.00</td>
+                                  </tr>
+	                              <tr>
+	                                  <td>食品酒水</td>
+                                      <td></td>
+                                      <td>￥100.00</td>
+	                              </tr>
+                                  <tr>
+	                                  <td>衣服饰品</td>
+	                                  <td></td>
+                                      <td>￥100.00</td>
+	                              </tr>
+                                  <tr>
+                                      <td></td>
+	                                  <td>衣服饰品</td>
+                                      <td>￥100.00</td>
+                                  </tr>
+	                              <tr>
+	                                  <td>食品酒水</td>
+                                      <td></td>
+                                      <td>￥100.00</td>
+	                              </tr>
+                                  <tr>
+	                                  <td>衣服饰品</td>
+	                                  <td></td>
+                                      <td>￥100.00</td>
+	                              </tr>
+                                  <tr>
+                                      <td></td>
+	                                  <td>衣服饰品</td>
+                                      <td>￥100.00</td>
+                                  </tr>
+	                              <tr>
+	                                  <td>食品酒水</td>
+                                      <td></td>
+                                      <td>￥100.00</td>
+	                              </tr>
+	                              <tr>
+	                                  <td>食品酒水</td>
+                                      <td></td>
+                                      <td>￥100.00</td>
+	                              </tr>
+                                  <tr>
+	                                  <td>食品酒水</td>
+                                      <td></td>
+                                      <td>￥100.00</td>
+	                              </tr>
+	                              </tbody>
+	                          </table>                                
+
                               </div>
                           </div>
                       </div>
                   </div>
               </div>
+
               <!-- page end-->
           </section>
       </section><!-- /MAIN CONTENT -->
 
-  <script>
-      //custom select box
+<script src="/dist/js/highcharts.js"></script>	
+<script>
+ $(function () {
+    $('#daily-zc-chart').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: ''
+        },
+        xAxis: {
+            categories: ['衣服饰品', '食品酒水', '居家物业', '行车交通', '交流通讯', '休闲娱乐', '学习进修',
+             '人情往来', '医疗保健', '金融保险', '其他款项']
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '金额'
+            },
+            stackLabels: {
+                enabled: true,
+                style: {
+                    fontWeight: 'bold',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                }
+            }
+        },
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.x + '</b><br/>'+
+                    this.series.name + ': ' + this.y + '元 ' + '<br/>' +
+                    '合计: ' + this.point.stackTotal + '元';
+            }
+        },
+        plotOptions: {
+            column: {
+                stacking: 'normal'
+            }
+        },
+        series: [{
+            name: '衣服裤子',
+            data: [500,0,0,0,0,0,0,0,0,0,0],
+            showInLegend: false // 设置为 false 即为不显示在图例中
+        }, {
+            name: '鞋帽包包',
+            data: [200,0,0,0,0,0,0,0,0,0,0],
+            showInLegend: false // 设置为 false 即为不显示在图例中
+        },{
+            name: '化妆饰品',
+            data: [0,120,0,0,0,0,0,0,0,0,0],
+            showInLegend: false // 设置为 false 即为不显示在图例中
+        },{
+            name: '菜品调料',
+            data: [0,0,0,0,0,700,0,0,0,0,0],
+            showInLegend: false // 设置为 false 即为不显示在图例中
+        },{
+            name: '早中晚餐',
+            data: [0,0,0,0,0,600,0,0,0,900,0],
+            showInLegend: false // 设置为 false 即为不显示在图例中
+        },{
+            name: '烟酒茶水',
+            data: [0,0,0,0,990,0,0,0,0,0,0],
+            showInLegend: false // 设置为 false 即为不显示在图例中
+        },{
+            name: '水果副食',
+            data: [0,0,0,0,0,0,0,0,0,0,880],
+            showInLegend: false // 设置为 false 即为不显示在图例中
+        },{
+            name: '培训进修',
+            data: [0,0,0,0,0,0,880,0,0,0,0],
+            showInLegend: false // 设置为 false 即为不显示在图例中
+        },]
+    });
+});
+</script>
 
-  </script>
+<script>
+    $(function () {
+    $('#daily-sr-chart').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: ''
+        },
+        xAxis: {
+            categories: ['职业收入', '其他收入']
+        },
+        yAxis: {
+            allowDecimals: false,
+            min: 0,
+            title: {
+                text: '金额'
+            }
+        },
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.x + '</b><br/>'+
+                    this.series.name + ': ' + this.y + '元 ' + '<br/>' +
+                    '合计: ' + this.point.stackTotal + '元';
+            }
+        },
+        plotOptions: {
+            column: {
+                stacking: 'normal'
+            }
+        },
+        series: [{
+            name: '工资收入',
+            data: [5000,0,],
+            showInLegend: false // 设置为 false 即为不显示在图例中
+        }, {
+            name: '利息收入',
+            data: [200,0],
+            showInLegend: false // 设置为 false 即为不显示在图例中
+        }, {
+            name: '奖金收入',
+            data: [200,0],
+            showInLegend: false // 设置为 false 即为不显示在图例中
+        }, {
+            name: '礼金收入',
+            data: [0,1000],
+            showInLegend: false // 设置为 false 即为不显示在图例中
+        }, {
+            name: '意外来钱',
+            data: [0,500],
+            showInLegend: false // 设置为 false 即为不显示在图例中
+        }]
+    });
+});
+
+</script>
