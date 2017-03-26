@@ -1,0 +1,225 @@
+{layout name="layout"}
+	<head>
+		<link href="/static/css/chart.css" rel="stylesheet">
+	</head>
+     <!--main content start-->
+      <section id="main-content">
+          <section class="wrapper site-min-height">
+          <h3><i class="fa fa-bar-chart"></i> 成员收支表</h3>
+              <!-- page start-->
+              <div id="morris">
+                  <div class="row mt">
+
+                      <div class="col-lg-6">
+                          <div class="content-panel">
+                              <h4><i class="fa fa-angle-right"></i> 成员支出表</h4>
+                              <div class="panel-body">
+                                    <div id="member-zc-chart">
+							
+						            </div>
+                                  <div id="hero-graph" class="graph"></div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="col-lg-6">
+                         <div class="content-panel">
+                              <h4><i class="fa fa-angle-right"></i> 成员收入表</h4>
+                              <div class="panel-body">
+                                    <div id="member-sr-chart">
+							
+						            </div>
+                                  <div id="hero-area" class="graph"></div>
+                              </div>
+                          </div> 
+                     </div>
+
+                      <div class="col-lg-6">
+                        <div class="content-panel">
+                              <div class="panel-body">
+                            <table class="table table-hover table-all">
+	                        <thead>
+                                 <th>总支出：￥10000.00</th>
+                                 <th></th>
+                                 <th></th>
+	                              <tr>
+	                                  <th>成员</th>
+	                                  <th>金额</th>
+	                                  <th>占比</th>
+	                              </tr>
+	                        </thead>
+	                              <tbody>
+	                              <tr>
+	                                  <td>公用</td>
+	                                  <td>￥4300.00</td>
+                                      <td>30%</td>
+	                              </tr>
+                                  <tr>
+                                      <td>父母</td>
+	                                  <td>￥4300.00</td>
+                                      <td>30%</td>
+                                  </tr>
+	                              <tr>
+	                                  <td>子女</td>
+                                      <td>￥4300.00</td>
+                                      <td>30%</td>
+	                              </tr>
+                                  <tr>
+	                                  <td>丈夫</td>
+                                      <td>￥4300.00</td>
+                                      <td>30%</td>
+	                              </tr>
+                                  <tr>
+	                                  <td>妻子</td>
+                                      <td>￥4300.00</td>
+                                      <td>30%</td>
+	                              </tr>
+
+
+	                              </tbody>
+	                          </table>
+
+                              </div>
+                          </div>
+
+                      </div>
+
+                      <div class="col-lg-6">
+                          <div class="content-panel">
+                              <div class="panel-body">
+                            <table class="table table-hover table-all">
+	                              <thead>
+                                 <th>总收入：￥10000.00</th>
+                                 <th></th>
+                                 <th></th>
+	                              <tr>
+	                                  <th>成员</th>
+	                                  <th>金额</th>
+	                                  <th>占比</th>
+	                              </tr>
+	                              </thead>
+	                              <tbody>
+                                  <tr>
+                                      <td>父母</td>
+	                                  <td>￥4300.00</td>
+                                      <td>30%</td>
+                                  </tr>
+	                              <tr>
+	                                  <td>子女</td>
+                                      <td>￥4300.00</td>
+                                      <td>30%</td>
+	                              </tr>
+                                  <tr>
+	                                  <td>丈夫</td>
+                                      <td>￥4300.00</td>
+                                      <td>30%</td>
+	                              </tr>
+                                  <tr>
+	                                  <td>妻子</td>
+                                      <td>￥4300.00</td>
+                                      <td>30%</td>
+	                              </tr>
+	                              </tbody>
+	                          </table>                                
+
+                              </div>
+                          </div>
+                      </div>
+
+                  </div>
+              </div>
+
+              <!-- page end-->
+          </section>
+      </section><!-- /MAIN CONTENT -->
+
+<script src="/dist/js/highcharts.js"></script>	
+<script>
+ $(function () {
+    $('#member-zc-chart').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        title: {
+            text: ''
+        },
+        tooltip: {
+            headerFormat: '{series.name}<br>',
+            pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: '支出比例：',
+            data: [
+                ['公用',   35.0],
+                ['父母',       26.8],
+                {
+                    name: '丈夫',
+                    y: 12.8,
+                    sliced: true,
+                    selected: true
+                },
+                ['妻子',    18.5],
+                ['子女',    18.5],
+            ]
+        }]
+    });
+});
+
+</script>
+<script>
+ $(function () {
+    $('#member-sr-chart').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+        },
+        title: {
+            text: ''
+        },
+        tooltip: {
+            headerFormat: '{series.name}<br>',
+            pointFormat: '{point.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            type: 'pie',
+            name: '浏览器访问量占比',
+            data: [
+                ['父母', 21.3],
+                {
+                    name: '丈夫',
+                    y: 48.3,
+                    sliced: true,
+                    selected: true
+                },
+                ['妻子', 30.4],
+                ['子女', 0],
+            ]
+        }]
+    });
+});
+
+</script>
