@@ -58,6 +58,8 @@ $(document).ready(function () {
 	
 	//签到表
 	createCalendar();
+	//消息窗
+	createGritter();
 
 	//获取收支图表
 	var time = [];
@@ -148,12 +150,35 @@ $(document).ready(function () {
 		}]
 	});
 	
-	//广告
+});
+
+//创建消息窗
+function createGritter(){
+	var days = 0;
+	var budget = 0.00;
+	var used = 0.00;
+	var over = 0.00;
+	$.ajax({
+		type: "get",
+		url: '/index/home/get_gritter',
+		async: false,
+		success: function (msg) {
+			if(msg.success){
+				days = msg.data.days;
+				budget = msg.data.budget;
+				used = msg.data.used;
+				over = msg.data.over;
+			}
+		},
+		error: function (e) {
+			console.log(e);
+		}
+	});
 	var unique_id = $.gritter.add({
 		// (string | mandatory) the heading of the notification
-		title: '今天是您第1天记账!',
+		title: '今天是您第'+ days +'天记账!',
 		// (string | mandatory) the text inside the notification
-		text: '本月预算额度0.00元，已使用0.00元，还剩0.00元可用。',
+		text: '本月预算额度'+ budget +'元，已使用'+ used +'元，还剩'+ over +'元可用。',
 		// (string | optional) the image to display on the left
 		image: '/static/img/ui-sam.jpg',
 		// (bool | optional) if you want it to fade out on its own or just sit there
@@ -165,8 +190,9 @@ $(document).ready(function () {
 	});
 			
 	$("#gritter-item-"+unique_id).parent().addClass("bottom-right");
-});
+}
 
+//创建签到日历
 function createCalendar(){
 	//获取签到状态
 	var legend = new Array();
@@ -195,6 +221,7 @@ function createCalendar(){
 	});
 }
 
+//签到日历点击事件
 function myDateFunction(id) {
 	var date = $("#" + id).data("date");
 	if(date == GetDateStr()){

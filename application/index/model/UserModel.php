@@ -87,4 +87,9 @@ class UserModel extends Model{
         $data = db('user')->where('uid',$uid)->field('username')->select();
         return $data[0]['username'];
     }
+	
+	public function get_registed_time($uid){
+		$data = db('user')->where('uid',$uid)->field('registered_time')->select();
+        return $data[0]['registered_time'];
+	}
 }

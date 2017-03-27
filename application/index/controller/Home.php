@@ -5,6 +5,7 @@ use app\index\model\AccountModel;
 use app\index\model\IncomeModel;
 use app\index\model\OutgoModel;
 use app\index\model\SignModel;
+use app\index\model\UserModel;
 use think\Request;
 
 class Home extends Controller
@@ -185,6 +186,26 @@ class Home extends Controller
 				return json($jsonData);
 			}
 		}
+	}
+	
+	public function get_gritter(){
+		$uid = session('user_auth.uid');
+		$user = new UserModel;
+		$registed = $user->get_registed_time($uid);
+		if(!empty($registed)){
+			$now = date("Y-m-d H:i:s");   
+			$registed = strtotime($registed);  
+			$now = strtotime($now);  
+			$days = ceil(($now-$registed)/3600/24);  
+		}
+		$data = [
+			'days'	=> $days,
+			'budget'=> '0.00',
+			'used'	=> '0.00',
+			'over'	=> '0.00'
+		];
+		$jsonData = array('success'=>true,'data'=>$data);
+		return json($jsonData);
 	}
 
 }
