@@ -16,4 +16,13 @@ class IncomeModel extends Model{
 		return $data;
 	}
 	
+	public function get_inout($uid){//获取近6个月收支
+		$in = Db::query("SELECT DATE_FORMAT(i_time,'%Y-%m') AS itime,sum(i_money) AS imoney FROM income 
+		WHERE uid=".$uid." AND i_time BETWEEN date_sub(now(),INTERVAL 6 MONTH) AND now() GROUP BY YEAR(i_time) ASC,MONTH(i_time) ASC;");
+		$out = Db::query("SELECT DATE_FORMAT(o_time,'%Y-%m') AS otime,sum(o_money) AS omoney FROM outgo 
+		WHERE uid=".$uid." AND o_time BETWEEN date_sub(now(),INTERVAL 6 MONTH) AND now() GROUP BY YEAR(o_time) ASC,MONTH(o_time) ASC;");
+		$data['in'] = $in;
+		$data['out'] = $out;
+		return $data;
+	}
 }

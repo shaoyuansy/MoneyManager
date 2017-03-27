@@ -24,20 +24,8 @@
 	<script>
         $(document).ready(function () {
 			$("[data-toggle='popover']").popover(); 
-            $("#date-popover").popover({html: true, trigger: "manual"});
-            $("#date-popover").hide();
-            $("#date-popover").click(function (e) {
-                $(this).hide();
-            });         
+                  
         });
-        
-        function myNavFunction(id) {
-            $("#date-popover").hide();
-            var nav = $("#" + id).data("navigation");
-            var to = $("#" + id).data("to");
-            console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
-        }
-
         function logout(){
             location.href="/logout";
         }
