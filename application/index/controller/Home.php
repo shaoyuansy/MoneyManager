@@ -16,6 +16,15 @@ class Home extends Controller
 		
     }
 	
+	public function get_username(){
+		$username = session ('user_auth.username');
+		if(!empty($username)){
+			$jsonData = array('success'=>true,'data'=>$username);
+			return json($jsonData);
+		}
+	}
+
+
 	public function all(){
 		$uid = session('user_auth.uid');
 		$account = new AccountModel;
