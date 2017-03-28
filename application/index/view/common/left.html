@@ -4,14 +4,14 @@
 		<!-- sidebar menu start-->
 		<ul class="sidebar-menu" id="nav-accordion">
 			<p class="centered">
-				<a href="profile.html">
+				<a href="#">
 					<img src="/static/img/ui-sam.jpg" class="img-circle" width="60">
 				</a>
 			</p>
 
 			<h5 class="centered" id = "get_username"></h5>
 			<li class="mt">
-				<a class="active" href="/index/home/index">
+				<a href="/index/home/index">
 				  <i class="fa fa-vcard-o"></i>
 				  <span>概览</span>
 				</a>
@@ -22,11 +22,19 @@
 				  <span>记账</span>
 				</a>
 				<ul class="sub">
+<<<<<<< Updated upstream
 				  <li><a  href="/index/account/in">收入</a></li>
 				  <li><a  href="/index/account/out">支出</a></li>
 				  <li><a  href="/index/account/debtee">还款</a></li>
 				  <li><a  href="/index/account/debtor">收债</a></li>
 				  <li><a  href="/index/account/budget">预算</a></li>
+=======
+				  <li><a href="#">收入</a></li>
+				  <li><a href="#">支出</a></li>
+				  <li><a href="#">还款</a></li>
+				  <li><a href="#">收债</a></li>
+				  <li><a href="#">预算</a></li>
+>>>>>>> Stashed changes
 				</ul>
 			</li>
 
@@ -36,11 +44,11 @@
 				  <span>报表</span>
 				</a>
 				<ul class="sub">
-				  <li><a  href="/index/chart/daily">日常收支表</a></li>
-				  <li><a  href="/index/chart/trend">收支趋势图</a></li>
-				  <li><a  href="/index/chart/member">成员收支表</a></li>
-				  <li><a  href="/index/chart/asset">资产负债表</a></li>
-				  <li><a  href="/index/chart/budget">收支预算表</a></li>
+				  <li><a class="/index/chart/daily" href="/index/chart/daily">日常收支表</a></li>
+				  <li><a class="/index/chart/trend" href="/index/chart/trend">收支趋势图</a></li>
+				  <li><a class="/index/chart/member" href="/index/chart/member">成员收支表</a></li>
+				  <li><a class="/index/chart/asset" href="/index/chart/asset">资产负债表</a></li>
+				  <li><a class="/index/chart/budget" href="/index/chart/budget">收支预算表</a></li>
 				</ul>
 			</li>
 
@@ -71,10 +79,10 @@
 				  <span>新功能</span>
 				</a>
 				<ul class="sub">
-				  <li><a  href="form_component.html">信用卡</a></li>
-				  <li><a  href="form_component.html">贷款</a></li>
-				  <li><a  href="form_component.html">股票</a></li>
-				  <li><a  href="form_component.html">+我要加功能</a></li>
+				  <li><a href="#">信用卡</a></li>
+				  <li><a href="#">贷款</a></li>
+				  <li><a href="#">股票</a></li>
+				  <li><a href="#">+我要加功能</a></li>
 				</ul>
 			</li>
 
@@ -84,10 +92,10 @@
 				  <span>设置</span>
 				</a>
 				<ul class="sub">
-				  <li><a  href="calendar.html">个人中心</a></li>
-				  <li><a  href="gallery.html">报告设置</a></li>
-				  <li><a  href="todo_list.html">分类管理</a></li>
-				  <li><a  href="todo_list.html">成员管理</a></li>
+				  <li><a href="#">个人中心</a></li>
+				  <li><a href="#">报告设置</a></li>
+				  <li><a href="#">分类管理</a></li>
+				  <li><a href="#">成员管理</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -95,3 +103,13 @@
 	</div>
 </aside>
 <!--sidebar end-->
+
+<script>
+	$().ready(function(){
+		var getclass = window.location.pathname;
+		var cla = document.getElementsByClassName(getclass);
+		$(cla).parent().addClass("active");
+		var getul = $(cla).parent().parent().parent().find("a")[0];
+		$(getul).addClass("active");
+	});
+</script>
