@@ -32,6 +32,14 @@
 .content-panel{
 	padding:10px;
 }
+.select{
+	padding:0px;
+}
+label{
+	margin-bottom: 0px;
+	cursor:pointer;
+}
+
 </style>
     <section id="main-content">
           <section class="wrapper">
@@ -52,7 +60,10 @@
 								    <label class="col-lg-3 col-md-3 col-sm-2 control-label" style="padding-top: 3px;padding-right: 0px;padding-left: 0px;text-align: right;">
 									分类</label>
 								    <div class="col-lg-9 col-md-9 col-sm-10">
-									    <input type="text" class="form-control">
+									    <select class="form-control select">
+											<option>1</option>
+											<option>2</option>
+										</select>
 								    </div>
 							    </div>
 								<div class="form-group in-filter row col-lg-4 col-md-4 col-sm-12" 
@@ -60,7 +71,10 @@
 								    <label class="col-lg-3 col-md-3 col-sm-2 control-label" style="padding-top: 3px;padding-right: 0px;padding-left: 0px;text-align: right;">
 									账户</label>
 								    <div class="col-lg-9 col-md-9 col-sm-10">
-									    <input type="text" class="form-control">
+									    <select class="form-control select">
+											<option>1</option>
+											<option>2</option>
+										</select>
 								    </div>
 							    </div>
 								<div class="form-group in-filter row col-lg-4 col-md-4 col-sm-12" 
@@ -68,24 +82,35 @@
 								    <label class="col-lg-3 col-md-3 col-sm-2 control-label" style="padding-top: 3px;padding-right: 0px;padding-left: 0px;text-align: right;">
 									金额</label>
 								    <div class="col-lg-9 col-md-9 col-sm-10">
-									    <input type="text" class="form-control">
-								    </div>
+										<div class="input-group">
+											<span style="padding:0px 7px;" class="input-group-addon">￥</span>
+											<input type="text" class="form-control">
+										</div>
+									</div>
 							    </div>
 								<div class="form-group in-filter row col-lg-4 col-md-4 col-sm-12" 
 									 style="border-bottom: 0px;padding-bottom: 0px;margin-bottom: 0px;margin-right: 0px; margin-left: 0px;">
 								    <label class="col-lg-3 col-md-3 col-sm-2 control-label" style="padding-top: 3px;padding-right: 0px;padding-left: 0px;text-align: right;">
 									成员</label>
 								    <div class="col-lg-9 col-md-9 col-sm-10">
-									    <input type="text" class="form-control">
+									    <select class="form-control select">
+											<option>1</option>
+											<option>2</option>
+										</select>
 								    </div>
 							    </div>
 								<div class="form-group in-filter row col-lg-4 col-md-4 col-sm-12" 
 									 style="border-bottom: 0px;padding-bottom: 0px;margin-bottom: 0px;margin-right: 0px; margin-left: 0px;">
 								    <label class="col-lg-3 col-md-3 col-sm-2 control-label" style="padding-top: 3px;padding-right: 0px;padding-left: 0px;text-align: right;">
 									时间</label>
-								    <div class="col-lg-9 col-md-9 col-sm-10">
-									    <input type="text" class="form-control">
-								    </div>
+								    <div class="col-lg-9 col-md-9 col-sm-10 ">
+										<div class="input-group">
+											<input type="text" class="form-control" id="time">
+											<span style="padding:0px 7px;" class="input-group-addon">
+												<label for="time"><i class="fa fa-calendar"></i></label>
+											</span>
+										</div>
+									</div>
 							    </div>
 								<div class="form-group row in-filter col-lg-12 col-md-12 col-sm-12" 
 									 style="border-bottom: 0px;padding-bottom: 0px;margin-bottom: 0px;margin-right: 0px; margin-left: 0px;">
@@ -221,6 +246,11 @@
     </section>
 	<script type="text/javascript">
 		$(document).ready(function() {
+		$('#time').datetimepicker({
+			format: 'yyyy-mm-dd hh:ii',
+			language:'zh-CN',
+			todayBtn:'linked'
+		});
 			 $('#example').dataTable({
 				"scrollX": true,
 				"pagingType":   "full_numbers",
