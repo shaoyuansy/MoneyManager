@@ -39,7 +39,15 @@ label{
 	margin-bottom: 0px;
 	cursor:pointer;
 }
-
+.table,
+.table thead tr th{
+	text-align:center;
+}
+.toolbar{
+	width:100px;
+	height:30px;
+	color:red;
+}
 </style>
     <section id="main-content">
           <section class="wrapper">
@@ -141,7 +149,7 @@ label{
 								</div>
 							</div>
 							<div class="row col-lg-12 col-md-12 col-sm-12" style="margin:0px;">
-							<table id="example" class="display table hover table-striped table-bordered " cellspacing="0" width="100%">
+							<table id="example" class="display table table-hover table-striped table-bordered" cellspacing="0" width="100%">
 								<thead>
 									<tr>
 										<th>收入类型</th>
@@ -246,12 +254,14 @@ label{
     </section>
 	<script type="text/javascript">
 		$(document).ready(function() {
-		$('#time').datetimepicker({
-			format: 'yyyy-mm-dd hh:ii',
-			language:'zh-CN',
-			todayBtn:'linked'
-		});
-			 $('#example').dataTable({
+			$('#time').datetimepicker({
+				format: 'yyyy-mm-dd hh:ii',
+				language:'zh-CN',
+				todayBtn:'linked'
+			});
+			var table = $('#example').dataTable({
+				"dom": '<"toolbar">lfrtip<"clear">',
+				"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
 				"scrollX": true,
 				"pagingType":   "full_numbers",
 				"language": {
@@ -286,7 +296,7 @@ label{
 					var api = this.api();
 					api.columns().indexes().flatten().each( function ( i ) {
 						var column = api.column( i );
-						var select = $('<select><option value=""></option></select>')
+						var select = $('<select class="form-control select"><option value=""></option></select>')
 							.appendTo( $(column.header()).empty() )
 							.on( 'change', function () {
 								var val = $.fn.dataTable.util.escapeRegex(
@@ -301,6 +311,25 @@ label{
 						} );
 					} );
 				}
-			 });
+			}).on( 'init.dt', function () {	
+				$(".dataTables_length").css("display","inline-block");
+				$(".dataTables_filter").css("display","inline-block");
+				$(".dataTables_info").css("display","inline-block");
+				$(".dataTables_paginate").css("display","inline-block");
+				$(".dataTables_paginate").css("float","right");
+				$(".dataTables_filter").css("float","right");
+				$(".dataTables_length label select").css("padding","0px");
+				$(".dataTables_length label select").css("height","26px");
+				$(".dataTables_length label select").css("width","55px");
+				$(".toolbar").addClass('toolbar');
+				$(".toolbar").html('<button id="delete" type="button" class="btn btn-primary btn-xs"><i class="fa fa-trash-o fa-lg"></i> 删除所选</button>');
+				$('#delete').click( function () {
+					console.log($("#example tbody ").find('.warning'));
+				} );
+			});
+			
+			$('#example tbody').on( 'click', 'tr', function () {
+				$(this).toggleClass('warning');
+			} );
 		});	
 	</script>

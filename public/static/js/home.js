@@ -255,6 +255,6 @@ function GetDateStr() {
 	var y = dd.getFullYear(); 
 	var m = dd.getMonth()+1;//获取当前月份的日期 
 	var d = dd.getDate(); 
-	return y +"-"+ (m<10 ? "0"+m : m )+"-"+d; 
+	return y +"-"+ (m<10 ? "0"+m : m ) +"-"+ (d<10 ? "0"+d : d ); 
 }
 		
