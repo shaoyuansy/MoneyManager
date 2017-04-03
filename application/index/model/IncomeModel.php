@@ -40,7 +40,7 @@ class IncomeModel extends Model{
 		return $data;
 	}
 	
-	public function get_in_type($uid){//获取近6个月收支
+	public function get_in_type($uid){//获取收入类型
 		$in_type = Db::table('t_in')->where('uid',$uid)->field('type')->select();
 		if(count($in_type)>0){
 			return $in_type[0];

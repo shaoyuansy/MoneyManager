@@ -7,6 +7,20 @@ use think\Db;
  *Account model
  */
 class OutgoModel extends Model{
+
+	public function save_outgo($uid,$type,$account,$money,$member,$time,$remark){
+		$data = [
+			'uid'		=> $uid,
+			'o_type' 	=> $type, 
+			'o_account' => $account, 
+			'o_money' 	=> $money, 
+			'o_member' 	=> $member, 
+			'o_time' 	=> $time, 
+			'o_remark' 	=> $remark,
+		];
+		$result = Db::name('outgo')->insert($data);
+		return $result;
+	}
 	
 	public function get_outgo($uid){//获取用户支出
 		$week_outgo = Db::query("SELECT SUM(o_money) as week_outgo FROM outgo WHERE uid=".$uid." AND YEARWEEK(date_format(o_time,'%Y-%m-%d')) = YEARWEEK(now());");
@@ -14,6 +28,13 @@ class OutgoModel extends Model{
 		$year_outgo = Db::query("SELECT SUM(o_money) as year_outgo FROM outgo WHERE uid=".$uid." AND YEAR(o_time)=YEAR(NOW());");
 		$data = array_merge($week_outgo[0],$month_outgo[0],$year_outgo[0]);
 		return $data;
+	}
+		
+	public function get_out_type($uid){//获取支出类型
+		$out_type = Db::table('t_out')->where('uid',$uid)->field('type')->select();
+		if(count($out_type)>0){
+			return $out_type[0];
+		}
 	}
 	
 }

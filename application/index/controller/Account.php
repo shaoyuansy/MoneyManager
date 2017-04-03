@@ -3,6 +3,7 @@ namespace app\index\controller;
 use think\Controller;
 use app\index\model\UserModel;
 use app\index\model\IncomeModel;
+use app\index\model\OutgoModel;
 use app\index\model\AccountModel;
 use app\index\model\MemberModel;
 use think\Request;
@@ -37,6 +38,16 @@ class Account extends Controller
 		$uid = session('user_auth.uid');
 		$income = new IncomeModel;
 		$data = $income->get_in_type($uid);
+		if(!empty($data)){
+			$jsonData = array('success'=>true,'data'=>$data);
+			return json($jsonData);
+		}
+	}	
+
+	public function out_type(){
+		$uid = session('user_auth.uid');
+		$outgo = new OutgoModel;
+		$data = $outgo->get_out_type($uid);
 		if(!empty($data)){
 			$jsonData = array('success'=>true,'data'=>$data);
 			return json($jsonData);

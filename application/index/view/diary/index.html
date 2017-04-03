@@ -1,22 +1,145 @@
 {layout name="layout"}
 
-    <section id="main-content">
-        <section class="wrapper">
-        <div class="row mt" style="margin-top:0px">
-					<div class="col-md-12 mb">
-						<div class="border-head">
-							<h3>理财日记</h3>
+<head>
+    <link rel="stylesheet" type="text/css" href="/dist/css/wangEditor.css">
+    <style type="text/css">
+        #editor-trigger {
+            height: 400px;
+            /*max-height: 500px;*/
+        }
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
+        }
+		.title-art{
+			width: 80%;
+			text-align: center;
+			margin: 0 auto;
+			margin-bottom: 10px;
+			height: 40px;
+			font-size: 20px;
+			background: #f2f2f2;
+			border: 1px dashed;
+		}
+    </style>
+</head>
+
+<!--中间上方 -->
+<!--main content start-->
+<section id="main-content">
+	<section class="wrapper">
+		<div class="row">
+			<div class="col-lg-9 col-md-9">
+				<h3><i class="fa fa-angle-right"></i> 理财日记</h3>
+				<h5>我的理财日记 本月有 0 篇，共 0 篇日记</h5>
+				<hr >
+				<div class="row">
+					<input type="text" class="form-control title-art" placeholder="请输入标题" />
+					<div id="editor-container" class="container">
+						<div id="editor-trigger">
+							<p>请输入内容</p>
 						</div>
-
-
-
-
 					</div>
-					<!--custom chart end-->
 				</div>
-				<!-- /row -->
+			</div>		
+			<!-- 右侧栏 -->
+			<div class="col-lg-3 col-md-3">
+				<div>
+					<h2>右侧</h2>
+					
+				</div>
 			</div>
-
-    </section>
+		</div>
+	</section>
 </section>
-<!--main content end-->
+
+<script type="text/javascript" src="/dist/js/wangEditor.js"></script>
+<!--<script type="text/javascript" src="../dist/js/wangEditor.min.js"></script>-->
+<script type="text/javascript">
+	// 阻止输出log
+	// wangEditor.config.printLog = false;
+
+	var editor = new wangEditor('editor-trigger');
+
+	// 上传图片
+	editor.config.uploadImgUrl = '/upload';
+	editor.config.uploadParams = {
+		// token1: 'abcde',
+		// token2: '12345'
+	};
+	editor.config.uploadHeaders = {
+		// 'Accept' : 'text/x-json'
+	}
+	// editor.config.uploadImgFileName = 'myFileName';
+
+	// 隐藏网络图片
+	// editor.config.hideLinkImg = true;
+
+	// 表情显示项
+	editor.config.emotionsShow = 'value';
+	editor.config.emotions = {
+		'default': {
+			title: '默认',
+			data: '/dist/data/emotions.data'
+		}
+	};
+
+	// 插入代码时的默认语言
+	// editor.config.codeDefaultLang = 'html'
+
+	// 只粘贴纯文本
+	// editor.config.pasteText = true;
+
+	// 跨域上传
+	// editor.config.uploadImgUrl = 'http://localhost:8012/upload';
+
+	// 第三方上传
+	// editor.config.customUpload = true;
+
+	// 普通菜单配置
+	// editor.config.menus = [
+	//     'img',
+	//     'insertcode',
+	//     'eraser',
+	//     'fullscreen'
+	// ];
+	// 只排除某几个菜单（兼容IE低版本，不支持ES5的浏览器），支持ES5的浏览器可直接用 [].map 方法
+	// editor.config.menus = $.map(wangEditor.config.menus, function(item, key) {
+	//     if (item === 'insertcode') {
+	//         return null;
+	//     }
+	//     if (item === 'fullscreen') {
+	//         return null;
+	//     }
+	//     return item;
+	// });
+
+	// onchange 事件
+	editor.onchange = function () {
+		console.log(this.$txt.html());
+	};
+
+	// 取消过滤js
+	// editor.config.jsFilter = false;
+
+	// 取消粘贴过来
+	// editor.config.pasteFilter = false;
+
+	// 设置 z-index
+	// editor.config.zindex = 20000;
+
+	// 语言
+	// editor.config.lang = wangEditor.langs['en'];
+
+	// 自定义菜单UI
+	// editor.UI.menus.bold = {
+	//     normal: '<button style="font-size:20px; margin-top:5px;">B</button>',
+	//     selected: '.selected'
+	// };
+	// editor.UI.menus.italic = {
+	//     normal: '<button style="font-size:20px; margin-top:5px;">I</button>',
+	//     selected: '<button style="font-size:20px; margin-top:5px;"><i>I</i></button>'
+	// };
+	editor.create();
+    </script>

@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 本地local
+Source Server         : localhost_3306
 Source Server Version : 50617
 Source Host           : localhost:3306
 Source Database       : moneymanager
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-03-27 21:27:24
+Date: 2017-04-03 13:46:49
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -109,7 +109,7 @@ CREATE TABLE `income` (
   `i_remark` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `uid` int(11) DEFAULT NULL,
   PRIMARY KEY (`iid`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf32;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf32;
 
 -- ----------------------------
 -- Records of income
@@ -122,6 +122,9 @@ INSERT INTO `income` VALUES ('5', '2016-11-27 09:23:55', '工资收入', '信用
 INSERT INTO `income` VALUES ('6', '2016-10-27 09:23:55', null, null, '100', null, null, '4');
 INSERT INTO `income` VALUES ('7', '2017-01-24 09:23:02', null, null, '100', null, null, '4');
 INSERT INTO `income` VALUES ('8', '2016-09-27 09:23:55', null, null, '100', null, null, '4');
+INSERT INTO `income` VALUES ('11', '2017-04-02 20:32:00', '职业收入', '信用卡', '200', '本人', '你好', '4');
+INSERT INTO `income` VALUES ('12', '2017-04-02 20:38:00', '职业收入', '信用卡', '250', '本人', '', '4');
+INSERT INTO `income` VALUES ('13', '2017-04-03 13:46:00', '职业收入', '信用卡', '123', '本人', '', '4');
 
 -- ----------------------------
 -- Table structure for outgo
@@ -161,7 +164,7 @@ CREATE TABLE `sign` (
 -- ----------------------------
 -- Records of sign
 -- ----------------------------
-INSERT INTO `sign` VALUES ('15', '4', '1', '2017-03-27 21:11:49');
+INSERT INTO `sign` VALUES ('15', '4', '1', '2017-04-02 15:38:10');
 
 -- ----------------------------
 -- Table structure for t_account
@@ -177,7 +180,7 @@ CREATE TABLE `t_account` (
 -- ----------------------------
 -- Records of t_account
 -- ----------------------------
-INSERT INTO `t_account` VALUES ('1', '{\"type\":[\"信用卡\",\"虚拟\",\"现金\",\"债权\",\"债务\"]}\r\n}', '4');
+INSERT INTO `t_account` VALUES ('1', '{\"type\":[\"信用卡\",\"虚拟\",\"现金\",\"债权\",\"债务\"]}', '4');
 
 -- ----------------------------
 -- Table structure for t_in
@@ -256,4 +259,4 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('4', 'admin', '89f0b495890138511edbca8d446aa63e', '123@123.COM', null, '', null, null, '2017-03-27 18:09:04', '8', '2017-03-27 13:59:07', null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('4', 'admin', '89f0b495890138511edbca8d446aa63e', '123@123.COM', null, '', null, null, '2017-04-03 13:26:24', '17', '2017-03-26 20:27:18', null, null, null, null, null, null, null);
