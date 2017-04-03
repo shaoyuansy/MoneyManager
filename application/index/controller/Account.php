@@ -34,6 +34,23 @@ class Account extends Controller
 		}
 	}
 	
+	public function get_income(){
+		$uid = session('user_auth.uid');
+		$income = new IncomeModel;
+		$result = $income->select_income($uid);
+		$data = [];
+		if($result > 0){
+			foreach($result as &$arr){
+				array_push($data,array_values($arr));
+			}
+			$jsonData = array('success'=>true,'data'=>$data);
+			return json($jsonData);
+		}else{
+			$jsonData = array('success'=>false,'errorMassage'=>'暂无记录');
+			return json($jsonData);
+		}
+	}
+	
 	public function in_type(){
 		$uid = session('user_auth.uid');
 		$income = new IncomeModel;
@@ -71,6 +88,23 @@ class Account extends Controller
 		if(!empty($data)){
 			$jsonData = array('success'=>true,'data'=>$data);
 			return json($jsonData);
+		}
+	}
+	
+	public function del_income(){
+		if(request()->isPost()){
+			$del = input('post.del');
+			$delArr = explode(",",$del);
+			$uid = session('user_auth.uid');
+			$income = new IncomeModel;
+			$result = $income->delete_income($uid,$delArr);
+			if($result>0){
+				$jsonData = array('success'=>true,'data'=>"");
+				return json($jsonData);
+			}else{
+				$jsonData = array('success'=>false,'errorMassage'=>'删除失败');
+				return json($jsonData);
+			}
 		}
 	}
 

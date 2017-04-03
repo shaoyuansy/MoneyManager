@@ -16,13 +16,22 @@ class IncomeModel extends Model{
 			'i_money' 	=> $money, 
 			'i_member' 	=> $member, 
 			'i_time' 	=> $time, 
-			'i_remark' 	=> $remark,
+			'i_remark' 	=> $remark
 		];
 		$result = Db::name('income')->insert($data);
 		return $result;
 	}
 	
-	public function get_income($uid){//获取用户收入
+	public function select_income($uid){//获取用户收入记录
+		$data = Db::table('income')
+				->where('uid',$uid)
+				->field('iid,i_type,i_account,i_time,i_money,i_member,i_remark')
+				->order('iid desc')
+				->select();
+		return $data;
+	}
+	
+	public function get_income($uid){//首页获取用户收入
 		$week_income = Db::query("SELECT SUM(i_money) as week_income FROM income WHERE uid=".$uid." AND YEARWEEK(date_format(i_time,'%Y-%m-%d')) = YEARWEEK(now());");
 		$month_income = Db::query("SELECT SUM(i_money) as month_income FROM income WHERE uid=".$uid." AND date_format(i_time,'%Y-%m')=date_format(now(),'%Y-%m');");
 		$year_income = Db::query("SELECT SUM(i_money) as year_income FROM income WHERE uid=".$uid." AND YEAR(i_time)=YEAR(NOW());");
@@ -45,5 +54,10 @@ class IncomeModel extends Model{
 		if(count($in_type)>0){
 			return $in_type[0];
 		}
+	}
+	
+	public function delete_income($uid,$del){//删除记录
+		$result = Db::table('income')->where('uid',$uid)->delete($del);
+		return $result;
 	}
 }

@@ -23,9 +23,12 @@ $(document).ready(function () {
 		async: false,
 		success: function (msg) {
 			if(msg.success){
-				$("#w_in").text("￥"+msg.data.week_income);
-				$("#m_in").text("￥"+msg.data.month_income);
-				$("#y_in").text("￥"+msg.data.year_income);
+				let w_in = msg.data.week_income===null ? "0" : msg.data.week_income;
+				let m_in = msg.data.month_income===null ? "0" : msg.data.month_income;
+				let y_in = msg.data.year_income===null ? "0" : msg.data.year_income;
+				$("#w_in").text("￥"+ w_in );
+				$("#m_in").text("￥"+ m_in );
+				$("#y_in").text("￥"+ y_in );
 			}
 		},
 		error: function (e) {
@@ -40,9 +43,12 @@ $(document).ready(function () {
 		async: false,
 		success: function (msg) {
 			if(msg.success){
-				$("#w_out").text("￥"+msg.data.week_outgo);
-				$("#m_out").text("￥"+msg.data.month_outgo);
-				$("#y_out").text("￥"+msg.data.year_outgo);
+				let w_out = msg.data.week_outgo===null ? "0" : msg.data.week_outgo;
+				let m_out = msg.data.month_outgo===null ? "0" : msg.data.month_outgo;
+				let y_out = msg.data.year_outgo===null ? "0" : msg.data.year_outgo;
+				$("#w_out").text("￥"+ w_out);
+				$("#m_out").text("￥"+ m_out);
+				$("#y_out").text("￥"+ y_out);
 			}
 		},
 		error: function (e) {
