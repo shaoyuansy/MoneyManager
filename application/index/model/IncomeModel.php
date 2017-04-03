@@ -8,6 +8,20 @@ use think\Db;
  */
 class IncomeModel extends Model{
 	
+	public function save_income($uid,$type,$account,$money,$member,$time,$remark){
+		$data = [
+			'uid'		=> $uid,
+			'i_type' 	=> $type, 
+			'i_account' => $account, 
+			'i_money' 	=> $money, 
+			'i_member' 	=> $member, 
+			'i_time' 	=> $time, 
+			'i_remark' 	=> $remark,
+		];
+		$result = Db::name('income')->insert($data);
+		return $result;
+	}
+	
 	public function get_income($uid){//获取用户收入
 		$week_income = Db::query("SELECT SUM(i_money) as week_income FROM income WHERE uid=".$uid." AND YEARWEEK(date_format(i_time,'%Y-%m-%d')) = YEARWEEK(now());");
 		$month_income = Db::query("SELECT SUM(i_money) as month_income FROM income WHERE uid=".$uid." AND date_format(i_time,'%Y-%m')=date_format(now(),'%Y-%m');");
@@ -24,5 +38,12 @@ class IncomeModel extends Model{
 		$data['in'] = $in;
 		$data['out'] = $out;
 		return $data;
+	}
+	
+	public function get_in_type($uid){//获取近6个月收支
+		$in_type = Db::table('t_in')->where('uid',$uid)->field('type')->select();
+		if(count($in_type)>0){
+			return $in_type[0];
+		}
 	}
 }

@@ -38,4 +38,11 @@ class AccountModel extends Model{
 		}
 	}
 	
+	public function get_account_type($uid){//获取近6个月收支
+		$type = Db::table('t_account')->where('uid',$uid)->field('type')->select();
+		if(count($type)>0){
+			return $type[0];
+		}
+	}
+	
 }
