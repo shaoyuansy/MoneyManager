@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-04-03 13:46:49
+Date: 2017-04-03 21:50:23
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -109,22 +109,13 @@ CREATE TABLE `income` (
   `i_remark` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `uid` int(11) DEFAULT NULL,
   PRIMARY KEY (`iid`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf32;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf32;
 
 -- ----------------------------
 -- Records of income
 -- ----------------------------
-INSERT INTO `income` VALUES ('1', '2017-01-27 09:23:02', '工资收入', '信用卡', '100', null, null, '4');
-INSERT INTO `income` VALUES ('2', '2017-02-27 09:23:04', '工资收入', '现金', '100', null, null, '4');
-INSERT INTO `income` VALUES ('3', '2017-03-27 09:23:06', '工资收入', '信用卡', '100', null, null, '4');
-INSERT INTO `income` VALUES ('4', '2016-12-27 09:23:54', '工资收入', '信用卡', '100', null, null, '4');
-INSERT INTO `income` VALUES ('5', '2016-11-27 09:23:55', '工资收入', '信用卡', '100', null, null, '4');
-INSERT INTO `income` VALUES ('6', '2016-10-27 09:23:55', null, null, '100', null, null, '4');
-INSERT INTO `income` VALUES ('7', '2017-01-24 09:23:02', null, null, '100', null, null, '4');
-INSERT INTO `income` VALUES ('8', '2016-09-27 09:23:55', null, null, '100', null, null, '4');
-INSERT INTO `income` VALUES ('11', '2017-04-02 20:32:00', '职业收入', '信用卡', '200', '本人', '你好', '4');
-INSERT INTO `income` VALUES ('12', '2017-04-02 20:38:00', '职业收入', '信用卡', '250', '本人', '', '4');
-INSERT INTO `income` VALUES ('13', '2017-04-03 13:46:00', '职业收入', '信用卡', '123', '本人', '', '4');
+INSERT INTO `income` VALUES ('28', '2017-04-03 21:12:00', '职业收入', '信用卡', '123.00', '本人', '', '4');
+INSERT INTO `income` VALUES ('29', '2017-04-02 21:30:00', '其他收入', '虚拟', '321.00', '子女', '游戏账户', '4');
 
 -- ----------------------------
 -- Table structure for outgo
@@ -259,4 +250,4 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('4', 'admin', '89f0b495890138511edbca8d446aa63e', '123@123.COM', null, '', null, null, '2017-04-03 13:26:24', '17', '2017-03-26 20:27:18', null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('4', 'admin', '89f0b495890138511edbca8d446aa63e', '123@123.COM', null, '', null, null, '2017-04-03 21:45:40', '21', '2017-03-26 20:27:18', null, null, null, null, null, null, null);

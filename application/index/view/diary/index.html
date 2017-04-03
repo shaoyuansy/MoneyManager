@@ -22,6 +22,45 @@
 			background: #f2f2f2;
 			border: 1px dashed;
 		}
+		.m_i{
+			margin-left: 6px;
+		}
+		a,
+		a:visited{
+			color: #797979;
+		}
+		a:hover{
+			color: #ffd777;
+			cursor: pointer;
+		}
+		.page-riji{
+			padding-left: 20px;
+			padding-right: 0px;
+			padding-bottom: 20px;
+		}
+		.page-num{
+			padding-right: 0px;
+			display:inline-block;
+		}
+		.page-btn{
+			padding-right: 0px;
+			padding-left: 0px;
+			padding-left: 10px;
+			display:inline-block;
+		}
+		.table tr:last-child td{
+			
+		}
+		.table-riji{
+			margin-bottom: 15px;
+			border-bottom: 1px solid #ddd;
+			min-height: 400px;
+			max-height: 450px;
+			overflow-y: auto;
+		}
+		.table{
+			margin-bottom: 0px;
+		}
     </style>
 </head>
 
@@ -30,7 +69,7 @@
 <section id="main-content">
 	<section class="wrapper">
 		<div class="row">
-			<div class="col-lg-9 col-md-9">
+			<div class="col-lg-8 col-md-8 col-sm-12">
 				<h3><i class="fa fa-angle-right"></i> 理财日记</h3>
 				<h5>我的理财日记 本月有 0 篇，共 0 篇日记</h5>
 				<hr >
@@ -44,10 +83,89 @@
 				</div>
 			</div>		
 			<!-- 右侧栏 -->
-			<div class="col-lg-3 col-md-3">
-				<div>
-					<h2>右侧</h2>
-					
+			<div class="col-lg-4 col-md-4 col-sm-12">
+					<h3><i class="fa fa-angle-right"></i> 日记列表</h3>
+					<div class="col-lg-12 col-md-12 col-sm-12 table-riji">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>日期</th>
+									<th>标题</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>2017-02-16</td>
+									<td><a href="#">理财一记</a></td>
+									<td>
+										<a class="tooltips" data-placement="bottom" data-original-title="编辑"><i class="fa fa-pencil"></i></a>
+										<a class="tooltips" data-placement="bottom" data-original-title="删除"><i class="fa fa-trash-o"></i></a>
+									</td>
+								</tr>
+								<tr>
+									<td>2017-02-16</td>
+									<td><a href="#">理财一记</a></td>
+									<td>
+										<a class="tooltips" data-placement="bottom" data-original-title="编辑"><i class="fa fa-pencil"></i></a>
+										<a class="tooltips" data-placement="bottom" data-original-title="删除"><i class="fa fa-trash-o"></i></a>
+									</td>
+								</tr>
+								<tr>
+									<td>2017-02-16</td>
+									<td><a href="#">理财一记</a></td>
+									<td>
+										<a class="tooltips" data-placement="bottom" data-original-title="编辑"><i class="fa fa-pencil"></i></a>
+										<a class="tooltips" data-placement="bottom" data-original-title="删除"><i class="fa fa-trash-o"></i></a>
+									</td>
+								</tr>
+								<tr>
+									<td>2017-02-16</td>
+									<td><a href="#">理财一记</a></td>
+									<td>
+										<a class="tooltips" data-placement="bottom" data-original-title="编辑"><i class="fa fa-pencil"></i></a>
+										<a class="tooltips" data-placement="bottom" data-original-title="删除"><i class="fa fa-trash-o"></i></a>
+									</td>
+								</tr>
+								<tr>
+									<td>2017-02-16</td>
+									<td><a href="#">理财一记</a></td>
+									<td>
+										<a class="tooltips" data-placement="bottom" data-original-title="编辑"><i class="fa fa-pencil"></i></a>
+										<a class="tooltips" data-placement="bottom" data-original-title="删除"><i class="fa fa-trash-o"></i></a>
+									</td>
+								</tr>
+								<tr>
+									<td>2017-02-16</td>
+									<td><a href="#">理财一记</a></td>
+									<td>
+										<a class="tooltips" data-placement="bottom" data-original-title="编辑"><i class="fa fa-pencil"></i></a>
+										<a class="tooltips" data-placement="bottom" data-original-title="删除"><i class="fa fa-trash-o"></i></a>
+									</td>
+								</tr>
+								<tr>
+									<td>2017-02-16</td>
+									<td><a href="#">理财一记</a></td>
+									<td>
+										<a class="tooltips" data-placement="bottom" data-original-title="编辑"><i class="fa fa-pencil"></i></a>
+										<a class="tooltips" data-placement="bottom" data-original-title="删除"><i class="fa fa-trash-o"></i></a>
+									</td>
+								</tr>
+								
+							</tbody>
+						</table>
+					</div>
+					<div class="page-riji col-lg-12 col-md-12 col-sm-12 row">
+						<div class="page-num col-lg-7 col-md-7 col-sm-6">
+							当前第<b>1</b>页，共<b>2</b>页
+						</div>
+						<div class="page-btn col-lg-5 col-md-5 col-sm-6">
+							<a class="tooltips" data-placement="bottom" data-original-title="首页"><i class="m_i fa fa-fast-backward"></i></a>
+							<a class="tooltips" data-placement="bottom" data-original-title="上一页"><i class="m_i fa fa-step-backward"></i></a>
+							<a class="tooltips" data-placement="bottom" data-original-title="下一页"><i class="m_i fa fa-step-forward"></i></a>
+							<a class="tooltips" data-placement="bottom" data-original-title="末页"><i class="m_i fa fa-fast-forward"></i></a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -55,7 +173,6 @@
 </section>
 
 <script type="text/javascript" src="/dist/js/wangEditor.js"></script>
-<!--<script type="text/javascript" src="../dist/js/wangEditor.min.js"></script>-->
 <script type="text/javascript">
 	// 阻止输出log
 	// wangEditor.config.printLog = false;
