@@ -1,162 +1,112 @@
 {layout name="layout"}
-<style>
-.form-group,
-.form-horizontal,
-.style-form{
-	margin-left:0px;
-	margin-right:0px;
-	margin-buttom:0px;
-	margin-top:0px;
-	margin:0px;
-	padding-left:0px;
-	padding-right:0px;
-	padding-top:0px;
-	padding-buttom:0px;
-	padding:0px;
-}
-.form-control{
-	height: 26px;
-    padding: 6px 6px;
-}
-.in-filter{
-	margin-top:10px;
-}
-.save-in{
-	position:absolute;
-	right:15px;
-	bottom:2px;
-	height:25px;
-	width:70px;
-	padding: 2px 6px;
-}
-.content-panel{
-	padding:10px;
-}
-.select{
-	padding:0px;
-}
-label{
-	margin-bottom: 0px;
-	cursor:pointer;
-}
-.table,
-.table thead tr th{
-	text-align:center;
-}
-.table tbody tr {
-	cursor:pointer;
-}
-.toolbar{
-	width:100px;
-	height:30px;
-	color:red;
-}
-</style>
-    <section id="main-content">
-          <section class="wrapper">
-          	<h3><i class="fa fa-angle-right"></i> 预算</h3>
-          	<!-- BASIC FORM ELELEMNTS -->
-          	<div class="row mt">
-          		<div class="col-lg-12 col-md-12 col-sm-12">
-                    <div class="content-panel">
-                        <form class="form-horizontal style-form row" id="budget-form">
-						    <div class="col-lg-3 col-md-3 col-sm-12" style="padding-left:0px;padding-right:0px;">
-								<p class="centered" style="margin:0px;">
-									<img src="/static/img/ui-sam.jpg" class="img-circle">
-								</p>
-						    </div>
-						    <div class="row col-lg-9 col-md-9 col-sm-12 in-filters" >
-								<div class="form-group in-filter row col-lg-4 col-md-4 col-sm-12" 
-									style="border-bottom: 0px;padding-bottom: 0px;margin-bottom: 0px;margin-right: 0px; margin-left: 0px;">
-									<label class="col-lg-3 col-md-3 col-sm-2 control-label" style="padding-top: 3px;padding-right: 0px;padding-left: 0px;text-align: right;">
-									时间</label>
-									<div class="col-lg-9 col-md-9 col-sm-10 ">
-										<div class="input-group">
-											<input type="text" class="form-control" id="time" name="time" onblur="vali_time()"
-											data-container="body" data-toggle="popover" data-trigger="manual" data-placement="bottom">
-											<span style="padding:0px 7px;" class="input-group-addon">
-												<label for="time"><i class="fa fa-calendar"></i></label>
-											</span>
-										</div>
+<head>
+    <link href="/static/css/account.css" rel="stylesheet">
+</head>
+<section id="main-content">
+		<section class="wrapper">
+		<h3><i class="fa fa-angle-right"></i> 预算</h3>
+		<!-- BASIC FORM ELELEMNTS -->
+		<div class="row mt">
+			<div class="col-lg-12 col-md-12 col-sm-12">
+				<div class="content-panel">
+					<form class="form-horizontal style-form row" id="budget-form">
+						<div class="col-lg-3 col-md-3 col-sm-12" style="padding-left:0px;padding-right:0px;">
+							<p class="centered" style="margin:0px;">
+								<img src="/static/img/ui-sam.jpg" class="img-circle">
+							</p>
+						</div>
+						<div class="row col-lg-9 col-md-9 col-sm-12 in-filters" >
+							<div class="form-group in-filter row col-lg-4 col-md-4 col-sm-12" 
+								style="border-bottom: 0px;padding-bottom: 0px;margin-bottom: 0px;margin-right: 0px; margin-left: 0px;">
+								<label class="col-lg-3 col-md-3 col-sm-2 control-label" style="padding-top: 3px;padding-right: 0px;padding-left: 0px;text-align: right;">
+								时间</label>
+								<div class="col-lg-9 col-md-9 col-sm-10 ">
+									<div class="input-group">
+										<input type="text" class="form-control" id="time" name="time" onblur="vali_time()"
+										data-container="body" data-toggle="popover" data-trigger="manual" data-placement="bottom">
+										<span style="padding:0px 7px;" class="input-group-addon">
+											<label for="time"><i class="fa fa-calendar"></i></label>
+										</span>
 									</div>
-								</div>
-								<div class="form-group in-filter row col-lg-4 col-md-4 col-sm-12" 
-									 style="border-bottom: 0px;padding-bottom: 0px;margin-bottom: 0px;margin-right: 0px; margin-left: 0px;">
-								    <label class="col-lg-3 col-md-3 col-sm-2 control-label" style="padding-top: 3px;padding-right: 0px;padding-left: 0px;text-align: right;">
-									期限</label>
-								    <div class="col-lg-9 col-md-9 col-sm-10">
-									    <div class="input-group">											
-											<input type="text" class="form-control" id="term" name="term"onblur="vali_term()"
-											data-container="body" data-toggle="popover" data-trigger="manual" data-placement="bottom" />
-											<span style="padding:0px 7px;" class="input-group-addon">
-												<label for="term">天</label>
-											</span>
-										</div>
-								    </div>
-							    </div>
-								<div class="form-group in-filter row col-lg-4 col-md-4 col-sm-12" 
-									style="border-bottom: 0px;padding-bottom: 0px;margin-bottom: 0px;margin-right: 0px; margin-left: 0px;">
-									<label class="col-lg-3 col-md-3 col-sm-2 control-label" style="padding-top: 3px;padding-right: 0px;padding-left: 0px;text-align: right;">
-									金额</label>
-									<div class="col-lg-9 col-md-9 col-sm-10">
-										<div class="input-group">
-											<span style="padding:0px 7px;" class="input-group-addon">￥</span>
-											<input type="number" min="0" class="form-control" id="money" name="money" onblur="vali_money()"
-											data-container="body" data-toggle="popover" data-trigger="manual" data-placement="bottom">
-										</div>
-									</div>
-								</div>
-								<div class="form-group row in-filter col-lg-12 col-md-12 col-sm-12" 
-									 style="border-bottom: 0px;padding-bottom: 0px;margin-bottom: 0px;margin-right: 0px; margin-left: 0px;">
-									<label class="col-lg-1 col-md-1 col-sm-2 control-label" style="padding-top: 3px;padding-right: 0px;padding-left: 0px;text-align: right;">
-									备注</label>
-									<div class="col-lg-11 col-md-11 col-sm-10">
-										<input type="text" class="form-control" id="remark" name="remark">
-									</div>
-								</div>
-								<div class="col-lg-12 col-md-12 col-sm-12" style="position:relative;height:40px;" >
-									<button type="button" class="btn btn-warning save-in" onclick="save()">保存</button>
 								</div>
 							</div>
-                        </form>
-						<hr><!-- 条件填写完成-->
-					<div class="row" style="padding:20px;">
-						<div class="row col-lg-6 col-md-6 col-sm-12" style="position:relative;height:50px;">
-							<div class="col-lg-4 col-md-4 col-sm-3">
-								<h4 style="margin-left: 0px;">预算清单</h4>
-							</div>								
-						</div>
-						<div class="row col-lg-12 col-md-12 col-sm-12" style="margin:0px;">
-							<table id="example" class="display table table-hover table-striped table-bordered" cellspacing="0" width="100%">
-									<thead>
-										<tr>
-											<th>#</th>
-											<th>时间</th>
-											<th>期限</th>											
-											<th>金额</th>
-											<th>备注</th>
-										</tr>
-										<tr>
-											<th> </th>
-											<th> </th>
-											<th> </th>
-											<th> </th>
-											<th> </th>
-										</tr>
-									</thead>
-									<tfoot>
-										<tr>
-											<th colspan="5" style="text-align:right">Total:</th>
-										</tr>
-									</tfoot>
-								</table>
+							<div class="form-group in-filter row col-lg-4 col-md-4 col-sm-12" 
+									style="border-bottom: 0px;padding-bottom: 0px;margin-bottom: 0px;margin-right: 0px; margin-left: 0px;">
+								<label class="col-lg-3 col-md-3 col-sm-2 control-label" style="padding-top: 3px;padding-right: 0px;padding-left: 0px;text-align: right;">
+								期限</label>
+								<div class="col-lg-9 col-md-9 col-sm-10">
+									<div class="input-group">											
+										<input type="text" class="form-control" id="term" name="term"onblur="vali_term()"
+										data-container="body" data-toggle="popover" data-trigger="manual" data-placement="bottom" />
+										<span style="padding:0px 7px;" class="input-group-addon">
+											<label for="term">天</label>
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="form-group in-filter row col-lg-4 col-md-4 col-sm-12" 
+								style="border-bottom: 0px;padding-bottom: 0px;margin-bottom: 0px;margin-right: 0px; margin-left: 0px;">
+								<label class="col-lg-3 col-md-3 col-sm-2 control-label" style="padding-top: 3px;padding-right: 0px;padding-left: 0px;text-align: right;">
+								金额</label>
+								<div class="col-lg-9 col-md-9 col-sm-10">
+									<div class="input-group">
+										<span style="padding:0px 7px;" class="input-group-addon">￥</span>
+										<input type="number" min="0" class="form-control" id="money" name="money" onblur="vali_money()"
+										data-container="body" data-toggle="popover" data-trigger="manual" data-placement="bottom">
+									</div>
+								</div>
+							</div>
+							<div class="form-group row in-filter col-lg-12 col-md-12 col-sm-12" 
+									style="border-bottom: 0px;padding-bottom: 0px;margin-bottom: 0px;margin-right: 0px; margin-left: 0px;">
+								<label class="col-lg-1 col-md-1 col-sm-2 control-label" style="padding-top: 3px;padding-right: 0px;padding-left: 0px;text-align: right;">
+								备注</label>
+								<div class="col-lg-11 col-md-11 col-sm-10">
+									<input type="text" class="form-control" id="remark" name="remark">
+								</div>
+							</div>
+							<div class="col-lg-12 col-md-12 col-sm-12" style="position:relative;height:40px;" >
+								<button type="button" class="btn btn-warning save-in" onclick="save()">保存</button>
 							</div>
 						</div>
-                    </div>
-          		</div>    	
-          	</div>
-		</section>
-    </section>
+					</form>
+					<hr><!-- 条件填写完成-->
+				<div class="row" style="padding:20px;">
+					<div class="row col-lg-6 col-md-6 col-sm-12" style="position:relative;height:50px;">
+						<div class="col-lg-4 col-md-4 col-sm-3">
+							<h4 style="margin-left: 0px;">预算清单</h4>
+						</div>								
+					</div>
+					<div class="row col-lg-12 col-md-12 col-sm-12" style="margin:0px;">
+						<table id="example" class="display table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+								<thead>
+									<tr>
+										<th>#</th>
+										<th>时间</th>
+										<th>期限</th>											
+										<th>金额</th>
+										<th>备注</th>
+									</tr>
+									<tr>
+										<th> </th>
+										<th> </th>
+										<th> </th>
+										<th> </th>
+										<th> </th>
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<th colspan="5" style="text-align:right">Total:</th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>    	
+		</div>
+	</section>
+</section>
 	<script type="text/javascript">
 		$(function() {
 		$('#time').datetimepicker({
@@ -168,7 +118,7 @@ label{
 		buildTable();
 		
 	});	
-	
+
 	//提交
 	function save(){
 		var time = $("#time").val();
@@ -198,7 +148,7 @@ label{
 			});
 		}
 	}
-	
+
 	//删除所选
 	function deleteBudget(str){
 		$.ajax({
@@ -222,7 +172,7 @@ label{
 			}
 		});
 	}
-	
+
 	//验证金钱
 	function vali_money(){
 		var money = $("#money").val();
@@ -246,7 +196,7 @@ label{
 		$("#money").val(Number(money).toFixed(2));
 		return true;
 	}
-	
+
 	//验证期限
 	function vali_term(){
 		var term = $("#term").val();
@@ -283,7 +233,7 @@ label{
 		}
 		return true;
 	}
-	
+
 	//验证备注
 	function vali_remark(){
 		var remark = $("#remark").val();
@@ -297,7 +247,7 @@ label{
 		}
 		return true;
 	}
-	
+
 	//构建datatable
 	function buildTable(){
 		//请求budget表数据记录
@@ -401,4 +351,4 @@ label{
 			$(this).toggleClass('danger');
 		});
 	}
-</script>
+	</script>

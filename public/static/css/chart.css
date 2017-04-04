@@ -1,0 +1,4 @@
+.table-all thead tr th,
+.table-all tbody tr td{
+    text-align: center;
+}
