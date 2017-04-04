@@ -49,3 +49,41 @@ function randchar($length = ""){
 	} 
 	return $randchar; 
 } 
+
+function upload($file,$size){
+    $info = $file->validate(['size'=>$size,'ext'=>'jpg,png,gif'])->move(ROOT_PATH . 'public' . DS . 'uploads');
+    if($info){
+        // $info->getExtension();//类型
+        // $info->getSaveName();//public中的路径
+        // $info->getRealPath();//绝对路径
+        // $info->getFilename();//服务器中的名字
+        $result = [
+            "success"   =>  true,
+            "data"      =>  $info->getSaveName()
+        ];
+    }else{
+        $result = [
+            "success"       =>  false,
+            "errorMessage"  =>  $file->getError() 
+        ];
+    }
+    return $result;
+}
+
+function uploadmore($file,$size){
+    $info = $file->validate(['size'=>$size,'ext'=>'jpg,png,gif'])->move(ROOT_PATH . 'public' . DS . 'uploads');
+    foreach($files as $file){
+        if($info){
+            $result = [
+                "success"   =>  true,
+                "data"      =>  $info->getSaveName()
+            ];
+        }else{
+            $result = [
+                "success"       =>  false,
+                "errorMessage"  =>  $file->getError() 
+            ];
+        }
+        return $result;
+    }
+}

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-04-03 21:50:23
+Date: 2017-04-04 21:49:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -94,6 +94,28 @@ CREATE TABLE `debtor` (
 -- Records of debtor
 -- ----------------------------
 INSERT INTO `debtor` VALUES ('1', '2017-03-26 15:42:37', '张三', '本人', '100.00', null, '4');
+
+-- ----------------------------
+-- Table structure for diary
+-- ----------------------------
+DROP TABLE IF EXISTS `diary`;
+CREATE TABLE `diary` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `content` text CHARACTER SET utf8,
+  `uid` int(11) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `title` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of diary
+-- ----------------------------
+INSERT INTO `diary` VALUES ('2', '					<p>哈哈哈哈，测试啦。存个图</p><p><img src=\"../../uploads/20170404\\d9bfba99446fd68d52d8ab6ebed4c509.jpg\" alt=\"zy\" style=\"max-width: 100%; width: 249px; height: 334px;\" class=\"\"><br></p><p><br></p>', '4', '2017-04-04', '测试日记1');
+INSERT INTO `diary` VALUES ('88', '123123', '4', '2017-04-04', '2017-04-04');
+INSERT INTO `diary` VALUES ('89', '<p>1231231321</p>', '4', '2017-04-04', '123');
+INSERT INTO `diary` VALUES ('91', '					<p><font color=\"#00ffff\">哈哈哈哈</font></p><p><img src=\"../../uploads/20170404\\fb535fde8aaa8d1c664261e851de8a62.jpg\" alt=\"20161125\" style=\"max-width: 100%; width: 303px; height: 296px;\" class=\"\"><br></p><p>哎呀 羞羞 &nbsp;[嘻嘻] &nbsp;66666 &nbsp;我媳妇儿说的</p><p><br></p>', '4', '2017-04-04', '你好啊');
+INSERT INTO `diary` VALUES ('92', '					<p>呜哈哈哈哈</p>', '4', '2017-04-04', '2017-04-04');
 
 -- ----------------------------
 -- Table structure for income
@@ -250,4 +272,4 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('4', 'admin', '89f0b495890138511edbca8d446aa63e', '123@123.COM', null, '', null, null, '2017-04-03 21:45:40', '21', '2017-03-26 20:27:18', null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('4', 'admin', '89f0b495890138511edbca8d446aa63e', '123@123.COM', null, '', null, null, '2017-04-04 21:23:36', '28', '2017-03-26 20:27:18', null, null, null, null, null, null, null);

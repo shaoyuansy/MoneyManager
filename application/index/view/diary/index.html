@@ -3,10 +3,6 @@
 <head>
     <link rel="stylesheet" type="text/css" href="/dist/css/wangEditor.css">
     <style type="text/css">
-        #editor-trigger {
-            height: 400px;
-            /*max-height: 500px;*/
-        }
         .container {
             width: 100%;
             margin: 0 auto;
@@ -38,6 +34,19 @@
 			padding-right: 0px;
 			padding-bottom: 20px;
 		}
+		.pagination{
+			margin: 0px;
+		}
+		.pagination > li > a, .pagination > li > span {
+			color:#797979;
+		}
+		.pagination > .active > span{
+			border:#797979;
+			background: #797979;
+		}
+		.pagination > .active > span:hover{
+			background: #797979;
+		}
 		.page-num{
 			padding-right: 0px;
 			display:inline-block;
@@ -48,18 +57,42 @@
 			padding-left: 10px;
 			display:inline-block;
 		}
-		.table tr:last-child td{
-			
-		}
 		.table-riji{
 			margin-bottom: 15px;
 			border-bottom: 1px solid #ddd;
-			min-height: 400px;
+			min-height: 415px;
 			max-height: 450px;
 			overflow-y: auto;
+			padding-left: 0px;
 		}
 		.table{
 			margin-bottom: 0px;
+		}
+		.table tbody tr td{
+			padding-right: 0px;
+		}
+		.table tbody tr td:nth-child(2),
+		.table tbody tr td:nth-child(3) {  
+			text-overflow: ellipsis; /* for IE */  
+			-moz-text-overflow: ellipsis; /* for Firefox,mozilla */  
+			overflow: hidden;  
+			white-space: nowrap; 
+			text-align: left;
+			max-width: 70px;
+		}  
+		.save{
+			width:70px;
+			padding: 2px 6px;
+			margin-top: 10px;
+			position: absolute;
+			right: 0px;
+		}
+		.clear{
+			width:70px;
+			padding: 2px 6px;
+			margin-top: 10px;
+			position: absolute;
+			right: 80px;
 		}
     </style>
 </head>
@@ -69,17 +102,19 @@
 <section id="main-content">
 	<section class="wrapper">
 		<div class="row">
-			<div class="col-lg-8 col-md-8 col-sm-12">
+			<div class="col-lg-8 col-md-8 col-sm-12" style="position: relative;margin-bottom: 50px;">
 				<h3><i class="fa fa-angle-right"></i> 理财日记</h3>
-				<h5>我的理财日记 本月有 0 篇，共 0 篇日记</h5>
+				<h5>我的理财日记 本月有 <b>{$month_count}</b> 篇，共 <b>{$all_count}</b> 篇日记</h5>
 				<hr >
-				<div class="row">
-					<input type="text" class="form-control title-art" placeholder="请输入标题" />
-					<div id="editor-container" class="container">
-						<div id="editor-trigger">
-							<p>请输入内容</p>
-						</div>
-					</div>
+				<div class="row col-lg-12 col-md-12 col-sm-12" style="margin-left: 0px;">
+					<input type="text" class="form-control title-art" id="title" placeholder="请输入标题" />
+					<textarea  id="editor-textarea" style="height:330px;max-height:350px;">
+					</textarea>
+				</div>
+				<div class="row col-lg-12 col-md-12 col-sm-12">
+					<button class="btn btn-warning save" onclick="saveDiary()">保 存</button>
+					<button class="btn btn-success clear" onclick="clearAll()">清 空</button>
+					<input type="hidden" id="edit_id"/>
 				</div>
 			</div>		
 			<!-- 右侧栏 -->
@@ -89,81 +124,70 @@
 						<table class="table">
 							<thead>
 								<tr>
+									<th>#</th>
 									<th>日期</th>
 									<th>标题</th>
 									<th>操作</th>
 								</tr>
 							</thead>
 							<tbody>
+								{volist name='list' id='diary'}
 								<tr>
-									<td>2017-02-16</td>
-									<td><a href="#">理财一记</a></td>
+									<td>{$diary.id}</td>
+									<td><a onclick="lookDiary({$diary.id})" class="tooltips" data-placement="bottom" data-original-title="{$diary.date}">{$diary.date}</a></td>
+									<td><a onclick="lookDiary({$diary.id})" class="tooltips" data-placement="bottom" data-original-title="查看{$diary.title}">{$diary.title}</a></td>
 									<td>
-										<a class="tooltips" data-placement="bottom" data-original-title="编辑"><i class="fa fa-pencil"></i></a>
-										<a class="tooltips" data-placement="bottom" data-original-title="删除"><i class="fa fa-trash-o"></i></a>
+										<a onclick="editDiary({$diary.id})" class="tooltips" data-placement="bottom" data-original-title="编辑"><i class="fa fa-pencil"></i></a>
+										<a onclick="delDiary({$diary.id})" class="tooltips" data-placement="bottom" data-original-title="删除"><i class="fa fa-trash-o"></i></a>
 									</td>
-								</tr>
-								<tr>
-									<td>2017-02-16</td>
-									<td><a href="#">理财一记</a></td>
-									<td>
-										<a class="tooltips" data-placement="bottom" data-original-title="编辑"><i class="fa fa-pencil"></i></a>
-										<a class="tooltips" data-placement="bottom" data-original-title="删除"><i class="fa fa-trash-o"></i></a>
-									</td>
-								</tr>
-								<tr>
-									<td>2017-02-16</td>
-									<td><a href="#">理财一记</a></td>
-									<td>
-										<a class="tooltips" data-placement="bottom" data-original-title="编辑"><i class="fa fa-pencil"></i></a>
-										<a class="tooltips" data-placement="bottom" data-original-title="删除"><i class="fa fa-trash-o"></i></a>
-									</td>
-								</tr>
-								<tr>
-									<td>2017-02-16</td>
-									<td><a href="#">理财一记</a></td>
-									<td>
-										<a class="tooltips" data-placement="bottom" data-original-title="编辑"><i class="fa fa-pencil"></i></a>
-										<a class="tooltips" data-placement="bottom" data-original-title="删除"><i class="fa fa-trash-o"></i></a>
-									</td>
-								</tr>
-								<tr>
-									<td>2017-02-16</td>
-									<td><a href="#">理财一记</a></td>
-									<td>
-										<a class="tooltips" data-placement="bottom" data-original-title="编辑"><i class="fa fa-pencil"></i></a>
-										<a class="tooltips" data-placement="bottom" data-original-title="删除"><i class="fa fa-trash-o"></i></a>
-									</td>
-								</tr>
-								<tr>
-									<td>2017-02-16</td>
-									<td><a href="#">理财一记</a></td>
-									<td>
-										<a class="tooltips" data-placement="bottom" data-original-title="编辑"><i class="fa fa-pencil"></i></a>
-										<a class="tooltips" data-placement="bottom" data-original-title="删除"><i class="fa fa-trash-o"></i></a>
-									</td>
-								</tr>
-								<tr>
-									<td>2017-02-16</td>
-									<td><a href="#">理财一记</a></td>
-									<td>
-										<a class="tooltips" data-placement="bottom" data-original-title="编辑"><i class="fa fa-pencil"></i></a>
-										<a class="tooltips" data-placement="bottom" data-original-title="删除"><i class="fa fa-trash-o"></i></a>
-									</td>
-								</tr>
-								
+								</tr>	
+								{/volist}				
 							</tbody>
 						</table>
 					</div>
 					<div class="page-riji col-lg-12 col-md-12 col-sm-12 row">
-						<div class="page-num col-lg-7 col-md-7 col-sm-6">
-							当前第<b>1</b>页，共<b>2</b>页
+						{$list->render()}
+					</div>
+				</div>
+			</div>
+			<!-- 查看日记 -->
+			<div class="modal fade" id="lookdiary" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content" style="margin-top:50px;">
+						<div class="modal-header" style="padding:5px;padding-left:10px;border-top-left-radius:5px;border-top-right-radius:5px;">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+								&times;
+							</button>
+							<h4 id="d_title" class="modal-title" style="font-size:15px;">
+								
+							</h4>
 						</div>
-						<div class="page-btn col-lg-5 col-md-5 col-sm-6">
-							<a class="tooltips" data-placement="bottom" data-original-title="首页"><i class="m_i fa fa-fast-backward"></i></a>
-							<a class="tooltips" data-placement="bottom" data-original-title="上一页"><i class="m_i fa fa-step-backward"></i></a>
-							<a class="tooltips" data-placement="bottom" data-original-title="下一页"><i class="m_i fa fa-step-forward"></i></a>
-							<a class="tooltips" data-placement="bottom" data-original-title="末页"><i class="m_i fa fa-fast-forward"></i></a>
+						<div id="d_content" class="modal-body" style="min-height:200px;">
+							
+						</div>
+						<div class="modal-footer" style="padding: 5px;text-align: center">
+							<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 提示框 -->
+			<div class="modal fade" id="success" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog" style="width: 300px;">
+					<div class="modal-content" style="margin-top:200px;">
+						<div class="modal-header" style="padding:5px;padding-left:10px;border-top-left-radius:5px;border-top-right-radius:5px;">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+								&times;
+							</button>
+							<h4 class="modal-title" style="font-size:15px;">
+								提示
+							</h4>
+						</div>
+						<div class="modal-body" style="text-align:center;height:70px;padding-top:30px;">
+							操作成功
+						</div>
+						<div class="modal-footer" style="padding: 5px;text-align: center">
+							<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">确定</button>
 						</div>
 					</div>
 				</div>
@@ -175,23 +199,20 @@
 <script type="text/javascript" src="/dist/js/wangEditor.js"></script>
 <script type="text/javascript">
 	// 阻止输出log
-	// wangEditor.config.printLog = false;
+	wangEditor.config.printLog = false;
 
-	var editor = new wangEditor('editor-trigger');
+	var editor = new wangEditor("editor-textarea");
 
 	// 上传图片
-	editor.config.uploadImgUrl = '/upload';
+	editor.config.uploadImgUrl = '/index/Tools/upload_image';
 	editor.config.uploadParams = {
-		// token1: 'abcde',
+		name: 'image',
 		// token2: '12345'
 	};
 	editor.config.uploadHeaders = {
-		// 'Accept' : 'text/x-json'
+		'enctype' : 'multipart/form-data'
 	}
-	// editor.config.uploadImgFileName = 'myFileName';
-
-	// 隐藏网络图片
-	// editor.config.hideLinkImg = true;
+	editor.config.uploadImgFileName = 'image';
 
 	// 表情显示项
 	editor.config.emotionsShow = 'value';
@@ -203,60 +224,143 @@
 	};
 
 	// 插入代码时的默认语言
-	// editor.config.codeDefaultLang = 'html'
+	editor.config.codeDefaultLang = 'html'
 
 	// 只粘贴纯文本
-	// editor.config.pasteText = true;
-
-	// 跨域上传
-	// editor.config.uploadImgUrl = 'http://localhost:8012/upload';
-
-	// 第三方上传
-	// editor.config.customUpload = true;
+	editor.config.pasteText = true;
 
 	// 普通菜单配置
-	// editor.config.menus = [
-	//     'img',
-	//     'insertcode',
-	//     'eraser',
-	//     'fullscreen'
-	// ];
-	// 只排除某几个菜单（兼容IE低版本，不支持ES5的浏览器），支持ES5的浏览器可直接用 [].map 方法
-	// editor.config.menus = $.map(wangEditor.config.menus, function(item, key) {
-	//     if (item === 'insertcode') {
-	//         return null;
-	//     }
-	//     if (item === 'fullscreen') {
-	//         return null;
-	//     }
-	//     return item;
-	// });
+	editor.config.menus = [
+		'fontfamily',
+        'fontsize',
+        'bold',
+        'italic',
+        'head',
+        'forecolor',
+        'bgcolor',
+		'underline',
+		'strikethrough',
+        'quote',
+        'eraser',
+        'orderlist',
+        'alignleft',
+        'aligncenter',
+        'alignright',
+        'img',
+        'undo',
+        'redo',
+        'fullscreen'
+    ];
 
-	// onchange 事件
-	editor.onchange = function () {
-		console.log(this.$txt.html());
-	};
-
-	// 取消过滤js
-	// editor.config.jsFilter = false;
-
-	// 取消粘贴过来
-	// editor.config.pasteFilter = false;
-
-	// 设置 z-index
-	// editor.config.zindex = 20000;
-
-	// 语言
-	// editor.config.lang = wangEditor.langs['en'];
-
-	// 自定义菜单UI
-	// editor.UI.menus.bold = {
-	//     normal: '<button style="font-size:20px; margin-top:5px;">B</button>',
-	//     selected: '.selected'
-	// };
-	// editor.UI.menus.italic = {
-	//     normal: '<button style="font-size:20px; margin-top:5px;">I</button>',
-	//     selected: '<button style="font-size:20px; margin-top:5px;"><i>I</i></button>'
-	// };
 	editor.create();
+
+	function delDiary(id){
+		$.ajax({
+			type: "post",
+			url: '/index/diary/del_diary',
+			dataType: "json",
+			data: {id:id},
+			cache: true,
+			async: false,
+			success: function (msg) {
+				if(msg.success){
+					$("#success").modal({backdrop:false});
+					setTimeout(function(){					
+						$("#success").modal('hide');
+						location.reload();
+					},1000);
+				}
+			},
+			error: function (e) {
+				console.log(e);
+			}
+		});
+	}
+
+	function editDiary(id){
+		$.ajax({
+			type: "post",
+			url: '/index/diary/get_diary_centont',
+			dataType: "json",
+			data: {id:id},
+			cache: true,
+			async: false,
+			success: function (msg) {
+				if(msg.success){
+					$("#title").val(msg.data.title);
+					editor.$txt.html(msg.data.content);
+					$("#edit_id").val(msg.data.id);
+				}
+			},
+			error: function (e) {
+				console.log(e);
+			}
+		});
+	}
+
+	function lookDiary(id){
+		$("#lookdiary").modal({backdrop:false});
+		$.ajax({
+			type: "post",
+			url: '/index/diary/get_diary_centont',
+			dataType: "json",
+			data: {id:id},
+			cache: true,
+			async: false,
+			success: function (msg) {
+				if(msg.success){
+					$("#d_title").text(msg.data.title);
+					$("#d_content").html(msg.data.content);
+				}
+			},
+			error: function (e) {
+				console.log(e);
+			}
+		});
+	}
+
+	function clearAll(){
+		$("#title").val("");
+		editor.clear();
+	}
+
+	function saveDiary(){
+		var title = $("#title").val() == "" ? getDate() : $("#title").val(); 
+		var content = editor.$txt.html();
+		var date = getDate();
+		var text = editor.$txt.text();
+		var edit_id = $("#edit_id").val();
+		
+		if(text=="" || (content.replace(/\s/ig,'')=="<p><br></p>")){
+			return false;
+		}else{
+			$.ajax({
+				type: "post",
+				url: '/index/diary/save_diary',
+				dataType: "json",
+				data: {title:title,content:content,date:date,id:edit_id},
+				cache: true,
+				async: false,
+				success: function (msg) {
+					if(msg.success){
+						$("#success").modal({backdrop:false});
+						setTimeout(function(){					
+							$("#success").modal('hide');
+							location.reload();
+						},1000);
+					}
+				},
+				error: function (e) {
+					console.log(e);
+				}
+			});
+		}
+	}
+	function getDate() { 
+		var dd = new Date(); 
+		var y = dd.getFullYear(); 
+		var m = dd.getMonth()+1;
+		var d = dd.getDate(); 
+		return y +"-"+ (m<10 ? "0"+m : m ) +"-"+ (d<10 ? "0"+d : d ); 
+	}
     </script>
