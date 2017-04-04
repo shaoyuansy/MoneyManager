@@ -4,6 +4,8 @@ use think\Controller;
 use app\index\model\UserModel;
 use app\index\model\IncomeModel;
 use app\index\model\OutgoModel;
+use app\index\model\DebteeModel;
+use app\index\model\DebtorModel;
 use app\index\model\BudgetModel;
 use app\index\model\AccountModel;
 use app\index\model\MemberModel;
@@ -106,6 +108,24 @@ class Account extends Controller
 		}
 	}
 
+		//删除支出记录
+		public function del_outgo(){
+		if(request()->isPost()){
+			$del = input('post.del');
+			$delArr = explode(",",$del);
+			$uid = session('user_auth.uid');
+			$outgo = new OutgoModel;
+			$result = $outgo->delete_outgo($uid,$delArr);
+			if($result>0){
+				$jsonData = array('success'=>true,'data'=>"");
+				return json($jsonData);
+			}else{
+				$jsonData = array('success'=>false,'errorMassage'=>'删除失败');
+				return json($jsonData);
+			}
+		}
+	}
+
 	//分类	
 	//收入分类
 	public function in_type(){
@@ -145,6 +165,114 @@ class Account extends Controller
 		if(!empty($data)){
 			$jsonData = array('success'=>true,'data'=>$data);
 			return json($jsonData);
+		}
+	}
+
+	//还款
+	public function set_debtee(){
+		if(request()->isPost()){
+			$uid = session('user_auth.uid');
+			$time = input('post.time');
+			$member = input('post.member');
+			$debtor = input('post.debtor');
+			$money = input('post.money');
+			$remark = input('post.remark');
+			$debtee = new DebteeModel;
+			$result = $debtee->save_debtee($uid,$time,$member,$debtor,$money,$remark);
+			if($result>0){
+				$jsonData = array('success'=>true,'data'=>'');
+			}else{
+				$jsonData = array('success'=>false,'errorMassage'=>'记录存入失败。');
+			}
+			return json($jsonData);
+		}
+	}
+	
+	public function get_debtee(){
+		$uid = session('user_auth.uid');
+		$debtee = new DebteeModel;
+		$result = $debtee->select_debtee($uid);
+		$data = [];
+		if(count($result) > 0){
+			foreach($result as &$arr){
+				array_push($data,array_values($arr));
+			}
+			$jsonData = array('success'=>true,'data'=>$data);
+			return json($jsonData);
+		}else{
+			$jsonData = array('success'=>false,'errorMassage'=>'暂无记录');
+			return json($jsonData);
+		}
+	}
+	//删除还款记录
+		public function del_debtee(){
+		if(request()->isPost()){
+			$del = input('post.del');
+			$delArr = explode(",",$del);
+			$uid = session('user_auth.uid');
+			$debtee = new DebteeModel;
+			$result = $debtee->delete_debtee($uid,$delArr);
+			if($result>0){
+				$jsonData = array('success'=>true,'data'=>"");
+				return json($jsonData);
+			}else{
+				$jsonData = array('success'=>false,'errorMassage'=>'删除失败');
+				return json($jsonData);
+			}
+		}
+	}
+
+	//收债
+	public function set_debtor(){
+		if(request()->isPost()){
+			$uid = session('user_auth.uid');
+			$time = input('post.time');
+			$debtee = input('post.debtee');
+			$member = input('post.member');
+			$money = input('post.money');
+			$remark = input('post.remark');
+			$debtor = new DebtorModel;
+			$result = $debtor->save_debtor($uid,$time,$debtee,$member,$money,$remark);
+			if($result>0){
+				$jsonData = array('success'=>true,'data'=>'');
+			}else{
+				$jsonData = array('success'=>false,'errorMassage'=>'记录存入失败。');
+			}
+			return json($jsonData);
+		}
+	}
+	
+	public function get_debtor(){
+		$uid = session('user_auth.uid');
+		$debtor = new DebtorModel;
+		$result = $debtor->select_debtor($uid);
+		$data = [];
+		if(count($result) > 0){
+			foreach($result as &$arr){
+				array_push($data,array_values($arr));
+			}
+			$jsonData = array('success'=>true,'data'=>$data);
+			return json($jsonData);
+		}else{
+			$jsonData = array('success'=>false,'errorMassage'=>'暂无记录');
+			return json($jsonData);
+		}
+	}
+	//删除还款记录
+		public function del_debtor(){
+		if(request()->isPost()){
+			$del = input('post.del');
+			$delArr = explode(",",$del);
+			$uid = session('user_auth.uid');
+			$debtor = new DebtorModel;
+			$result = $debtor->delete_debtor($uid,$delArr);
+			if($result>0){
+				$jsonData = array('success'=>true,'data'=>"");
+				return json($jsonData);
+			}else{
+				$jsonData = array('success'=>false,'errorMassage'=>'删除失败');
+				return json($jsonData);
+			}
 		}
 	}
 
@@ -189,7 +317,7 @@ class Account extends Controller
 			$del = input('post.del');
 			$delArr = explode(",",$del);
 			$uid = session('user_auth.uid');
-			$budget = new BbudgetModel;
+			$budget = new BudgetModel;
 			$result = $budget->delete_budget($uid,$delArr);
 			if($result>0){
 				$jsonData = array('success'=>true,'data'=>"");
