@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost_3306
+Source Server         : 本地local
 Source Server Version : 50617
 Source Host           : localhost:3306
 Source Database       : moneymanager
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-04-04 21:49:40
+Date: 2017-04-05 19:13:03
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,7 +31,7 @@ CREATE TABLE `account` (
 -- ----------------------------
 -- Records of account
 -- ----------------------------
-INSERT INTO `account` VALUES ('1', '现金账户', '0.00', '4', '我的现金账户');
+INSERT INTO `account` VALUES ('1', '现金账户', '100', '4', '我的现金账户');
 INSERT INTO `account` VALUES ('2', '虚拟账户', '0.00', '4', '我的虚拟账户');
 INSERT INTO `account` VALUES ('3', '债权账户', '100.00', '4', '我的债权账户');
 INSERT INTO `account` VALUES ('4', '债务账户', '200.00', '4', '我的债务账户');
@@ -106,14 +106,14 @@ CREATE TABLE `diary` (
   `date` date DEFAULT NULL,
   `title` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of diary
 -- ----------------------------
 INSERT INTO `diary` VALUES ('2', '					<p>哈哈哈哈，测试啦。存个图</p><p><img src=\"../../uploads/20170404\\d9bfba99446fd68d52d8ab6ebed4c509.jpg\" alt=\"zy\" style=\"max-width: 100%; width: 249px; height: 334px;\" class=\"\"><br></p><p><br></p>', '4', '2017-04-04', '测试日记1');
 INSERT INTO `diary` VALUES ('88', '123123', '4', '2017-04-04', '2017-04-04');
-INSERT INTO `diary` VALUES ('89', '<p>1231231321</p>', '4', '2017-04-04', '123');
+INSERT INTO `diary` VALUES ('89', '<p>123123132112313</p>', '4', '2017-04-04', '123');
 INSERT INTO `diary` VALUES ('91', '					<p><font color=\"#00ffff\">哈哈哈哈</font></p><p><img src=\"../../uploads/20170404\\fb535fde8aaa8d1c664261e851de8a62.jpg\" alt=\"20161125\" style=\"max-width: 100%; width: 303px; height: 296px;\" class=\"\"><br></p><p>哎呀 羞羞 &nbsp;[嘻嘻] &nbsp;66666 &nbsp;我媳妇儿说的</p><p><br></p>', '4', '2017-04-04', '你好啊');
 INSERT INTO `diary` VALUES ('92', '					<p>呜哈哈哈哈</p>', '4', '2017-04-04', '2017-04-04');
 
@@ -131,13 +131,16 @@ CREATE TABLE `income` (
   `i_remark` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `uid` int(11) DEFAULT NULL,
   PRIMARY KEY (`iid`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf32;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf32;
 
 -- ----------------------------
 -- Records of income
 -- ----------------------------
-INSERT INTO `income` VALUES ('28', '2017-04-03 21:12:00', '职业收入', '信用卡', '123.00', '本人', '', '4');
-INSERT INTO `income` VALUES ('29', '2017-04-02 21:30:00', '其他收入', '虚拟', '321.00', '子女', '游戏账户', '4');
+INSERT INTO `income` VALUES ('31', '2017-04-04 17:40:00', '职业收入', '信用卡账户', '100.00', '本人', '', '4');
+INSERT INTO `income` VALUES ('32', '2017-04-07 17:40:00', '职业收入', '信用卡账户', '200.00', '本人', '', '4');
+INSERT INTO `income` VALUES ('33', '2017-04-05 18:02:00', '职业收入', '信用卡账户', '200.00', '本人', '', '4');
+INSERT INTO `income` VALUES ('34', '2017-04-05 18:02:00', '职业收入', '信用卡账户', '200.00', '本人', '', '4');
+INSERT INTO `income` VALUES ('58', '2017-04-05 18:25:00', '职业收入', '现金账户', '100.00', '本人', '', '4');
 
 -- ----------------------------
 -- Table structure for outgo
@@ -153,14 +156,20 @@ CREATE TABLE `outgo` (
   `o_remark` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `uid` int(11) DEFAULT NULL,
   PRIMARY KEY (`oid`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf32;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf32;
 
 -- ----------------------------
 -- Records of outgo
 -- ----------------------------
 INSERT INTO `outgo` VALUES ('1', '2017-03-26 15:14:42', '衣物服饰', '信用卡', '300', '本人', null, '4');
-INSERT INTO `outgo` VALUES ('2', '2017-02-26 15:14:42', '衣物服饰', '信用卡', '1000', '本人', null, '4');
-INSERT INTO `outgo` VALUES ('3', '2017-03-10 15:14:42', '衣物服饰', '信用卡', '1000', '本人', null, '4');
+INSERT INTO `outgo` VALUES ('2', '2017-02-26 15:14:42', '食品酒水', '信用卡', '1000', '本人', null, '4');
+INSERT INTO `outgo` VALUES ('3', '2017-03-10 15:14:42', '居家物业', '信用卡', '500', '本人', null, '4');
+INSERT INTO `outgo` VALUES ('4', '2017-04-05 14:34:28', '行车交通', '现金', '10', '本人', null, '4');
+INSERT INTO `outgo` VALUES ('5', '2017-04-03 14:34:54', '交流通讯', '虚拟', '20', '本人', null, '4');
+INSERT INTO `outgo` VALUES ('6', '2017-04-01 14:35:22', '休闲娱乐', '现金', '300', '本人', null, '4');
+INSERT INTO `outgo` VALUES ('7', '2017-03-29 14:35:42', '学习进修', '信用卡', '500', '本人', null, '4');
+INSERT INTO `outgo` VALUES ('8', '2017-04-04 14:35:59', '医疗保健', '现金', '999', '本人', null, '4');
+INSERT INTO `outgo` VALUES ('9', '2017-04-05 14:40:03', '行车交通', '现金', '30', '本人', null, '4');
 
 -- ----------------------------
 -- Table structure for sign
@@ -193,7 +202,7 @@ CREATE TABLE `t_account` (
 -- ----------------------------
 -- Records of t_account
 -- ----------------------------
-INSERT INTO `t_account` VALUES ('1', '{\"type\":[\"信用卡\",\"虚拟\",\"现金\",\"债权\",\"债务\"]}', '4');
+INSERT INTO `t_account` VALUES ('1', '{\"type\":[\"信用卡账户\",\"虚拟账户\",\"现金账户\",\"债权账户\",\"债务账户\"]}', '4');
 
 -- ----------------------------
 -- Table structure for t_in
@@ -272,4 +281,4 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('4', 'admin', '89f0b495890138511edbca8d446aa63e', '123@123.COM', null, '', null, null, '2017-04-04 21:23:36', '28', '2017-03-26 20:27:18', null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('4', 'admin', '89f0b495890138511edbca8d446aa63e', '123@123.COM', null, '', null, null, '2017-04-05 14:52:56', '30', '2017-03-26 20:27:18', null, null, null, null, null, null, null);
