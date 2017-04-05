@@ -57,4 +57,16 @@ class AccountModel extends Model{
 		}
 	}
 
+	public function sub_money($uid,$account,$money){
+		$moneydata = Db::table('account')->where('uid',$uid)->where('a_type',$account)->field('a_money')->select();
+		if(count($moneydata)>0){
+			$moneydata = $moneydata[0]['a_money'];
+			$money = floatval($moneydata)-floatval($money);			
+			$result = Db::table('account')->where('uid', $uid)->where('a_type', $account)->update(['a_money' => $money]);
+			if($result>0){
+				return $result;
+			}
+		}
+	}
+
 }

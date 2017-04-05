@@ -38,6 +38,11 @@ class OutgoModel extends Model{
 		$data = array_merge($week_outgo[0],$month_outgo[0],$year_outgo[0]);
 		return $data;
 	}
+
+	public function get_year_out($uid,$year){
+		$year_outgo = Db::query("SELECT SUM(o_money) as year_outgo FROM outgo WHERE uid=".$uid." AND YEAR(o_time)=".$year.";");
+		return $year_outgo[0];
+	}
 		
 	public function get_out_type($uid){//获取支出类型
 		$out_type = Db::table('t_out')->where('uid',$uid)->field('type')->select();

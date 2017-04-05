@@ -4,7 +4,7 @@
 </head>
 <section id="main-content">
 		<section class="wrapper">
-		<h3><i class="fa fa-angle-right"></i> 预算</h3>
+		<h3><i class="fa fa-angle-right"></i> 月支出预算</h3>
 		<!-- BASIC FORM ELELEMNTS -->
 		<div class="row mt">
 			<div class="col-lg-12 col-md-12 col-sm-12">
@@ -19,11 +19,10 @@
 							<div class="form-group in-filter row col-lg-4 col-md-4 col-sm-12" 
 								style="border-bottom: 0px;padding-bottom: 0px;margin-bottom: 0px;margin-right: 0px; margin-left: 0px;">
 								<label class="col-lg-3 col-md-3 col-sm-2 control-label" style="padding-top: 3px;padding-right: 0px;padding-left: 0px;text-align: right;">
-								时间</label>
+								日期</label>
 								<div class="col-lg-9 col-md-9 col-sm-10 ">
 									<div class="input-group">
-										<input type="text" class="form-control" id="time" name="time" onblur="vali_time()"
-										data-container="body" data-toggle="popover" data-trigger="manual" data-placement="bottom">
+										<input type="text" class="form-control" id="time" name="time" readonly>
 										<span style="padding:0px 7px;" class="input-group-addon">
 											<label for="time"><i class="fa fa-calendar"></i></label>
 										</span>
@@ -33,13 +32,25 @@
 							<div class="form-group in-filter row col-lg-4 col-md-4 col-sm-12" 
 									style="border-bottom: 0px;padding-bottom: 0px;margin-bottom: 0px;margin-right: 0px; margin-left: 0px;">
 								<label class="col-lg-3 col-md-3 col-sm-2 control-label" style="padding-top: 3px;padding-right: 0px;padding-left: 0px;text-align: right;">
-								期限</label>
+								月份</label>
 								<div class="col-lg-9 col-md-9 col-sm-10">
 									<div class="input-group">											
-										<input type="text" class="form-control" id="term" name="term"onblur="vali_term()"
-										data-container="body" data-toggle="popover" data-trigger="manual" data-placement="bottom" />
+										<select class="form-control select" id="month" name="month">
+											<option value="1">一</option>
+											<option value="2">二</option>
+											<option value="3">三</option>
+											<option value="4">四</option>
+											<option value="5">五</option>
+											<option value="6">六</option>
+											<option value="7">七</option>
+											<option value="8">八</option>
+											<option value="9">九</option>
+											<option value="10">十</option>
+											<option value="11">十一</option>
+											<option value="12">十二</option>
+										</select>
 										<span style="padding:0px 7px;" class="input-group-addon">
-											<label for="term">天</label>
+											<label for="term">月</label>
 										</span>
 									</div>
 								</div>
@@ -65,6 +76,7 @@
 								</div>
 							</div>
 							<div class="col-lg-12 col-md-12 col-sm-12" style="position:relative;height:40px;" >
+								<p class="tags">注：若某一个月重复添加月预算，则更新为最新记录。</p>
 								<button type="button" class="btn btn-warning save-in" onclick="save()">保存</button>
 							</div>
 						</div>
@@ -81,8 +93,8 @@
 								<thead>
 									<tr>
 										<th>#</th>
-										<th>时间</th>
-										<th>期限</th>											
+										<th>日期</th>
+										<th>月份</th>											
 										<th>金额</th>
 										<th>备注</th>
 									</tr>
@@ -103,34 +115,55 @@
 						</div>
 					</div>
 				</div>
+			</div>
+			<div class="modal fade" id="success" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog" style="width: 300px;">
+					<div class="modal-content" style="margin-top:200px;">
+						<div class="modal-header" style="padding:5px;padding-left:10px;border-top-left-radius:5px;border-top-right-radius:5px;">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+								&times;
+							</button>
+							<h4 class="modal-title" style="font-size:15px;">
+								提示
+							</h4>
+						</div>
+						<div class="modal-body" style="text-align:center;height:70px;padding-top:30px;">
+							操作成功
+						</div>
+						<div class="modal-footer" style="padding: 5px;text-align: center">
+							<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">确定</button>
+						</div>
+					</div>
+				</div>
 			</div>    	
 		</div>
 	</section>
 </section>
-	<script type="text/javascript">
-		$(function() {
-		$('#time').datetimepicker({
-			format: 'yyyy-mm-dd hh:ii',
-			language:'zh-CN',
-			todayBtn:'linked'
-		});
-
-		buildTable();
-		
+<script type="text/javascript">
+	$(function() {
+		buildTable();	
+		$("#time").val(GetDateStr());
 	});	
-
+	//获取今天日期
+	function GetDateStr() { 
+		var dd = new Date(); 
+		var y = dd.getFullYear(); 
+		var m = dd.getMonth()+1;//获取当前月份的日期 
+		var d = dd.getDate(); 
+		return y +"-"+ (m<10 ? "0"+m : m ) +"-"+ (d<10 ? "0"+d : d ); 
+	}	
 	//提交
 	function save(){
 		var time = $("#time").val();
-		var term = $("#term").val();
+		var month = $("#month").val();
 		var money = $("#money").val();
 		var remark = $("#remark").val();
-		if( vali_time() && vali_term() &&vali_money() && vali_remark()){
+		if( vali_money() && vali_remark()){
 			$.ajax({
 				type: "post",
 				url: '/index/account/set_budget',
 				dataType: "json",
-				data: {time:time,term:term,money:money,remark:remark},
+				data: {time:time,month:month,money:money,remark:remark},
 				cache: true,
 				async: false,
 				success: function (msg) {
@@ -149,206 +182,169 @@
 		}
 	}
 
-	//删除所选
-	function deleteBudget(str){
-		$.ajax({
-			type: "post",
-			url: '/index/account/del_budget',
-			dataType: "json",
-			data: {del:str},
-			cache: true,
-			async: false,
-			success: function (msg) {
-				if(msg.success){
-					$("#success").modal({backdrop:false});
-					setTimeout(function(){					
-						$("#success").modal('hide');
-						location.reload();
-					},1000);
-				}
-			},
-			error: function (e) {
-				console.log(e);
+//删除所选
+function deleteBudget(str){
+	$.ajax({
+		type: "post",
+		url: '/index/account/del_budget',
+		dataType: "json",
+		data: {del:str},
+		cache: true,
+		async: false,
+		success: function (msg) {
+			if(msg.success){
+				$("#success").modal({backdrop:false});
+				setTimeout(function(){					
+					$("#success").modal('hide');
+					location.reload();
+				},1000);
 			}
-		});
+		},
+		error: function (e) {
+			console.log(e);
+		}
+	});
+}
+
+//验证金钱
+function vali_money(){
+	var money = $("#money").val();
+	var floatNumReg = /^[0-9]+([.]{1}[0-9]+){0,1}$/;
+	if(money==""){
+		$("#money").attr('data-content','空或无效字符');
+		$("#money").popover('show');
+		setTimeout(function(){					
+			$("#money").popover('hide');
+		},500);
+		return false;
 	}
-
-	//验证金钱
-	function vali_money(){
-		var money = $("#money").val();
-		var floatNumReg = /^[0-9]+([.]{1}[0-9]+){0,1}$/;
-		if(money==""){
-			$("#money").attr('data-content','空或无效字符');
-			$("#money").popover('show');
-			setTimeout(function(){					
-				$("#money").popover('hide');
-			},500);
-			return false;
-		}
-		if(!floatNumReg.test(money)){
-			$("#money").attr('data-content','格式错误');
-			$("#money").popover('show');
-			setTimeout(function(){					
-				$("#money").popover('hide');
-			},500);
-			return false;
-		}
-		$("#money").val(Number(money).toFixed(2));
-		return true;
+	if(!floatNumReg.test(money)){
+		$("#money").attr('data-content','格式错误');
+		$("#money").popover('show');
+		setTimeout(function(){					
+			$("#money").popover('hide');
+		},500);
+		return false;
 	}
+	$("#money").val(Number(money).toFixed(2));
+	return true;
+}
 
-	//验证期限
-	function vali_term(){
-		var term = $("#term").val();
-		var floatNumReg = /^[1-9]\d*$/;
-		if(term==""){
-			$("#term").attr('data-content','空或无效字符');
-			$("#term").popover('show');
-			setTimeout(function(){					
-				$("#term").popover('hide');
-			},500);
-			return false;
-		}
-		if(!floatNumReg.test(term)){
-			$("#term").attr('data-content','格式错误');
-			$("#term").popover('show');
-			setTimeout(function(){					
-				$("#term").popover('hide');
-			},500);
-			return false;
-		}
-		return true;
-	}	
-
-	//验证时间
-	function vali_time(){
-		var time = $("#time").val();
-		if(time==""){
-			$("#time").attr('data-content','时间不能为空');
-			$("#time").popover('show');
-			setTimeout(function(){					
-				$("#time").popover('hide');
-			},500);
-			return false;
-		}
-		return true;
+//验证备注
+function vali_remark(){
+	var remark = $("#remark").val();
+	if(remark!="" && remark.length>40){
+		$("#remark").attr('data-content','备注最多40字');
+		$("#remark").popover('show');
+		setTimeout(function(){					
+			$("#remark").popover('hide');
+		},500);
+		return false;
 	}
+	return true;
+}
 
-	//验证备注
-	function vali_remark(){
-		var remark = $("#remark").val();
-		if(remark!="" && remark.length>40){
-			$("#remark").attr('data-content','备注最多40字');
-			$("#remark").popover('show');
-			setTimeout(function(){					
-				$("#remark").popover('hide');
-			},500);
-			return false;
+//构建datatable
+function buildTable(){
+	//请求budget表数据记录
+	var budget_data = new Array();
+	$.ajax({
+		type: "get",
+		url: '/index/account/get_budget',
+		async: false,
+		success: function (msg) {
+			budget_data = msg.data;
+		},
+		error: function (e) {
+			console.log(e);
 		}
-		return true;
-	}
-
-	//构建datatable
-	function buildTable(){
-		//请求budget表数据记录
-		var budget_data = new Array();
-		$.ajax({
-			type: "get",
-			url: '/index/account/get_budget',
-			async: false,
-			success: function (msg) {
-				budget_data = msg.data;
-			},
-			error: function (e) {
-				console.log(e);
-			}
-		});
-		var table = $('#example').DataTable({
-			"dom": '<"toolbar">lfrtip<"clear">',
-			"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-			data:budget_data,
-			"scrollX": true,
-			"pagingType":   "full_numbers",
-			"language": {
-				"url": "/dist/i18n/Chinese.json"
-			},
-			"ordering": false, // 禁止排序
-			"footerCallback": function ( row, data, start, end, display ) {
-				var api = this.api(), data;
-				var intVal = function ( i ) {
-					return typeof i === 'string' ?
-						i.replace(/[\￥,]/g, '')*1 :
-						typeof i === 'number' ?
-							i : 0;
-				};
-				total = api
-					.column( 3 )
-					.data()
-					.reduce( function (a, b) {
-						return intVal(a) + intVal(b);
-					} );
-				pageTotal = api
-					.column( 3, { page: 'current'} )
-					.data()
-					.reduce( function (a, b) {
-						return intVal(a) + intVal(b);
-					}, 0 );
-				$( api.column( 3 ).footer() ).html(
-					'本页预算：￥'+pageTotal +' ( 共预算：￥'+ total +')'
-				);
-			},
-			initComplete: function () {
-				var api = this.api();
-				api.columns().indexes().flatten().each( function ( i ) {
-					var column = api.column( i );
-					var select = $('<select class="form-control select"><option value=""></option></select>')
-						.appendTo( $(column.header()).empty() )
-						.on( 'change', function () {
-							var val = $.fn.dataTable.util.escapeRegex(
-								$(this).val()
-							);
-							column
-								.search( val ? '^'+val+'$' : '', true, false )
-								.draw();
-						} );
-					column.data().unique().sort().each( function ( d, j ) {
-						if(d===null || d===""){
-							return true;
-						}
-						select.append( '<option value="'+d+'">'+d+'</option>' )
-					} );
+	});
+	var table = $('#example').DataTable({
+		"dom": '<"toolbar">lfrtip<"clear">',
+		"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+		data:budget_data,
+		"scrollX": true,
+		"pagingType":   "full_numbers",
+		"language": {
+			"url": "/dist/i18n/Chinese.json"
+		},
+		"ordering": false, // 禁止排序
+		"footerCallback": function ( row, data, start, end, display ) {
+			var api = this.api(), data;
+			var intVal = function ( i ) {
+				return typeof i === 'string' ?
+					i.replace(/[\￥,]/g, '')*1 :
+					typeof i === 'number' ?
+						i : 0;
+			};
+			total = api
+				.column( 3 )
+				.data()
+				.reduce( function (a, b) {
+					return intVal(a) + intVal(b);
 				} );
-			}
-		}).on( 'init.dt', function () {	
-			$(".dataTables_length").css("display","inline-block");
-			$(".dataTables_filter").css("display","inline-block");
-			$(".dataTables_info").css("display","inline-block");
-			$(".dataTables_paginate").css("display","inline-block");
-			$(".dataTables_paginate").css("float","right");
-			$(".dataTables_filter").css("float","right");
-			$(".dataTables_length label select").css("padding","0px");
-			$(".dataTables_length label select").css("height","26px");
-			$(".dataTables_length label select").css("width","55px");
-			$(".toolbar").addClass('toolbar');
-			$(".toolbar").html('<button id="delete" type="button" class="btn btn-danger  btn-xs"><i class="fa fa-trash-o"></i> 删除所选</button>');
-			$('#delete').click( function () {
-				if($("#example tbody ").find('.danger').length === 0 ){
-					alert("请选择需要删除的项");
-				}else{
-					var deleteStr = "";
-					$("#example tbody ").find('.danger').each(function ( l, o ) {
-						let td = $(o).find('td')[0];
-						deleteStr += $(td).html()+",";							
-					});
-					deleteStr=deleteStr.substring(0,deleteStr.length-1);
-					deleteBudget(deleteStr);
-				}
-				
+			pageTotal = api
+				.column( 3, { page: 'current'} )
+				.data()
+				.reduce( function (a, b) {
+					return intVal(a) + intVal(b);
+				}, 0 );
+			$( api.column( 3 ).footer() ).html(
+				'本页预算：￥'+pageTotal +' ( 共预算：￥'+ total +')'
+			);
+		},
+		initComplete: function () {
+			var api = this.api();
+			api.columns().indexes().flatten().each( function ( i ) {
+				var column = api.column( i );
+				var select = $('<select class="form-control select"><option value=""></option></select>')
+					.appendTo( $(column.header()).empty() )
+					.on( 'change', function () {
+						var val = $.fn.dataTable.util.escapeRegex(
+							$(this).val()
+						);
+						column
+							.search( val ? '^'+val+'$' : '', true, false )
+							.draw();
+					} );
+				column.data().unique().sort().each( function ( d, j ) {
+					if(d===null || d===""){
+						return true;
+					}
+					select.append( '<option value="'+d+'">'+d+'</option>' )
+				} );
 			} );
-		});
-		
-		$('#example tbody').on( 'click', 'tr', function () {
-			$(this).toggleClass('danger');
-		});
-	}
-	</script>
+		}
+	}).on( 'init.dt', function () {	
+		$(".dataTables_length").css("display","inline-block");
+		$(".dataTables_filter").css("display","inline-block");
+		$(".dataTables_info").css("display","inline-block");
+		$(".dataTables_paginate").css("display","inline-block");
+		$(".dataTables_paginate").css("float","right");
+		$(".dataTables_filter").css("float","right");
+		$(".dataTables_length label select").css("padding","0px");
+		$(".dataTables_length label select").css("height","26px");
+		$(".dataTables_length label select").css("width","55px");
+		$(".toolbar").addClass('toolbar');
+		$(".toolbar").html('<button id="delete" type="button" class="btn btn-danger  btn-xs"><i class="fa fa-trash-o"></i> 删除所选</button>');
+		$('#delete').click( function () {
+			if($("#example tbody ").find('.danger').length === 0 ){
+				alert("请选择需要删除的项");
+			}else{
+				var deleteStr = "";
+				$("#example tbody ").find('.danger').each(function ( l, o ) {
+					let td = $(o).find('td')[0];
+					deleteStr += $(td).html()+",";							
+				});
+				deleteStr=deleteStr.substring(0,deleteStr.length-1);
+				deleteBudget(deleteStr);
+			}
+			
+		} );
+	});
+	
+	$('#example tbody').on( 'click', 'tr', function () {
+		$(this).toggleClass('danger');
+	});
+}
+</script>

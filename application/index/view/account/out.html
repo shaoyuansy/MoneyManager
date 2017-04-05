@@ -128,7 +128,7 @@
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 								&times;
 							</button>
-							<h4 class="modal-title" style="font-size:15px;">
+							<h4 class="modal-title" style="font-size:15px">
 								提示
 							</h4>
 						</div>
@@ -175,6 +175,8 @@
 						var account_type = JSON.parse(msg.data.type);
 						var typeStr = "";
 						account_type.type.forEach(function(item){
+							if(item=="债务账户")
+							return true;
 							typeStr += "<option>"+ item +"</option>";
 						});
 						$(".accounttype").html(typeStr);

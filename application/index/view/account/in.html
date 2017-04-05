@@ -177,7 +177,7 @@
 					var account_type = JSON.parse(msg.data.type);
 					var typeStr = "";
 					account_type.type.forEach(function(item){
-						if(item=="债务")
+						if(item=="债权账户")
 							return true;
 						typeStr += "<option>"+ item +"</option>";
 					});

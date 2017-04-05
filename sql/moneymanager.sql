@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 本地local
+Source Server         : localhost_3306
 Source Server Version : 50617
 Source Host           : localhost:3306
 Source Database       : moneymanager
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-04-05 19:13:03
+Date: 2017-04-06 00:24:45
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -33,9 +33,9 @@ CREATE TABLE `account` (
 -- ----------------------------
 INSERT INTO `account` VALUES ('1', '现金账户', '100', '4', '我的现金账户');
 INSERT INTO `account` VALUES ('2', '虚拟账户', '0.00', '4', '我的虚拟账户');
-INSERT INTO `account` VALUES ('3', '债权账户', '100.00', '4', '我的债权账户');
-INSERT INTO `account` VALUES ('4', '债务账户', '200.00', '4', '我的债务账户');
-INSERT INTO `account` VALUES ('5', '信用卡账户', '2700.01', '4', '我的信用卡账户');
+INSERT INTO `account` VALUES ('3', '债权账户', '100', '4', '我的债权账户');
+INSERT INTO `account` VALUES ('4', '债务账户', '100', '4', '我的债务账户');
+INSERT INTO `account` VALUES ('5', '信用卡账户', '5400.01', '4', '我的信用卡账户');
 
 -- ----------------------------
 -- Table structure for budget
@@ -43,17 +43,20 @@ INSERT INTO `account` VALUES ('5', '信用卡账户', '2700.01', '4', '我的信
 DROP TABLE IF EXISTS `budget`;
 CREATE TABLE `budget` (
   `bid` int(11) NOT NULL AUTO_INCREMENT,
-  `b_time` datetime DEFAULT NULL COMMENT '预算时间',
-  `b_term` varchar(255) DEFAULT NULL COMMENT '预算期限',
+  `b_time` date DEFAULT NULL COMMENT '预算时间',
+  `b_month` varchar(255) DEFAULT NULL COMMENT '预算期限',
   `b_money` varchar(255) DEFAULT NULL,
   `b_remark` varchar(255) DEFAULT NULL COMMENT '备注',
   `uid` int(11) DEFAULT NULL,
   PRIMARY KEY (`bid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of budget
 -- ----------------------------
+INSERT INTO `budget` VALUES ('3', '2017-04-05', '1', '300.00', '', '4');
+INSERT INTO `budget` VALUES ('4', '2017-04-05', '2', '300.00', '', '4');
+INSERT INTO `budget` VALUES ('5', '2017-04-06', '3', '500.00', '', '4');
 
 -- ----------------------------
 -- Table structure for debtee
@@ -68,12 +71,15 @@ CREATE TABLE `debtee` (
   `e_remark` varchar(255) DEFAULT NULL,
   `uid` int(11) DEFAULT NULL,
   PRIMARY KEY (`eid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of debtee
 -- ----------------------------
 INSERT INTO `debtee` VALUES ('1', '2017-03-26 15:42:33', '本人', '李四', '200.00', null, '4');
+INSERT INTO `debtee` VALUES ('2', '2017-04-05 20:59:00', '本人', '张三', '100.00', '还了，当面还的', '4');
+INSERT INTO `debtee` VALUES ('3', '2017-04-05 21:01:00', '本人', '我妈', '100.00', '', '4');
+INSERT INTO `debtee` VALUES ('4', '2017-04-05 21:01:00', '丈夫', '我爸', '200.00', '', '4');
 
 -- ----------------------------
 -- Table structure for debtor
@@ -88,12 +94,14 @@ CREATE TABLE `debtor` (
   `r_remark` varchar(255) DEFAULT NULL,
   `uid` int(11) DEFAULT NULL,
   PRIMARY KEY (`rid`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of debtor
 -- ----------------------------
 INSERT INTO `debtor` VALUES ('1', '2017-03-26 15:42:37', '张三', '本人', '100.00', null, '4');
+INSERT INTO `debtor` VALUES ('2', '2017-04-05 21:08:00', '王五', '本人', '50.00', '收钱了', '4');
+INSERT INTO `debtor` VALUES ('3', '2017-04-05 21:09:00', '溜溜', '本人', '50.00', '', '4');
 
 -- ----------------------------
 -- Table structure for diary
@@ -131,7 +139,7 @@ CREATE TABLE `income` (
   `i_remark` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `uid` int(11) DEFAULT NULL,
   PRIMARY KEY (`iid`)
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf32;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf32;
 
 -- ----------------------------
 -- Records of income
@@ -141,6 +149,10 @@ INSERT INTO `income` VALUES ('32', '2017-04-07 17:40:00', '职业收入', '信�
 INSERT INTO `income` VALUES ('33', '2017-04-05 18:02:00', '职业收入', '信用卡账户', '200.00', '本人', '', '4');
 INSERT INTO `income` VALUES ('34', '2017-04-05 18:02:00', '职业收入', '信用卡账户', '200.00', '本人', '', '4');
 INSERT INTO `income` VALUES ('58', '2017-04-05 18:25:00', '职业收入', '现金账户', '100.00', '本人', '', '4');
+INSERT INTO `income` VALUES ('59', '2017-04-05 20:44:00', '其他收入', '债务账户', '300.00', '本人', '', '4');
+INSERT INTO `income` VALUES ('60', '2017-02-08 15:10:00', '职业收入', '信用卡账户', '600.00', '本人', '', '4');
+INSERT INTO `income` VALUES ('61', '2017-01-03 14:25:00', '职业收入', '信用卡账户', '3000.00', '本人', '', '4');
+INSERT INTO `income` VALUES ('62', '2017-03-15 18:35:00', '职业收入', '信用卡账户', '600.00', '本人', '', '4');
 
 -- ----------------------------
 -- Table structure for outgo
@@ -156,7 +168,7 @@ CREATE TABLE `outgo` (
   `o_remark` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `uid` int(11) DEFAULT NULL,
   PRIMARY KEY (`oid`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf32;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf32;
 
 -- ----------------------------
 -- Records of outgo
@@ -170,6 +182,11 @@ INSERT INTO `outgo` VALUES ('6', '2017-04-01 14:35:22', '休闲娱乐', '现金'
 INSERT INTO `outgo` VALUES ('7', '2017-03-29 14:35:42', '学习进修', '信用卡', '500', '本人', null, '4');
 INSERT INTO `outgo` VALUES ('8', '2017-04-04 14:35:59', '医疗保健', '现金', '999', '本人', null, '4');
 INSERT INTO `outgo` VALUES ('9', '2017-04-05 14:40:03', '行车交通', '现金', '30', '本人', null, '4');
+INSERT INTO `outgo` VALUES ('10', '2017-04-05 20:25:00', '居家物业', '信用卡账户', '100.00', '本人', '', '4');
+INSERT INTO `outgo` VALUES ('11', '2017-04-04 18:40:00', '衣服饰品', '债权账户', '200.00', '本人', '', '4');
+INSERT INTO `outgo` VALUES ('12', '2017-04-05 20:43:00', '其他款项', '债权账户', '300.00', '本人', '', '4');
+INSERT INTO `outgo` VALUES ('13', '2017-02-22 14:20:00', '衣服饰品', '信用卡账户', '900.00', '本人', '', '4');
+INSERT INTO `outgo` VALUES ('14', '2017-01-19 23:30:00', '衣服饰品', '信用卡账户', '500.00', '本人', '', '4');
 
 -- ----------------------------
 -- Table structure for sign
@@ -281,4 +298,4 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('4', 'admin', '89f0b495890138511edbca8d446aa63e', '123@123.COM', null, '', null, null, '2017-04-05 14:52:56', '30', '2017-03-26 20:27:18', null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('4', 'admin', '89f0b495890138511edbca8d446aa63e', '123@123.COM', null, '', null, null, '2017-04-05 21:49:49', '36', '2017-03-26 20:27:18', null, null, null, null, null, null, null);

@@ -112,7 +112,27 @@
 							</div>
 						</div>
                     </div>
-          		</div>    	
+          		</div>
+				  <div class="modal fade" id="success" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog" style="width: 300px;">
+					<div class="modal-content" style="margin-top:200px;">
+						<div class="modal-header" style="padding:5px;padding-left:10px;border-top-left-radius:5px;border-top-right-radius:5px;">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+								&times;
+							</button>
+							<h4 class="modal-title" style="font-size:15px;">
+								提示
+							</h4>
+						</div>
+						<div class="modal-body" style="text-align:center;height:70px;padding-top:30px;">
+							操作成功
+						</div>
+						<div class="modal-footer" style="padding: 5px;text-align: center">
+							<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">确定</button>
+						</div>
+					</div>
+				</div>
+			</div>    	
           	</div>
 		</section>
     </section>
@@ -140,7 +160,7 @@
 				type: "post",
 				url: '/index/account/set_debtor',
 				dataType: "json",
-				data: {time:time,debtee:debtee,member:member,money:money,remark:remark},
+				data: {time:time,debtee:debtee,member:member,money:money,remark:remark,account:"债权账户"},
 				cache: true,
 				async: false,
 				success: function (msg) {

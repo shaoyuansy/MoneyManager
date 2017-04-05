@@ -12,7 +12,7 @@
             <div class="row mt">
                 <div class="col-lg-12">
                     <div class="content-panel">
-                        <h4><i class="fa fa-angle-right"></i> 收支趋势图</h4>
+                        <h4><i class="fa fa-angle-right"></i> {$year}年 收支趋势图</h4>
                         <div class="panel-body">
                             <div id="trend-chart">
 
@@ -38,39 +38,20 @@
                                 <tbody>
                                     <tr>
                                         <td>总计</td>
-                                        <td></td>
-                                        <td>￥40000.00</td>
-                                        <td>￥12000.00</td>
-                                        <td>￥28000.00</td>
+                                        <td>{$year}年</td>
+                                        <td>￥{$yaer_in}</td>
+                                        <td>￥{$yaer_out}</td>
+                                        <td>￥{$year_sub}</td>
                                     </tr>
-                                    <tr>
-                                        <td>2017年</td>
-                                        <td>1月</td>
-                                        <td>￥10000.00</td>
-                                        <td>￥3000.00</td>
-                                        <td>￥7000.00</td>
-                                    </tr>
+                                    {volist name='inoutList' id='inout'}
                                     <tr>
                                         <td></td>
-                                        <td>2月</td>
-                                        <td>￥9000.00</td>
-                                        <td>￥2500.00</td>
-                                        <td>￥6500.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>3月</td>
-                                        <td>￥11000.00</td>
-                                        <td>￥3300.00</td>
-                                        <td>￥7700.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td>4月</td>
-                                        <td>￥12000.00</td>
-                                        <td>￥3400.00</td>
-                                        <td>￥8600.00</td>
-                                    </tr>
+                                        <td>{$inout.month}月</td>
+                                        <td>￥{$inout.in}</td>
+                                        <td>￥{$inout.out}</td>
+                                        <td>￥{$inout.sub}</td>
+                                    </tr>	
+                                    {/volist}
                                 </tbody>
                             </table>
                         </div>
@@ -85,18 +66,29 @@
 
 <script src="/dist/js/highcharts.js"></script>
 <script>
-    /**
-      * Highcharts 在 4.2.0 开始已经不依赖 jQuery 了，直接用其构造函数既可创建图表
-     **/
+    var income = [];
+    var outgo = [];
+    var sub = [];
+    $.ajax({
+		type: "get",
+		url: '/index/chart/trend_year_inout',
+		async: false,
+		success: function (msg) {
+			if(msg.success){
+				income = msg.data.income;
+                outgo = msg.data.outgo;
+                sub = msg.data.sub;
+			}
+		},
+		error: function (e) {
+			console.log(e);
+		}
+	});
     var chart = new Highcharts.Chart('trend-chart', {
         title: {
             text: '',
             x: -20
         },
-        // subtitle: {
-        //     text: '数据来源: WorldClimate.com',
-        //     x: -20
-        // },
         xAxis: {
             categories: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月',
                 '9月', '10月', '11月', '12月']
@@ -117,13 +109,13 @@
 
         series: [{
             name: '支出',
-            data: [3000, 2500, 3300, 3400, null, null, null, null, null, null, null, null]
+            data: outgo
         }, {
             name: '收入',
-            data: [10000, 9000, 11000, 12000, null, null, null, null, null, null, null, null]
+            data: income
         }, {
             name: '结余',
-            data: [7000, 6500, 7700, 8600, null, null, null, null, null, null, null, null]
+            data: sub
         }
 
         ]

@@ -88,9 +88,18 @@ class Account extends Controller
 			$outgo = new OutgoModel;
 			$result = $outgo->save_outgo($uid,$type,$account,$money,$member,$time,$remark);
 			if($result>0){
-				$jsonData = array('success'=>true,'data'=>'');
+				//存入记录成功 则需要将金额从账户减去
+				$accmodel = new AccountModel;
+				if($account == "债权账户"){
+					$res = $accmodel->add_money($uid,$account,$money);
+				}else{
+					$res = $accmodel->sub_money($uid,$account,$money);
+				}
+				if($res){
+					$jsonData = array('success'=>true,'data'=>'');
+				}
 			}else{
-				$jsonData = array('success'=>false,'errorMassage'=>'记录存入失败。');
+				$jsonData = array('success'=>false,'errorMassage'=>'记录存入失败');
 			}
 			return json($jsonData);
 		}
@@ -182,12 +191,18 @@ class Account extends Controller
 			$debtor = input('post.debtor');
 			$money = input('post.money');
 			$remark = input('post.remark');
+			$account = input('post.account');
 			$debtee = new DebteeModel;
 			$result = $debtee->save_debtee($uid,$time,$member,$debtor,$money,$remark);
 			if($result>0){
-				$jsonData = array('success'=>true,'data'=>'');
+				//还款 将债务账户减去所还的款项
+				$accmodel = new AccountModel;
+				$res = $accmodel->sub_money($uid,$account,$money);
+				if($res){
+					$jsonData = array('success'=>true,'data'=>'');
+				}
 			}else{
-				$jsonData = array('success'=>false,'errorMassage'=>'记录存入失败。');
+				$jsonData = array('success'=>false,'errorMassage'=>'记录存入失败');
 			}
 			return json($jsonData);
 		}
@@ -236,12 +251,18 @@ class Account extends Controller
 			$member = input('post.member');
 			$money = input('post.money');
 			$remark = input('post.remark');
+			$account = input('post.account');
 			$debtor = new DebtorModel;
 			$result = $debtor->save_debtor($uid,$time,$debtee,$member,$money,$remark);
 			if($result>0){
-				$jsonData = array('success'=>true,'data'=>'');
+				//收款 将债权账户减去所收的款项
+				$accmodel = new AccountModel;
+				$res = $accmodel->sub_money($uid,$account,$money);
+				if($res){
+					$jsonData = array('success'=>true,'data'=>'');
+				}
 			}else{
-				$jsonData = array('success'=>false,'errorMassage'=>'记录存入失败。');
+				$jsonData = array('success'=>false,'errorMassage'=>'记录存入失败');
 			}
 			return json($jsonData);
 		}
@@ -286,15 +307,28 @@ class Account extends Controller
 		if(request()->isPost()){
 			$uid = session('user_auth.uid');
 			$time = input('post.time');
-			$term = input('post.term');
+			$month = input('post.month');
 			$money = input('post.money');
 			$remark = input('post.remark');
 			$budget = new BudgetModel;
-			$result = $budget->save_budget($uid,$time,$term,$money,$remark);
+			$monthArr = $budget->get_month($uid);
+			$id = "";
+			foreach($monthArr as $arr){
+				if($arr["month"] == $month){
+					$id = $arr['id'];
+				}
+			}
+			
+			if($id == ""){
+				$result = $budget->save_budget($uid,$time,$month,$money,$remark);
+			}else{
+				$result = $budget->update_budget($id,$uid,$time,$month,$money,$remark);
+			}
+			
 			if($result>0){
 				$jsonData = array('success'=>true,'data'=>'');
 			}else{
-				$jsonData = array('success'=>false,'errorMassage'=>'记录存入失败。');
+				$jsonData = array('success'=>false,'errorMassage'=>'记录存入失败');
 			}
 			return json($jsonData);
 		}

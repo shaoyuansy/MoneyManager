@@ -27,6 +27,14 @@
 	width:70px;
 	padding: 2px 6px;
 }
+.tags{
+	position:absolute;
+	left:35px;
+	top:13px;
+	height:25px;
+	padding: 2px 6px;
+	color: #eea236;
+}
 .content-panel{
 	padding:10px;
 }

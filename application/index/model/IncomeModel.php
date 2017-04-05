@@ -38,6 +38,11 @@ class IncomeModel extends Model{
 		$data = array_merge($week_income[0],$month_income[0],$year_income[0]);
 		return $data;
 	}
+
+	public function get_year_in($uid,$year){
+		$year_income = Db::query("SELECT SUM(i_money) as year_income FROM income WHERE uid=".$uid." AND YEAR(i_time)=".$year.";");
+		return $year_income[0];
+	}
 	
 	public function get_inout($uid){//获取近6个月收支
 		$in = Db::query("SELECT DATE_FORMAT(i_time,'%Y-%m') AS itime,sum(i_money) AS imoney FROM income 
@@ -73,5 +78,15 @@ class IncomeModel extends Model{
 		if($data){
 			return $data;
 		}
+	}
+
+	public function get_year_inout($uid,$year){
+		$income = Db::query("SELECT SUM(i_money) as income ,MONTH(i_time) as month FROM income WHERE uid=".$uid." AND YEAR(i_time)=".$year." GROUP BY MONTH(i_time);");
+		$outgo = Db::query("SELECT SUM(o_money) as outgo ,MONTH(o_time) as month FROM outgo WHERE uid=".$uid." AND YEAR(o_time)=".$year." GROUP BY MONTH(o_time);");
+		$data = [
+			"income"	=>	$income,
+			"outgo"	=>	$outgo,
+		];
+		return $data;
 	}
 }
