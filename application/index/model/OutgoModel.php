@@ -50,5 +50,18 @@ class OutgoModel extends Model{
 		$result = Db::table('outgo')->where('uid',$uid)->delete($del);
 		return $result;
 	}
+
+	public function get_group_type($uid){
+		$data = Db::query("SELECT o_type as type,sum(o_money) as money FROM outgo WHERE uid=".$uid." GROUP BY o_type;");
+		if($data){
+			return $data;
+		}
+	}
 	
+	public function get_group_type_time($uid,$start,$end){
+		$data = Db::query("SELECT o_type as type,sum(o_money) as money FROM outgo WHERE uid=".$uid." AND o_time BETWEEN \"".$start."\" AND \"".$end."\" GROUP BY o_type;");
+		if($data){
+			return $data;
+		}
+	}
 }

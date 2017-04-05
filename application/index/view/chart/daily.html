@@ -11,15 +11,14 @@
                 <div class="content-panel">
                     <h4><i class="fa fa-angle-right"></i> 支出堆积表</h4>
                     <div class="panel-body row">
-                        <div class="col-lg-2 col-md-2">
-                            <label class="control-label" for="reservationtime">选择时间：</label>
+                        <div class="col-lg-2 col-md-2" style="margin-left: 10px;">
+                            <label class="control-label time-label" for="out_reservationtime">选择时间：</label>
                         </div>
-                        <div class="input-group col-lg-10 col-md-10">
-                            <input type="text" class="form-control" name="reservation" id="reservationtime"
-                            data-container="body" data-toggle="popover" data-trigger="manual" data-placement="bottom"
-                            alue="01/01/2017 1:00 PM - 01/01/2017 1:30 PM"  class="span4"/>
-                            <span style="padding:0px 7px;" class="input-group-addon">
-                                <label for="time"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></label>
+                        <div class="input-group col-lg-7 col-md-7 "style="margin:0 20px;">
+                            <input type="text" class="form-control" name="reservation" id="out_reservationtime"
+                            data-container="body" data-toggle="popover" data-trigger="manual" data-placement="bottom" class="span4"/>
+                            <span style="padding:0px 7px;cursor: pointer;" class="input-group-addon">
+                                <label class="tooltips fresh" data-placement="bottom" data-original-title="重置" onclick="fresh_out()"><i class="fa fa-refresh icon-large"></i></label>
                             </span>
                         </div>
                         <div id="daily-zc-chart">
@@ -32,7 +31,6 @@
                     <h4><i class="fa fa-angle-right"></i> 支出分类表</h4>
                     <div class="panel-body">
                         <table class="table table-hover table-all">
-                        <hr>
                             <thead>
                                 <tr>
                                     <th>支出分类</th>
@@ -40,18 +38,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>衣服饰品</td>
-                                    <td>￥100.00</td>
-                                </tr>
-                                <tr>
-                                    <td>衣服饰品</td>
-                                    <td>￥100.00</td>
-                                </tr>
-                                <tr>
-                                    <td>食品酒水</td>
-                                    <td>￥100.00</td>
-                                </tr>
+                                {volist name='outlist' id='out'}
+								<tr>
+									<td>{$out.type}</td>
+									<td>￥{$out.money}</td>
+								</tr>	
+								{/volist}
                             </tbody>
                         </table>
                     </div>
@@ -63,15 +55,14 @@
                 <div class="content-panel">
                     <h4><i class="fa fa-angle-right"></i> 收入堆积表</h4>
                     <div class="panel-body row">
-                        <div class="col-lg-2 col-md-2">
-                            <label class="control-label" for="reservationtime">选择时间：</label>
+                        <div class="col-lg-2 col-md-2" style="margin-left: 10px;">
+                            <label class="control-label time-label" for="in_reservationtime">选择时间：</label>
                         </div>
-                        <div class="input-group col-lg-10 col-md-10">
-                            <input type="text" class="form-control" name="reservation" id="reservationtime"
-                            data-container="body" data-toggle="popover" data-trigger="manual" data-placement="bottom"
-                            alue="01/01/2017 1:00 PM - 01/01/2017 1:30 PM"  class="span4"/>
-                            <span style="padding:0px 7px;" class="input-group-addon">
-                                <label for="time"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></label>
+                        <div class="input-group col-lg-7 col-md-7" style="margin:0 20px;">
+                            <input type="text" class="form-control" name="reservation" id="in_reservationtime"
+                            data-container="body" data-toggle="popover" data-trigger="manual" data-placement="bottom" class="span4"/>
+                            <span style="padding:0px 7px;cursor: pointer;" class="input-group-addon">
+                                <label class="tooltips fresh" data-placement="bottom" data-original-title="重置" onclick="fresh_in()"><i class="fa fa-refresh"></i></label>
                             </span>
                         </div>
                         <div id="daily-sr-chart"></div>
@@ -90,30 +81,12 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>衣服饰品</td>
-                            <td>￥100.00</td>
-                        </tr>
-                        <tr>
-                            <td>衣服饰品</td>
-                            <td>￥100.00</td>
-                        </tr>
-                        <tr>
-                            <td>食品酒水</td>
-                            <td>￥100.00</td>
-                        </tr>
-                        <tr>
-                            <td>食品酒水</td>
-                            <td>￥100.00</td>
-                        </tr>
-                        <tr>
-                            <td>食品酒水</td>
-                            <td>￥100.00</td>
-                        </tr>
-                        <tr>
-                            <td>食品酒水</td>
-                            <td>￥100.00</td>
-                        </tr>
+                            {volist name='inlist' id='in'}
+                            <tr>
+                                <td>{$in.type}</td>
+                                <td>￥{$in.money}</td>
+                            </tr>	
+                            {/volist}
                         </tbody>
                     </table>   
                         
@@ -124,25 +97,83 @@
     </section>
 </section>
 
+<script type="text/javascript" src="/dist/js/moment.js"></script>
+<script type="text/javascript" src="/dist/js/daterangepicker.js"></script>
+<script type="text/javascript" src="/static/js/chart.js"></script>
 <script src="/dist/js/highcharts.js"></script>	
 <script>
  $(function () {
+     //选择时间段
+    $('#in_reservationtime').daterangepicker({
+            timePicker: true,
+            timePickerIncrement: 30,
+            timePicker12Hour : false,
+            format: 'YYYY-MM-DD HH:mm:ss'
+    }, function(start, end, label) {
+            getIndata(start.format('YYYY-MM-DD HH:mm:ss'),end.format('YYYY-MM-DD HH:mm:ss'));
+    });
+
+    $('#out_reservationtime').daterangepicker({
+            timePicker: true,
+            timePickerIncrement: 30,
+            timePicker12Hour : false,
+            format: 'YYYY-MM-DD HH:mm:ss'
+    }, function(start, end, label) {
+            getOutdata(start.format('YYYY-MM-DD HH:mm:ss'),end.format('YYYY-MM-DD HH:mm:ss'));
+    });
+
+    getOutdata("","");
+    getIndata("","");
+    
+});
+
+function getOutdata(start,end){
+    var type = [];
+    var money = [];
+    $.ajax({
+        type: "post",
+        url: '/index/chart/get_group_out',
+        data:{start:start,end:end},
+        dataType:"json",
+        cache: true,
+        async: false,
+        success: function (msg) {
+            if(msg.success){
+                type = msg.data.type;
+                money = msg.data.money;
+            }
+        },
+        error: function (e) {
+            console.log(e);
+        }
+    });
     $('#daily-zc-chart').highcharts({
         chart: {
-            type: 'column'
+            type: 'column',
+            marginTop:50,
+			marginRight:20
         },
         title: {
             text: ''
         },
         xAxis: {
-            categories: ['衣服饰品', '食品酒水', '居家物业', '行车交通', '交流通讯', '休闲娱乐', '学习进修',
-             '人情往来', '医疗保健', '金融保险', '其他款项']
+            categories: type,
+            labels:{
+				style:{
+					fontFamily:"Microsoft YaHei"
+				}
+			}
         },
         yAxis: {
             min: 0,
             title: {
                 text: '金额/元'
             },
+            labels:{
+				style:{
+					fontFamily:"Microsoft YaHei"
+				}
+			},
             stackLabels: {
                 enabled: true,
                 style: {
@@ -160,64 +191,67 @@
         },
         plotOptions: {
             column: {
-                stacking: 'normal'
+                stacking: 'normal',
+                pointPadding: 0.2,
+                borderWidth: 0
             }
         },
         series: [{
-            name: '衣服裤子',
-            data: [500,0,0,0,0,0,0,0,0,0,0],
+            name: '支出',
+            data: money,
             showInLegend: false // 设置为 false 即为不显示在图例中
-        }, {
-            name: '鞋帽包包',
-            data: [200,0,0,0,0,0,0,0,0,0,0],
-            showInLegend: false // 设置为 false 即为不显示在图例中
-        },{
-            name: '化妆饰品',
-            data: [0,120,0,0,0,0,0,0,0,0,0],
-            showInLegend: false // 设置为 false 即为不显示在图例中
-        },{
-            name: '菜品调料',
-            data: [0,0,0,0,0,700,0,0,0,0,0],
-            showInLegend: false // 设置为 false 即为不显示在图例中
-        },{
-            name: '早中晚餐',
-            data: [0,0,0,0,0,600,0,0,0,900,0],
-            showInLegend: false // 设置为 false 即为不显示在图例中
-        },{
-            name: '烟酒茶水',
-            data: [0,0,0,0,990,0,0,0,0,0,0],
-            showInLegend: false // 设置为 false 即为不显示在图例中
-        },{
-            name: '水果副食',
-            data: [0,0,0,0,0,0,0,0,0,0,880],
-            showInLegend: false // 设置为 false 即为不显示在图例中
-        },{
-            name: '培训进修',
-            data: [0,0,0,0,0,0,880,0,0,0,0],
-            showInLegend: false // 设置为 false 即为不显示在图例中
-        },]
+        }]
     });
-});
-</script>
+}
 
-<script>
-    $(function () {
+function getIndata(start,end){
+    var type = [];
+    var money = [];
+    $.ajax({
+        type: "post",
+        url: '/index/chart/get_group_in',
+        data:{start:start,end:end},
+        dataType:"json",
+        cache: true,
+        async: false,
+        success: function (msg) {
+            if(msg.success){
+                type = msg.data.type;
+                money = msg.data.money;
+            }
+        },
+        error: function (e) {
+            console.log(e);
+        }
+    });
     $('#daily-sr-chart').highcharts({
         chart: {
-            type: 'column'
+            type: 'column',
+            marginTop:50,
+			marginRight:20
         },
         title: {
             text: ''
         },
         xAxis: {
-            categories: ['职业收入', '其他收入']
+            categories: type,
+            labels:{
+				style:{
+					fontFamily:"Microsoft YaHei"
+				}
+			}
         },
         yAxis: {
             allowDecimals: false,
             min: 0,
             title: {
                 text: '金额'
-            }
+            },
+            labels:{
+				style:{
+					fontFamily:"Microsoft YaHei"
+				}
+			}
         },
         tooltip: {
             formatter: function () {
@@ -232,44 +266,22 @@
             }
         },
         series: [{
-            name: '工资收入',
-            data: [5000,0,],
-            showInLegend: false // 设置为 false 即为不显示在图例中
-        }, {
-            name: '利息收入',
-            data: [200,0],
-            showInLegend: false // 设置为 false 即为不显示在图例中
-        }, {
-            name: '奖金收入',
-            data: [200,0],
-            showInLegend: false // 设置为 false 即为不显示在图例中
-        }, {
-            name: '礼金收入',
-            data: [0,1000],
-            showInLegend: false // 设置为 false 即为不显示在图例中
-        }, {
-            name: '意外来钱',
-            data: [0,500],
+            name: '收入',
+            data: money,
             showInLegend: false // 设置为 false 即为不显示在图例中
         }]
     });
-});
+}
 
+function fresh_out(){
+    getOutdata("","");
+    $("#out_reservationtime").val("")
+}
+
+function fresh_in(){
+    getIndata("","");
+    $("#in_reservationtime").val("")
+}
 </script>
 
-<!-- 选择时间段 -->
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#reservationtime').daterangepicker({
-             timePicker: true,
-             timePickerIncrement: 30,
-             format: 'MM/DD/YYYY h:mm A'
-        }, function(start, end, label) {
-             console.log(start.toISOString(), end.toISOString(), label);
-        });
-   });
-</script>
 
-<script type="text/javascript" src="/dist/js/moment.js"></script>
-<script type="text/javascript" src="/dist/js/daterangepicker.js"></script>
-<script type="text/javascript" src="/static/js/chart.js"></script>

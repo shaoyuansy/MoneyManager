@@ -2,3 +2,16 @@
 .table-all tbody tr td{
     text-align: center;
 }
+#in_reservationtime,
+#out_reservationtime{
+    height: 25px;
+}
+.time-label{
+    height: 25px;
+    margin-bottom: 0px;
+    margin-top: 4px;
+}
+.fresh{
+    cursor: pointer;
+    margin-bottom:0px;
+}

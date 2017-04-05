@@ -29,9 +29,14 @@ class Account extends Controller
 			$income = new IncomeModel;
 			$result = $income->save_income($uid,$type,$account,$money,$member,$time,$remark);
 			if($result>0){
-				$jsonData = array('success'=>true,'data'=>'');
+				//存入记录成功 则需要将金额存入账户
+				$accmodel = new AccountModel;
+				$res = $accmodel->add_money($uid,$account,$money);
+				if($res){
+					$jsonData = array('success'=>true,'data'=>'');
+				}
 			}else{
-				$jsonData = array('success'=>false,'errorMassage'=>'记录存入失败。');
+				$jsonData = array('success'=>false,'errorMassage'=>'记录存入失败');
 			}
 			return json($jsonData);
 		}

@@ -80,7 +80,6 @@ $(document).ready(function () {
 				time = msg.data.time;
 				income = msg.data.in;
 				outgo = msg.data.out;
-				console.log(msg);
 			}
 		},
 		error: function (e) {

@@ -60,4 +60,18 @@ class IncomeModel extends Model{
 		$result = Db::table('income')->where('uid',$uid)->delete($del);
 		return $result;
 	}
+
+	public function get_group_type($uid){
+		$data = Db::query("SELECT i_type as type,sum(i_money) as money FROM income WHERE uid=".$uid."  GROUP BY i_type;");
+		if($data){
+			return $data;
+		}
+	}
+	
+	public function get_group_type_time($uid,$start,$end){
+		$data = Db::query("SELECT i_type as type,sum(i_money) as money FROM income WHERE uid=".$uid." AND i_time BETWEEN \"".$start."\" AND \"".$end."\" GROUP BY i_type;");
+		if($data){
+			return $data;
+		}
+	}
 }
