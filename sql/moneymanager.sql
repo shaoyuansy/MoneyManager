@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost_3306
+Source Server         : 本地local
 Source Server Version : 50617
 Source Host           : localhost:3306
 Source Database       : moneymanager
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-04-06 00:24:45
+Date: 2017-04-06 16:19:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -49,7 +49,7 @@ CREATE TABLE `budget` (
   `b_remark` varchar(255) DEFAULT NULL COMMENT '备注',
   `uid` int(11) DEFAULT NULL,
   PRIMARY KEY (`bid`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of budget
@@ -57,6 +57,8 @@ CREATE TABLE `budget` (
 INSERT INTO `budget` VALUES ('3', '2017-04-05', '1', '300.00', '', '4');
 INSERT INTO `budget` VALUES ('4', '2017-04-05', '2', '300.00', '', '4');
 INSERT INTO `budget` VALUES ('5', '2017-04-06', '3', '500.00', '', '4');
+INSERT INTO `budget` VALUES ('6', '2017-04-06', '4', '600', null, '4');
+INSERT INTO `budget` VALUES ('7', '2017-04-06', '5', '300', null, '4');
 
 -- ----------------------------
 -- Table structure for debtee
@@ -145,10 +147,10 @@ CREATE TABLE `income` (
 -- Records of income
 -- ----------------------------
 INSERT INTO `income` VALUES ('31', '2017-04-04 17:40:00', '职业收入', '信用卡账户', '100.00', '本人', '', '4');
-INSERT INTO `income` VALUES ('32', '2017-04-07 17:40:00', '职业收入', '信用卡账户', '200.00', '本人', '', '4');
-INSERT INTO `income` VALUES ('33', '2017-04-05 18:02:00', '职业收入', '信用卡账户', '200.00', '本人', '', '4');
-INSERT INTO `income` VALUES ('34', '2017-04-05 18:02:00', '职业收入', '信用卡账户', '200.00', '本人', '', '4');
-INSERT INTO `income` VALUES ('58', '2017-04-05 18:25:00', '职业收入', '现金账户', '100.00', '本人', '', '4');
+INSERT INTO `income` VALUES ('32', '2017-04-07 17:40:00', '职业收入', '信用卡账户', '200.00', '丈夫', '', '4');
+INSERT INTO `income` VALUES ('33', '2017-04-05 18:02:00', '职业收入', '信用卡账户', '200.00', '父母', '', '4');
+INSERT INTO `income` VALUES ('34', '2017-04-05 18:02:00', '职业收入', '信用卡账户', '200.00', '子女', '', '4');
+INSERT INTO `income` VALUES ('58', '2017-04-05 18:25:00', '职业收入', '现金账户', '100.00', '家庭公用', '', '4');
 INSERT INTO `income` VALUES ('59', '2017-04-05 20:44:00', '其他收入', '债务账户', '300.00', '本人', '', '4');
 INSERT INTO `income` VALUES ('60', '2017-02-08 15:10:00', '职业收入', '信用卡账户', '600.00', '本人', '', '4');
 INSERT INTO `income` VALUES ('61', '2017-01-03 14:25:00', '职业收入', '信用卡账户', '3000.00', '本人', '', '4');
@@ -173,20 +175,20 @@ CREATE TABLE `outgo` (
 -- ----------------------------
 -- Records of outgo
 -- ----------------------------
-INSERT INTO `outgo` VALUES ('1', '2017-03-26 15:14:42', '衣物服饰', '信用卡', '300', '本人', null, '4');
-INSERT INTO `outgo` VALUES ('2', '2017-02-26 15:14:42', '食品酒水', '信用卡', '1000', '本人', null, '4');
-INSERT INTO `outgo` VALUES ('3', '2017-03-10 15:14:42', '居家物业', '信用卡', '500', '本人', null, '4');
-INSERT INTO `outgo` VALUES ('4', '2017-04-05 14:34:28', '行车交通', '现金', '10', '本人', null, '4');
+INSERT INTO `outgo` VALUES ('1', '2017-03-26 15:14:42', '衣物服饰', '信用卡', '300', '父母', null, '4');
+INSERT INTO `outgo` VALUES ('2', '2017-02-26 15:14:42', '食品酒水', '信用卡', '1000', '妻子', null, '4');
+INSERT INTO `outgo` VALUES ('3', '2017-03-10 15:14:42', '居家物业', '信用卡', '500', '子女', null, '4');
+INSERT INTO `outgo` VALUES ('4', '2017-04-05 14:34:28', '行车交通', '现金', '10', '丈夫', null, '4');
 INSERT INTO `outgo` VALUES ('5', '2017-04-03 14:34:54', '交流通讯', '虚拟', '20', '本人', null, '4');
-INSERT INTO `outgo` VALUES ('6', '2017-04-01 14:35:22', '休闲娱乐', '现金', '300', '本人', null, '4');
-INSERT INTO `outgo` VALUES ('7', '2017-03-29 14:35:42', '学习进修', '信用卡', '500', '本人', null, '4');
+INSERT INTO `outgo` VALUES ('6', '2017-04-01 14:35:22', '休闲娱乐', '现金', '300', '家庭共用', null, '4');
+INSERT INTO `outgo` VALUES ('7', '2017-03-29 14:35:42', '学习进修', '信用卡', '500', '妻子', null, '4');
 INSERT INTO `outgo` VALUES ('8', '2017-04-04 14:35:59', '医疗保健', '现金', '999', '本人', null, '4');
-INSERT INTO `outgo` VALUES ('9', '2017-04-05 14:40:03', '行车交通', '现金', '30', '本人', null, '4');
+INSERT INTO `outgo` VALUES ('9', '2017-04-05 14:40:03', '行车交通', '现金', '30', '妻子', null, '4');
 INSERT INTO `outgo` VALUES ('10', '2017-04-05 20:25:00', '居家物业', '信用卡账户', '100.00', '本人', '', '4');
-INSERT INTO `outgo` VALUES ('11', '2017-04-04 18:40:00', '衣服饰品', '债权账户', '200.00', '本人', '', '4');
+INSERT INTO `outgo` VALUES ('11', '2017-04-04 18:40:00', '衣服饰品', '债权账户', '200.00', '妻子', '', '4');
 INSERT INTO `outgo` VALUES ('12', '2017-04-05 20:43:00', '其他款项', '债权账户', '300.00', '本人', '', '4');
-INSERT INTO `outgo` VALUES ('13', '2017-02-22 14:20:00', '衣服饰品', '信用卡账户', '900.00', '本人', '', '4');
-INSERT INTO `outgo` VALUES ('14', '2017-01-19 23:30:00', '衣服饰品', '信用卡账户', '500.00', '本人', '', '4');
+INSERT INTO `outgo` VALUES ('13', '2017-02-22 14:20:00', '衣服饰品', '信用卡账户', '900.00', '子女', '', '4');
+INSERT INTO `outgo` VALUES ('14', '2017-01-19 23:30:00', '衣服饰品', '信用卡账户', '500.00', '子女', '', '4');
 
 -- ----------------------------
 -- Table structure for sign

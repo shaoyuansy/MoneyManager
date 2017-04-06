@@ -4,7 +4,7 @@ namespace app\index\model;
 use think\Model;
 use think\Db;
 /**
- *Account model
+ *Budget model
  */
 class BudgetModel extends Model{
 
@@ -45,4 +45,8 @@ class BudgetModel extends Model{
 		return $result;
 	}
 	
+	public function get_year($uid,$year){ //获取一年的预算
+		$data = Db::query("SELECT b_month as month, b_money as money FROM budget WHERE uid=".$uid." AND YEAR(b_time)=".$year.";");
+		return $data;
+	}
 }

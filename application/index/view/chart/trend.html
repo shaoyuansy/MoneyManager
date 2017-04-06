@@ -12,7 +12,9 @@
             <div class="row mt">
                 <div class="col-lg-12">
                     <div class="content-panel">
-                        <h4><i class="fa fa-angle-right"></i> {$year}年 收支趋势图</h4>
+                        <h4><i class="fa fa-angle-right"></i> 
+                        <input type="hidden" value="{$year}" id="yearhide"/>
+                        <select id="year" style="border:0px;cursor: pointer"></select>年 收支趋势图</h4>
                         <div class="panel-body">
                             <div id="trend-chart">
 
@@ -66,12 +68,23 @@
 
 <script src="/dist/js/highcharts.js"></script>
 <script>
+    
+    var dd = new Date(); 
+    var y = dd.getFullYear();
+    yearStr = "<option>"+ (y-2) +"</option>"+"<option>"+ (y-1) +"</option>"+"<option>"+ y +"</option>";
+    $("#year").html(yearStr);
+    $("#year").val($("#yearhide").val());
+    $('#year').change(function () {  
+        location.href="/index/chart/trend?year="+$('#year').val();
+    });
     var income = [];
     var outgo = [];
     var sub = [];
     $.ajax({
-		type: "get",
+		type: "post",
 		url: '/index/chart/trend_year_inout',
+        data:{year:$("#yearhide").val()},
+        dataType:"json",
 		async: false,
 		success: function (msg) {
 			if(msg.success){

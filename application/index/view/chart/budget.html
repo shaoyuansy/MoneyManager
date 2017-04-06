@@ -1,147 +1,84 @@
 {layout name="layout"}
-	<head>
-		<link href="/static/css/chart.css" rel="stylesheet">
-	</head>
-     <!--main content start-->
-      <section id="main-content">
-          <section class="wrapper site-min-height">
-          <h3><i class="fa fa-bar-chart"></i> 收支预算对比表</h3>
-              <!-- page start-->
-              <div id="morris">
-                  <div class="row mt">
-
-                      <div class="col-lg-6">
-                          <div class="content-panel">
-                              <h4><i class="fa fa-angle-right"></i> 支出预算对比表</h4>
-                              <div class="panel-body">
-                                    <div id="budget-zc-chart">
-							
-						            </div>
-                                  <div id="hero-graph" class="graph"></div>
-                              </div>
-                          </div>
-                      </div>
-
-                      <div class="col-lg-6">
-                          <div class="content-panel">
-                              <h4><i class="fa fa-angle-right"></i> 收入预算对比表</h4>
-                              <div class="panel-body">
-                                    <div id="budget-sr-chart">
-							
-						            </div>
-                                  <div id="hero-area" class="graph"></div>
-                              </div>
-                          </div>
-                     </div>
-                     
-                      <div class="col-lg-6">
-                          <div class="content-panel">
-                              <div class="panel-body">
+<head>
+    <link href="/static/css/chart.css" rel="stylesheet">
+</head>
+<section id="main-content">
+    <section class="wrapper site-min-height">
+    <h3><i class="fa fa-bar-chart"></i> 支出预算对比表</h3>
+        <div id="morris">
+            <div class="row mt">
+                <div class="col-lg-12">
+                    <div class="content-panel">
+                        <h4><i class="fa fa-angle-right"></i> 
+                        <input type="hidden" value="{$year}" id="yearhide"/>
+                        <select id="year" style="border:0px;cursor: pointer"></select>年 月支出预算对比表</h4>
+                        <div class="panel-body">
+                            <div id="budget-zc-chart">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="content-panel">
+                        <div class="panel-body">
                             <table class="table table-hover table-all">
-	                              <thead>
-	                              <tr>
-	                                  <th>一级分类</th>
-	                                  <th>二级分类</th>
-	                                  <th>预算金额</th>
-                                      <th>实际金额</th>
-                                      <th>实际差额</th>
-	                              </tr>
-	                              </thead>
-	                              <tbody>
-	                              <tr>
-	                                  <td>衣服饰品</td>
-	                                  <td></td>
-                                      <td>￥100.00</td>
-                                      <td></td>
-                                      <td></td>
-	                              </tr>
-                                  <tr>
-                                      <td></td>
-	                                  <td>衣服饰品</td>
-                                      <td>￥100.00</td>
-                                      <td></td>
-                                      <td></td>
-                                  </tr>
-	                              <tr>
-	                                  <td>食品酒水</td>
-                                      <td></td>
-                                      <td>￥100.00</td>
-                                      <td></td>
-                                      <td></td>
-	                              </tr>
-                                  <tr>
-                                      <td>居家物业</td>
-                                      <td></td>
-                                      <td>￥100.00</td>
-                                      <td></td>
-                                      <td></td>
-                                  </tr>
-	                              </tbody>
-	                          </table>
-
-                              </div>
-                          </div>
-                      </div>
-
-                      <div class="col-lg-6">
-                          <div class="content-panel">
-                              <div class="panel-body">
-                            <table class="table table-hover table-all">
-	                              <thead>
-	                              <tr>
-	                                  <th>一级分类</th>
-	                                  <th>二级分类</th>
-	                                  <th>预算金额</th>
-                                      <th>实际金额</th>
-                                      <th>实际差额</th>
-	                              </tr>
-	                              </thead>
-	                              <tbody>
-	                              <tr>
-	                                  <td>衣服饰品</td>
-	                                  <td></td>
-                                      <td>￥100.00</td>
-                                      <td></td>
-                                      <td></td>
-	                              </tr>
-                                  <tr>
-                                      <td></td>
-	                                  <td>衣服饰品</td>
-                                      <td>￥100.00</td>
-                                      <td></td>
-                                      <td></td>
-                                  </tr>
-	                              <tr>
-	                                  <td>食品酒水</td>
-                                      <td></td>
-                                      <td>￥100.00</td>
-                                      <td></td>
-                                      <td></td>
-	                              </tr>
-                                  <tr>
-	                                  <td>衣服饰品</td>
-	                                  <td></td>
-                                      <td>￥100.00</td>
-                                      <td></td>
-                                      <td></td>
-	                              </tr>
-
-	                              </tbody>
-	                          </table>                                
-
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-
-              <!-- page end-->
-          </section>
-      </section><!-- /MAIN CONTENT -->
+                                <thead>
+                                    <tr>
+                                        <th>月份</th>
+                                        <th>预算金额</th>
+                                        <th>实际金额</th>
+                                        <th>实际差额</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {volist name='budgetlist' id='bud'}
+                                    <tr>
+                                        <td>{$bud.month}月</td>
+                                        <td>￥{$bud.budget}</td>
+                                        <td>￥{$bud.outgo}</td>
+                                        <td>￥{$bud.fact}</td>
+                                    </tr>
+                                    {/volist}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
 
 <script src="/dist/js/highcharts.js"></script>	
 <script>
 $(function () {
+    var dd = new Date(); 
+    var y = dd.getFullYear();
+    yearStr = "<option>"+ (y-2) +"</option>"+"<option>"+ (y-1) +"</option>"+"<option>"+ y +"</option>";
+    $("#year").html(yearStr);
+    $("#year").val($("#yearhide").val());
+    $('#year').change(function () {  
+        location.href="/index/chart/budget?year="+$('#year').val();
+    });
+    //请求图表数据
+    var budget = [];
+    var outgo = [];
+    $.ajax({
+		type: "post",
+		url: '/index/chart/get_budget',
+        data:{year:$("#yearhide").val()},
+        dataType:"json",
+		async: false,
+		success: function (msg) {
+			if(msg.success){
+				budget = msg.data.budget;
+                outgo = msg.data.outgo;
+			}
+		},
+		error: function (e) {
+			console.log(e);
+		}
+	});
     $('#budget-zc-chart').highcharts({
         chart: {
             type: 'column'
@@ -188,67 +125,10 @@ $(function () {
         },
         series: [{
             name: '预算金额',
-            data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+            data: budget
         }, {
             name: '实际金额',
-            data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3]
-        }]
-    });
-});
-</script>
-
-<script>
-$(function () {
-    $('#budget-sr-chart').highcharts({
-        chart: {
-            type: 'column'
-        },
-        title: {
-            text: ''
-        },
-        xAxis: {
-            categories: [
-                '一月',
-                '二月',
-                '三月',
-                '四月',
-                '五月',
-                '六月',
-                '七月',
-                '八月',
-                '九月',
-                '十月',
-                '十一月',
-                '十二月'
-            ],
-            crosshair: true
-        },
-        yAxis: {
-            min: 0,
-            title: {
-                text: '金额/元'
-            }
-        },
-        tooltip: {
-            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.1f} 元</b></td></tr>',
-            footerFormat: '</table>',
-            shared: true,
-            useHTML: true
-        },
-        plotOptions: {
-            column: {
-                pointPadding: 0.2,
-                borderWidth: 0
-            }
-        },
-        series: [{
-            name: '预算金额',
-            data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
-        }, {
-            name: '实际金额',
-            data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3]
+            data: outgo
         }]
     });
 });

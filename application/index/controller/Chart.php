@@ -3,6 +3,7 @@ namespace app\index\controller;
 use think\Controller;
 use app\index\model\IncomeModel;
 use app\index\model\OutgoModel;
+use app\index\model\BudgetModel;
 use think\Request;
 
 class Chart extends Controller{
@@ -76,9 +77,12 @@ class Chart extends Controller{
         }
     }
 
-    public function trend(){
+    public function trend(){ //收支趋势图table
         $uid = session('user_auth.uid');
-        $year = 2017;
+        $year = input('get.year');
+        if($year == ""){
+            $year = date('Y',time());
+        }
         $outgo = new OutgoModel;
         $income = new IncomeModel;
 
@@ -120,9 +124,9 @@ class Chart extends Controller{
         return $this->fetch();
     } 
 
-    public function trend_year_inout(){
+    public function trend_year_inout(){ //收支趋势图
         $uid = session('user_auth.uid');
-        $year = "2017";
+        $year = input('post.year');
         $income = new IncomeModel;
         $data = $income->get_year_inout($uid,$year);
         $in = $data["income"];
@@ -151,16 +155,165 @@ class Chart extends Controller{
         return json($jsonData);
     }
 
-    public function member(){
-        return view("member");
+    public function member(){ //成员收支表 收入 支出 table渲染
+        $uid = session('user_auth.uid');
+        $outyear = input('get.outyear');//渲染成员收支图标中的年收入支出的年份，空则默认为当年
+        $inyear = input('get.inyear');
+        if($inyear == ""){ 
+            $inyear = date('Y',time());
+        }
+        if($outyear == ""){
+            $outyear = date('Y',time());
+        }
+        //开始请求成员收入、支出数据
+        $outgo = new OutgoModel;
+        $income = new IncomeModel;
+        $out_member = $outgo->get_year_group_member($uid,$outyear);
+        $in_member = $income->get_year_group_member($uid,$inyear);
+        $outsum = 0; 
+        if(count($out_member)>0){//计算支出比例
+            foreach($out_member as $out){
+                $outsum += $out['outgo']; //所有支出
+            }
+            foreach($out_member as &$out){
+                $out['per'] = (round($out['outgo'] / $outsum,3)*100)."%"; //计算所占比
+            }
+        }
+        
+        $insum = 0; 
+        if(count($in_member)>0){//计算收入比例
+            foreach($in_member as $in){
+                $insum += $in['income']; //所有收入
+            }
+            foreach($in_member as &$in){
+                $in['per'] = (round($in['income'] / $insum,3)*100)."%"; //计算所占比
+            }
+        }
+
+        $this->assign('inyear', $inyear);
+        $this->assign('outyear', $outyear);
+        $this->assign('outsum', $outsum);
+        $this->assign('out_member', $out_member);
+        $this->assign('insum', $insum);
+        $this->assign('in_member', $in_member);
+        return $this->fetch();
     } 
     
-    public function asset(){
-        return view("asset");
+    public function out_year_member(){ //图表 支出 按成员分类 数据处理
+        $uid = session('user_auth.uid');
+        $year = input('post.year');
+        $outgo = new OutgoModel;
+        $out_member = $outgo->get_year_group_member($uid,$year);
+        $outsum = 0; 
+        $arr = [];
+        if(count($out_member)>0){//计算支出比例
+            foreach($out_member as $out){
+                $outsum += $out['outgo']; //所有支出
+            }
+            foreach($out_member as &$out){
+                $out['per'] = round($out['outgo'] / $outsum,3)*100; //计算所占比
+                unset($out['outgo']);
+                $arr[] = array_values($out);
+            }
+        }
+        $jsonData = array('success'=>true,'data'=>$arr);
+        return json($jsonData);
+    }
+
+    public function in_year_member(){ //图表 收入 按成员分类 数据处理
+        $uid = session('user_auth.uid');
+        $year = input('post.year');
+        $income = new IncomeModel;
+        $in_member = $income->get_year_group_member($uid,$year);
+        $insum = 0; 
+        $arr = [];
+        if(count($in_member)>0){//计算收入比例
+            foreach($in_member as $in){
+                $insum += $in['income']; //所有收入
+            }
+            foreach($in_member as &$in){
+                $in['per'] = round($in['income'] / $insum,3)*100; //计算所占比
+                unset($in['income']);
+                $arr[] = array_values($in);
+            }
+        }
+        $jsonData = array('success'=>true,'data'=>$arr);
+        return json($jsonData);
+    }
+
+
+    public function budget(){ //预算
+        $uid = session('user_auth.uid');
+        $year = input('get.year');
+        if($year == ""){
+            $year = date('Y',time());
+        }
+        $outgo = new OutgoModel;
+        $budget = new BudgetModel;
+        $out_data = $outgo->get_year_group_month($uid,$year);
+        $budget_data = $budget->get_year($uid,$year);
+        
+        $budgetlist=[
+            ['month' => 1,'budget' => '0.00','outgo' => '0.00','fact' => '0.00'],['month' => 2,'budget' => '0.00','outgo' => '0.00','fact' => '0.00'],
+            ['month' => 3,'budget' => '0.00','outgo' => '0.00','fact' => '0.00'],['month' => 4,'budget' => '0.00','outgo' => '0.00','fact' => '0.00'],
+            ['month' => 5,'budget' => '0.00','outgo' => '0.00','fact' => '0.00'],['month' => 6,'budget' => '0.00','outgo' => '0.00','fact' => '0.00'],
+            ['month' => 7,'budget' => '0.00','outgo' => '0.00','fact' => '0.00'],['month' => 8,'budget' => '0.00','outgo' => '0.00','fact' => '0.00'],
+            ['month' => 9,'budget' => '0.00','outgo' => '0.00','fact' => '0.00'],['month' => 10,'budget' => '0.00','outgo' => '0.00','fact' => '0.00'],
+            ['month' => 11,'budget' => '0.00','outgo' => '0.00','fact' => '0.00'],['month' => 12,'budget' => '0.00','outgo' => '0.00','fact' => '0.00']
+        ];
+        if(count($out_data)>0){
+            foreach($out_data as $index => $out){
+                if($budgetlist[$index]['month'] == $out['month']){
+                    $budgetlist[$index]['outgo'] = $out['outgo'];
+                }
+            }
+        }
+        if(count($budget_data)>0){
+            foreach($budget_data as $index => $budget){
+                if($budgetlist[$index]['month'] == $budget['month']){
+                    $budgetlist[$index]['budget'] = $budget['money'];
+                }
+            }
+        }
+        foreach($budgetlist as &$list){
+            $list['fact'] = $list['budget'] - $list['outgo'];
+            if($list['fact']==0)
+                $list['fact']="0.00";
+        }
+
+        $this->assign('budgetlist', $budgetlist);
+        $this->assign('year', $year);
+        return $this->fetch();
     } 
 
-    public function budget(){
-        return view("budget");
+    public function get_budget(){ //获取预算图表数据
+        $uid = session('user_auth.uid');
+        $year = input('post.year');
+        if($year == ""){
+            $year = date('Y',time());
+        }
+        $outgo = new OutgoModel;
+        $budget = new BudgetModel;
+        $out_data = $outgo->get_year_group_month($uid,$year);
+        $budget_data = $budget->get_year($uid,$year);
+        $out_money =[0,0,0,0,0,0,0,0,0,0,0,0];
+        $budget_money =[0,0,0,0,0,0,0,0,0,0,0,0];
+        if(count($out_data)>0){
+            foreach($out_data as $out){
+                $out_money[$out['month']-1] = $out['outgo'];
+            }
+        }
+        if(count($budget_data)>0){
+            foreach($budget_data as $budget){
+                $budget_money[$budget['month']-1] = floatval($budget['money']);
+            }
+        }
+        $data = [
+			"outgo"	=>	$out_money,
+            "budget"	=>	$budget_money
+        ];
+        $jsonData = array('success'=>true,'data'=>$data);
+        return json($jsonData);
     } 
 
 }

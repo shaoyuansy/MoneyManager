@@ -5,89 +5,67 @@
      <!--main content start-->
       <section id="main-content">
           <section class="wrapper site-min-height">
-          <h3><i class="fa fa-bar-chart"></i> 成员收支表</h3>
+          <h3><i class="fa fa-bar-chart"></i>成员收支表</h3>
               <!-- page start-->
               <div id="morris">
-                  <div class="row mt">
-
-                      <div class="col-lg-6">
-                          <div class="content-panel">
-                              <h4><i class="fa fa-angle-right"></i> 成员支出表</h4>
-                              <div class="panel-body">
-                                    <div id="member-zc-chart"></div>
-                                  <div id="hero-graph" class="graph"></div>
-                              </div>
-                          </div>
-                      </div>
-
-                      <div class="col-lg-6">
-                         <div class="content-panel">
-                              <h4><i class="fa fa-angle-right"></i> 成员收入表</h4>
-                              <div class="panel-body">
-                                    <div id="member-sr-chart"></div>
-                                  <div id="hero-area" class="graph"></div>
-                              </div>
-                          </div> 
-                     </div>
-
-                      <div class="col-lg-6">
+                <div class="row mt">
+                    <div class="col-lg-6">
                         <div class="content-panel">
-                              <div class="panel-body">
+                            <h4><i class="fa fa-angle-right"></i>
+                            <input type="hidden" value="{$outyear}" id="outyearhide"/>
+                            <select id="outyear" style="border:0px;cursor: pointer"></select> 年成员支出表</h4>
+                            <div class="panel-body">
+                                <div id="member-zc-chart"></div>
+                                <div id="hero-graph" class="graph"></div>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-lg-6">
+                        <div class="content-panel">
+                            <div class="panel-body">
+                                <table class="table table-hover table-all">
+                                    <thead>
+                                        <th>总支出：￥{$outsum}</th>
+                                        <th></th>
+                                        <th></th>
+                                        <tr>
+                                            <th>成员</th>
+                                            <th>金额</th>
+                                            <th>占比</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {volist name='out_member' id='out'}
+                                        <tr>
+                                            <td>{$out.member}</td>
+                                            <td>￥{$out.outgo}</td>
+                                            <td>{$out.per}</td>
+                                        </tr>
+                                        {/volist}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="content-panel">
+                            <h4><i class="fa fa-angle-right"></i>
+                            <input type="hidden" value="{$inyear}" id="inyearhide"/>
+                            <select id="inyear" style="border:0px;cursor: pointer"></select> 成员收入表</h4>
+                            <div class="panel-body">
+                                <div id="member-sr-chart"></div>
+                                <div id="hero-area" class="graph"></div>
+                            </div>
+                        </div> 
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="content-panel">
+                            <div class="panel-body">
                             <table class="table table-hover table-all">
-	                        <thead>
-                                 <th>总支出：￥10000.00</th>
-                                 <th></th>
-                                 <th></th>
-	                              <tr>
-	                                  <th>成员</th>
-	                                  <th>金额</th>
-	                                  <th>占比</th>
-	                              </tr>
-	                        </thead>
-	                              <tbody>
-	                              <tr>
-	                                  <td>公用</td>
-	                                  <td>￥4300.00</td>
-                                      <td>30%</td>
-	                              </tr>
-                                  <tr>
-                                      <td>父母</td>
-	                                  <td>￥4300.00</td>
-                                      <td>30%</td>
-                                  </tr>
-	                              <tr>
-	                                  <td>子女</td>
-                                      <td>￥4300.00</td>
-                                      <td>30%</td>
-	                              </tr>
-                                  <tr>
-	                                  <td>丈夫</td>
-                                      <td>￥4300.00</td>
-                                      <td>30%</td>
-	                              </tr>
-                                  <tr>
-	                                  <td>妻子</td>
-                                      <td>￥4300.00</td>
-                                      <td>30%</td>
-	                              </tr>
-
-
-	                              </tbody>
-	                          </table>
-
-                              </div>
-                          </div>
-
-                      </div>
-
-                      <div class="col-lg-6">
-                          <div class="content-panel">
-                              <div class="panel-body">
-                            <table class="table table-hover table-all">
-	                              <thead>
-                                 <th>总收入：￥10000.00</th>
-                                 <th></th>
-                                 <th></th>
+	                            <thead>
+                                  <th>总收入：￥{$insum}</th>
+                                  <th></th>
+                                  <th></th>
 	                              <tr>
 	                                  <th>成员</th>
 	                                  <th>金额</th>
@@ -95,43 +73,58 @@
 	                              </tr>
 	                              </thead>
 	                              <tbody>
-                                  <tr>
-                                      <td>父母</td>
-	                                  <td>￥4300.00</td>
-                                      <td>30%</td>
-                                  </tr>
-	                              <tr>
-	                                  <td>子女</td>
-                                      <td>￥4300.00</td>
-                                      <td>30%</td>
-	                              </tr>
-                                  <tr>
-	                                  <td>丈夫</td>
-                                      <td>￥4300.00</td>
-                                      <td>30%</td>
-	                              </tr>
-                                  <tr>
-	                                  <td>妻子</td>
-                                      <td>￥4300.00</td>
-                                      <td>30%</td>
-	                              </tr>
-	                              </tbody>
-	                          </table>                                
-
-                              </div>
-                          </div>
-                      </div>
-
-                  </div>
-              </div>
-
-              <!-- page end-->
-          </section>
-      </section><!-- /MAIN CONTENT -->
+                                    {volist name='in_member' id='in'}
+                                    <tr>
+                                        <td>{$in.member}</td>
+                                        <td>￥{$in.income}</td>
+                                        <td>{$in.per}</td>
+                                    </tr>
+                                    {/volist}
+	                            </tbody>
+	                        </table>                                
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- page end-->
+    </section>
+</section><!-- /MAIN CONTENT -->
 
 <script src="/dist/js/highcharts.js"></script>	
 <script>
  $(function () {
+    var dd = new Date(); 
+    var y = dd.getFullYear();
+    yearStr = "<option>"+ (y-2) +"</option>"+"<option>"+ (y-1) +"</option>"+"<option>"+ y +"</option>";
+    $("#inyear").html(yearStr);
+    $("#outyear").html(yearStr);
+    $("#inyear").val($("#inyearhide").val());
+    $("#outyear").val($("#outyearhide").val());
+    $('#inyear').change(function () {  
+        location.href="/index/chart/member?inyear="+$('#inyear').val()+"&outyear="+$("#outyear").val();
+    });
+    $('#outyear').change(function () {  
+        location.href="/index/chart/member?inyear="+$('#inyear').val()+"&outyear="+$("#outyear").val();
+    });
+    //请求支出图表数据
+    var outdata = [];
+    $.ajax({
+		type: "post",
+		url: '/index/chart/out_year_member',
+        data:{year:$("#outyearhide").val()},
+        dataType:"json",
+		async: false,
+		success: function (msg) {
+			if(msg.success){
+				outdata = msg.data;
+			}
+		},
+		error: function (e) {
+			console.log(e);
+		}
+	});
+    //绘制支出图表
     $('#member-zc-chart').highcharts({
         chart: {
             plotBackgroundColor: null,
@@ -158,25 +151,30 @@
         series: [{
             type: 'pie',
             name: '支出比例：',
-            data: [
-                ['公用',   35.0],
-                ['父母',       26.8],
-                {
-                    name: '丈夫',
-                    y: 12.8,
-                    sliced: true,
-                    selected: true
-                },
-                ['妻子',    18.5],
-                ['子女',    18.5],
-            ]
+            data: outdata
         }]
     });
 });
 
-</script>
-<script>
  $(function () {
+     //请求收入图表数据
+    var indata = [];
+    $.ajax({
+		type: "post",
+		url: '/index/chart/in_year_member',
+        data:{year:$("#inyearhide").val()},
+        dataType:"json",
+		async: false,
+		success: function (msg) {
+			if(msg.success){
+				indata = msg.data;
+			}
+		},
+		error: function (e) {
+			console.log(e);
+		}
+	});
+    //绘制收入图表
     $('#member-sr-chart').highcharts({
         chart: {
             plotBackgroundColor: null,
@@ -202,18 +200,8 @@
         },
         series: [{
             type: 'pie',
-            name: '浏览器访问量占比',
-            data: [
-                ['父母', 21.3],
-                {
-                    name: '丈夫',
-                    y: 48.3,
-                    sliced: true,
-                    selected: true
-                },
-                ['妻子', 30.4],
-                ['子女', 0],
-            ]
+            name: '收入比例：',
+            data: indata
         }]
     });
 });

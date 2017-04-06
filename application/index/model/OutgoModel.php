@@ -39,7 +39,7 @@ class OutgoModel extends Model{
 		return $data;
 	}
 
-	public function get_year_out($uid,$year){
+	public function get_year_out($uid,$year){//获取一年的支出之和
 		$year_outgo = Db::query("SELECT SUM(o_money) as year_outgo FROM outgo WHERE uid=".$uid." AND YEAR(o_time)=".$year.";");
 		return $year_outgo[0];
 	}
@@ -56,17 +56,27 @@ class OutgoModel extends Model{
 		return $result;
 	}
 
-	public function get_group_type($uid){
+	public function get_group_type($uid){//根据支出分类分组查询(用于日常收支表)
 		$data = Db::query("SELECT o_type as type,sum(o_money) as money FROM outgo WHERE uid=".$uid." GROUP BY o_type;");
 		if($data){
 			return $data;
 		}
 	}
 	
-	public function get_group_type_time($uid,$start,$end){
+	public function get_group_type_time($uid,$start,$end){//根据支出分类 时间段 分组查询(用于日常收支表)
 		$data = Db::query("SELECT o_type as type,sum(o_money) as money FROM outgo WHERE uid=".$uid." AND o_time BETWEEN \"".$start."\" AND \"".$end."\" GROUP BY o_type;");
 		if($data){
 			return $data;
 		}
+	}
+
+	public function get_year_group_member($uid,$year){ //获取一年的支出按照成员计算之和
+		$data = Db::query("SELECT SUM(o_money) as outgo ,o_member as member FROM outgo WHERE uid=".$uid." AND YEAR(o_time)=".$year." GROUP BY o_member;");
+		return $data;
+	}
+
+	public function get_year_group_month($uid,$year){ //获取一年内所有支出 按照月份求和
+		$data = Db::query("SELECT SUM(o_money) as outgo ,MONTH(o_time) as month FROM outgo WHERE uid=".$uid." AND YEAR(o_time)=".$year." GROUP BY MONTH(o_time) ORDER BY MONTH(o_time) ASC;");
+		return $data;
 	}
 }

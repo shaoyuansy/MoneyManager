@@ -66,27 +66,32 @@ class IncomeModel extends Model{
 		return $result;
 	}
 
-	public function get_group_type($uid){
+	public function get_group_type($uid){//根据不同类型获取收入和
 		$data = Db::query("SELECT i_type as type,sum(i_money) as money FROM income WHERE uid=".$uid."  GROUP BY i_type;");
 		if($data){
 			return $data;
 		}
 	}
 	
-	public function get_group_type_time($uid,$start,$end){
+	public function get_group_type_time($uid,$start,$end){ //获取某段时间内不同类型的收入和
 		$data = Db::query("SELECT i_type as type,sum(i_money) as money FROM income WHERE uid=".$uid." AND i_time BETWEEN \"".$start."\" AND \"".$end."\" GROUP BY i_type;");
 		if($data){
 			return $data;
 		}
 	}
 
-	public function get_year_inout($uid,$year){
+	public function get_year_inout($uid,$year){ //获取某年支出收入的和
 		$income = Db::query("SELECT SUM(i_money) as income ,MONTH(i_time) as month FROM income WHERE uid=".$uid." AND YEAR(i_time)=".$year." GROUP BY MONTH(i_time);");
 		$outgo = Db::query("SELECT SUM(o_money) as outgo ,MONTH(o_time) as month FROM outgo WHERE uid=".$uid." AND YEAR(o_time)=".$year." GROUP BY MONTH(o_time);");
 		$data = [
 			"income"	=>	$income,
 			"outgo"	=>	$outgo,
 		];
+		return $data;
+	}
+
+	public function get_year_group_member($uid,$year){ //获取一年的收入 按照成员计算之和
+		$data = Db::query("SELECT SUM(i_money) as income ,i_member as member FROM income WHERE uid=".$uid." AND YEAR(i_time)=".$year." GROUP BY i_member;");
 		return $data;
 	}
 }
