@@ -58,105 +58,25 @@ $(document).ready(function () {
 	
 	//获取天气
 	$.getJSON("http://wthrcdn.etouch.cn/weather_mini?citykey=101180101", function(data) {
-		$(".weather-on-time h2").text(data.data.wendu+"℃");
-		$(".weather-on-time h4").text(data.data.city);
+		if(data.status == "1000"){
+			$(".weather-on-time h2").text(data.data.wendu+"℃");
+			$(".weather-on-time h4").text(data.data.city);
+			$(".w_api").text(data.data.city+"空气污染指数："+data.data.aqi);
+			$(".w_type").text(data.data.forecast[0].type);
+			$(".w_fengxiang").text(data.data.forecast[0].fengxiang+" "+data.data.forecast[0].fengli);
+		}else{
+			$(".weather-on-time h2").text("网络不见了");
+		}
+		
 	});
-	
 	//签到表
 	createCalendar();
 	//消息窗
 	createGritter();
-
-	//获取收支图表
-	var time = [];
-	var income = [];
-	var outgo = [];
-	$.ajax({
-		type: "get",
-		url: '/index/home/inout',
-		async: false,
-		success: function (msg) {
-			if(msg.success){
-				time = msg.data.time;
-				income = msg.data.in;
-				outgo = msg.data.out;
-			}
-		},
-		error: function (e) {
-			console.log(e);
-		}
-	});
-	
-	//描绘收支图表
-	$('#sz-chart').highcharts({
-		chart: {
-			type: 'column',
-			marginTop:50,
-			marginRight:20
-		},
-		title: {
-			text: ''
-		},
-		xAxis: {
-			categories: time,
-			labels:{
-				style:{
-					fontFamily:"Microsoft YaHei"
-				}
-			}
-		},
-		credits:{
-			enabled:false // 禁用版权信息
-		},
-		yAxis: [{
-			min: 0,
-			title: {
-				text: 'RMB'
-			},
-			labels:{
-				style:{
-					fontFamily:"Microsoft YaHei"
-				}
-			}
-		}, {
-			title: {
-				text: ''
-			},
-			opposite: true
-		}],
-		legend: {
-			shadow: false
-		},
-		tooltip: {
-			shared: true,
-			valueSuffix: '元',
-			style: {               
-				fontFamily:"Microsoft YaHei"
-		}
-		},
-		plotOptions: {
-			column: {
-				grouping: false,
-				shadow: false,
-				borderWidth: 0
-			}
-		},
-		series: [{
-			name: '收入',
-			color: '#71C8E5',
-			data: income,
-			pointPadding: 0.3,
-			pointPlacement: 0
-		},{
-			name: '支出',
-			color: '#ffd777',
-			data: outgo,
-			pointPadding: 0.4,
-			pointPlacement: 0
-		}]
-	});
-	
+	//收支图表
+	createInout();
 });
+// end ready
 
 //创建消息窗
 function createGritter(){
@@ -180,18 +100,13 @@ function createGritter(){
 			console.log(e);
 		}
 	});
+	//绘制消息窗
 	var unique_id = $.gritter.add({
-		// (string | mandatory) the heading of the notification
 		title: '今天是您第'+ days +'天记账!',
-		// (string | mandatory) the text inside the notification
-		text: '本月预算额度'+ budget +'元，已使用'+ used +'元，还剩'+ over +'元可用。',
-		// (string | optional) the image to display on the left
+		text: '本月预算额度'+ budget +'元，已使用'+ used +'元'+ over,
 		image: '/static/img/ui-sam.jpg',
-		// (bool | optional) if you want it to fade out on its own or just sit there
 		sticky: true,
-		// (int | optional) the time you want it to be alive for before fading out
 		time: '1000',
-		// (string | optional) the class name you want to apply to that specific message
 		class_name: 'welcome-msg'
 	});
 			
@@ -263,4 +178,95 @@ function GetDateStr() {
 	var d = dd.getDate(); 
 	return y +"-"+ (m<10 ? "0"+m : m ) +"-"+ (d<10 ? "0"+d : d ); 
 }
+
+function createInout(){
+		//获取收支图表
+		var time = [];
+		var income = [];
+		var outgo = [];
+		$.ajax({
+			type: "get",
+			url: '/index/home/inout',
+			async: false,
+			success: function (msg) {
+				if(msg.success){
+					time = msg.data.time;
+					income = msg.data.in;
+					outgo = msg.data.out;
+				}
+			},
+			error: function (e) {
+				console.log(e);
+			}
+		});
+		
+		//描绘收支图表
+		$('#sz-chart').highcharts({
+			chart: {
+				type: 'column',
+				marginTop:50,
+				marginRight:20
+			},
+			title: {
+				text: ''
+			},
+			xAxis: {
+				categories: time,
+				labels:{
+					style:{
+						fontFamily:"Microsoft YaHei"
+					}
+				}
+			},
+			credits:{
+				enabled:false // 禁用版权信息
+			},
+			yAxis: [{
+				min: 0,
+				title: {
+					text: 'RMB'
+				},
+				labels:{
+					style:{
+						fontFamily:"Microsoft YaHei"
+					}
+				}
+			}, {
+				title: {
+					text: ''
+				},
+				opposite: true
+			}],
+			legend: {
+				shadow: false
+			},
+			tooltip: {
+				shared: true,
+				valueSuffix: '元',
+				style: {               
+					fontFamily:"Microsoft YaHei"
+			}
+			},
+			plotOptions: {
+				column: {
+					grouping: false,
+					shadow: false,
+					borderWidth: 0
+				}
+			},
+			series: [{
+				name: '收入',
+				color: '#71C8E5',
+				data: income,
+				pointPadding: 0.3,
+				pointPlacement: 0
+			},{
+				name: '支出',
+				color: '#ffd777',
+				data: outgo,
+				pointPadding: 0.4,
+				pointPlacement: 0
+			}]
+		});
+	}
 		

@@ -49,4 +49,17 @@ class BudgetModel extends Model{
 		$data = Db::query("SELECT b_month as month, b_money as money FROM budget WHERE uid=".$uid." AND YEAR(b_time)=".$year.";");
 		return $data;
 	}
+
+	public function get_month_budget($uid,$month){ //获取某月的预算
+		$data = Db::table('budget')
+				->where('uid',$uid)->where('b_month',$month)
+				->field('b_money')
+				->select();
+		if(count($data)>0){
+			return $data[0];
+		}else{
+			return 0;
+		}
+		
+	}
 }

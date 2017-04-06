@@ -41,7 +41,9 @@ class OutgoModel extends Model{
 
 	public function get_year_out($uid,$year){//获取一年的支出之和
 		$year_outgo = Db::query("SELECT SUM(o_money) as year_outgo FROM outgo WHERE uid=".$uid." AND YEAR(o_time)=".$year.";");
-		return $year_outgo[0];
+		if(count($year_outgo)>0){
+			return $year_outgo[0];
+		}
 	}
 		
 	public function get_out_type($uid){//获取支出类型
@@ -78,5 +80,14 @@ class OutgoModel extends Model{
 	public function get_year_group_month($uid,$year){ //获取一年内所有支出 按照月份求和
 		$data = Db::query("SELECT SUM(o_money) as outgo ,MONTH(o_time) as month FROM outgo WHERE uid=".$uid." AND YEAR(o_time)=".$year." GROUP BY MONTH(o_time) ORDER BY MONTH(o_time) ASC;");
 		return $data;
+	}
+
+	public function get_month_outgo($uid,$month){
+		$data = Db::query("SELECT SUM(o_money) as outgo FROM outgo WHERE uid=".$uid." AND MONTH(o_time)=".$month.";");
+		if(count($data)>0){
+			return $data[0];
+		}else{
+			return 0;
+		}
 	}
 }

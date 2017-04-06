@@ -1,7 +1,6 @@
 <!--sidebar start-->
 <aside>
 	<div id="sidebar" class="nav-collapse" style="z-index:1000">
-		<!-- sidebar menu start-->
 		<ul class="sidebar-menu" id="nav-accordion">
 			<p class="centered">
 				<a href="#">
@@ -44,16 +43,16 @@
 			</li>
 
 			<li class="sub-menu">
-				<a href="/index/books/index" >
-				  <i class="fa fa-calendar"></i>
-				  <span>周期账本</span>
+				<a href="/index/diary/index" >
+				  <i class="fa fa-book"></i>
+				  <span>理财日记</span>
 				</a>
 			</li>
 
 			<li class="sub-menu">
-				<a href="/index/diary/index" >
-				  <i class="fa fa-book"></i>
-				  <span>理财日记</span>
+				<a href="/index/books/index" >
+				  <i class="fa fa-calendar"></i>
+				  <span>周期账本</span>
 				</a>
 			</li>
 
@@ -62,6 +61,18 @@
 				  <i class="fa fa-line-chart"></i>
 				  <span>汇率查询</span>
 				</a>
+			</li>
+
+			<li class="sub-menu">
+				<a href="javascript:;" >
+				  <i class="fa fa-cogs"></i>
+				  <span>设置</span>
+				</a>
+				<ul class="sub">
+				  <li><a href="#">个人中心</a></li>
+					<li><a href="#">分类管理</a></li>
+				  <li><a href="#">报告设置</a></li>
+				</ul>
 			</li>
 
 			<li class="sub-menu">
@@ -77,24 +88,9 @@
 				</ul>
 			</li>
 
-			<li class="sub-menu">
-				<a href="javascript:;" >
-				  <i class="fa fa-cogs"></i>
-				  <span>设置</span>
-				</a>
-				<ul class="sub">
-				  <li><a href="#">个人中心</a></li>
-				  <li><a href="#">报告设置</a></li>
-				  <li><a href="#">分类管理</a></li>
-				  <li><a href="#">成员管理</a></li>
-				</ul>
-			</li>
 		</ul>
-	<!-- sidebar menu end-->
 	</div>
 </aside>
-<!--sidebar end-->
-
 <script>
 	$().ready(function(){
 		var getclass = window.location.pathname;

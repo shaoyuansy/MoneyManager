@@ -6,6 +6,7 @@ use app\index\model\IncomeModel;
 use app\index\model\OutgoModel;
 use app\index\model\SignModel;
 use app\index\model\UserModel;
+use app\index\model\BudgetModel;
 use think\Request;
 
 class Home extends Controller
@@ -197,9 +198,11 @@ class Home extends Controller
 		}
 	}
 	
-	public function get_gritter(){
+	public function get_gritter(){ //首页消息弹窗的提示内容
 		$uid = session('user_auth.uid');
+		$month = date("n");
 		$user = new UserModel;
+		//获取注册的时间
 		$registed = $user->get_registed_time($uid);
 		if(!empty($registed)){
 			$now = date("Y-m-d H:i:s");   
@@ -207,11 +210,41 @@ class Home extends Controller
 			$now = strtotime($now);  
 			$days = ceil(($now-$registed)/3600/24);  
 		}
+
+		//获取当月的预算
+		$budget = new BudgetModel;
+		$budget_data = $budget->get_month_budget($uid,$month);
+		if($budget_data != 0 && array_key_exists("b_money",$budget_data)){
+			$budget = $budget_data["b_money"];
+		}else{
+			$budget = 0.00;
+		}
+
+		//获取当月支出
+		$outgo = new OutgoModel;
+		$data = $outgo->get_month_outgo($uid,$month);
+		if($data != 0 && array_key_exists("outgo",$data)){
+			$used = $data["outgo"];
+		}else{
+			$used = 0.00;
+		}
+
+		//计算余额
+		if( $budget>0 ){
+			$over = $budget - $used;
+			if( $over >= 0){
+				$over = "，还剩".$over."元可用。";
+			}else{
+				$over = "，超出".abs($over)."元。";
+			}
+		}else{
+			$over = "";
+		}
 		$data = [
 			'days'	=> $days,
-			'budget'=> '0.00',
-			'used'	=> '0.00',
-			'over'	=> '0.00'
+			'budget'=> $budget,
+			'used'	=> $used,
+			'over'	=> $over
 		];
 		$jsonData = array('success'=>true,'data'=>$data);
 		return json($jsonData);
