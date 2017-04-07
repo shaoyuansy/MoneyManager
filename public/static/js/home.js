@@ -56,19 +56,19 @@ $(document).ready(function () {
 		}
 	});
 	
-	//获取天气
-	$.getJSON("http://wthrcdn.etouch.cn/weather_mini?citykey=101180101", function(data) {
-		if(data.status == "1000"){
-			$(".weather-on-time h2").text(data.data.wendu+"℃");
-			$(".weather-on-time h4").text(data.data.city);
-			$(".w_api").text(data.data.city+"空气污染指数："+data.data.aqi);
-			$(".w_type").text(data.data.forecast[0].type);
-			$(".w_fengxiang").text(data.data.forecast[0].fengxiang+" "+data.data.forecast[0].fengli);
-		}else{
-			$(".weather-on-time h2").text("网络不见了");
+	//获取天气   
+	$.getJSON("http://wthrcdn.etouch.cn/weather_mini?citykey=101180101", function(data,status,xhr) {
+		if(data){
+			if(data.status == "1000"){
+				$(".weather-on-time h2").text(data.data.wendu+"℃");
+				$(".weather-on-time h4").text(data.data.city);
+				$(".w_api").text(data.data.city+"空气污染指数："+data.data.aqi);
+				$(".w_type").text(data.data.forecast[0].type);
+				$(".w_fengxiang").text(data.data.forecast[0].fengxiang+" "+data.data.forecast[0].fengli);
+			}
 		}
-		
 	});
+
 	//签到表
 	createCalendar();
 	//消息窗

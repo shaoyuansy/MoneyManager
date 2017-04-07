@@ -1,0 +1,547 @@
+{layout name="layout"}
+<style>
+.icon-btn{
+    display: block;
+    margin: 0 auto;
+    height: 24px;
+    padding: 0 10px;
+    margin-top: 10px;
+}
+.email-btn{
+    position: absolute;
+    left: 220px;
+    top: 9px;
+    margin: 0 auto;
+    height: 24px;
+    padding: 0 10px;
+}
+.pwd-btn{
+    margin: 0 auto;
+    height: 24px;
+    padding: 0 10px;
+}
+
+.icon{
+    margin-bottom: 20px;
+    margin-top: 30px;
+}
+.personal-table{
+    width: 80%;
+}
+.personal-table tbody tr td{
+    border-top: 0px;
+}
+.personal-table tbody tr td:first-child{
+    width: 40%;
+    text-align: right;
+    padding-right: 30px;
+    vertical-align: middle;
+}
+.form-control{
+    height: 26px;
+    padding: 0px 6px;
+}
+.safe-table tbody tr:first-child td {
+    padding-bottom: 20px;
+}
+.safe-table tbody tr:nth-child(2) td {
+    padding-top: 20px;
+}
+.safe-table tbody tr:nth-child(5) td {
+    padding-bottom: 20px;
+}
+.safe-table tbody tr:last-child td {
+    padding-top: 20px;
+}
+.safe-table tbody tr td:last-child{
+    width: 10%;
+}
+.safe-table tbody tr td:nth-child(2),
+.safe-table tbody tr td:nth-child(3){
+    width: 30%;
+}
+.safe-table tbody tr td{
+    border-top: 0px;
+}
+.safe-table tbody tr td:first-child{
+    width: 30%;
+    text-align: right;
+    padding-right: 30px;
+    vertical-align: middle;
+}
+.safe-table tbody tr:first-child td,
+.safe-table tbody tr:nth-child(5) td{
+    border-bottom: 1px solid #ddd;
+}
+.report-table tbody tr td:first-child{
+    width: 30%;
+    text-align: right;
+    padding-right: 30px;
+    vertical-align: middle;
+}
+.report-table tbody tr td:nth-child(2),
+.report-table tbody tr td:nth-child(3){
+    width: 30%;
+}
+report-table tbody tr td:nth-child(4){
+    width: 10%;
+}
+.report-table tbody tr td{
+    border-top: 0px;
+}
+.report-table{
+
+}
+@charset "utf-8";
+.container {
+	width: 400px;
+	margin: 40px auto 0 auto;
+	position: relative;
+	font-family: 微软雅黑;
+	font-size: 12px;
+}
+.container p {
+	line-height: 12px;
+	line-height: 0px;
+	height: 0px;
+	margin: 10px;
+	color: #bbb
+}
+.action {
+	width: 400px;
+	height: 30px;
+	margin: 10px 0;
+}
+.cropped {
+	position: absolute;
+	right: -230px;
+	top: 0;
+	width: 200px;
+	border: 1px #ddd solid;
+	height: 460px;
+	padding: 4px;
+	box-shadow: 0px 0px 12px #ddd;
+	text-align: center;
+}
+.imageBox {
+	position: relative;
+	height: 400px;
+	width: 400px;
+	border: 1px solid #aaa;
+	background: #fff;
+	overflow: hidden;
+	background-repeat: no-repeat;
+	cursor: move;
+	box-shadow: 4px 4px 12px #B0B0B0; 
+}
+.imageBox .thumbBox {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 200px;
+	height: 200px;
+	margin-top: -100px;
+	border-radius:200px;
+	margin-left: -100px;
+	box-sizing: border-box;
+	border: 1px solid rgb(102, 102, 102);
+	box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.5);
+	background: none repeat scroll 0% 0% transparent;
+}
+.imageBox .spinner {
+	position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  text-align: center;
+  line-height: 400px;
+  color: #2F2A2A;
+  background: rgba(213, 211, 211, 0.7);
+}
+.Btnsty_peyton{ float: right;
+   width: 66px;
+  display: inline-block;
+  margin-bottom: 10px;
+  height: 57px;
+  line-height: 57px;
+  font-size: 20px;
+  color: #FFFFFF;
+  margin:0px 2px;
+  background-color: #f38e81;
+  border-radius: 3px;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0px 0px 5px #B0B0B0;
+  border: 0px #fff solid;}
+/*选择文件上传*/
+.new-contentarea {
+	width: 165px;
+	overflow:hidden;
+	margin: 0 auto;
+	position:relative;float:left;
+}
+.new-contentarea label {
+	width:100%;
+	height:100%;
+	display:block;
+}
+.new-contentarea input[type=file] {
+	width:188px;
+	height:60px;
+	background:#333;
+	margin: 0 auto;
+	position:absolute;
+	right:50%;
+	margin-right:-94px;
+	top:0;
+	right/*\**/:0px\9;
+	margin-right/*\**/:0px\9;
+	width/*\**/:10px\9;
+	opacity:0;
+	filter:alpha(opacity=0);
+	z-index:2;
+}
+a.upload-img{
+	width:165px;
+	display: inline-block;
+	margin-bottom: 10px;
+	height:57px;
+	line-height: 57px;
+	font-size: 20px;
+	color: #FFFFFF;
+	background-color: #f38e81;
+	border-radius: 3px;
+	text-decoration:none;
+	cursor:pointer;
+	border: 0px #fff solid;
+	box-shadow: 0px 0px 5px #B0B0B0;
+}
+a.upload-img:hover{
+	background-color: #ec7e70;
+}
+
+.tc{text-align:center;}
+</style>
+<section id="main-content">
+	<section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i> 个人中心</h3>
+
+        <div class="row mt">
+            <div class="col-lg-11 col-md-12 col-sm-12">
+                <div class="content-panel">
+                    <h4><i class="fa fa-angle-right"></i> 个人资料</h4>
+                    <hr>
+                    <form class="form-horizontal style-form row">
+                        <div class="col-lg-4 col-md-4 col-sm-12 centered icon">
+                            <img src="/static/img/ui-sam.jpg" class="img-circle" style="width: 120px">
+                            <button class="btn btn-default btn-sm icon-btn" onclick="changeIcon()">修改头像</button>
+                        </div>
+                        <div class="row col-lg-7 col-md-7 col-sm-12" >
+                            <table class="table personal-table">
+                                <tbody>
+                                    <tr>
+                                        <td>用户名</td>
+                                        <td>
+                                            <div class="input-group">
+                                                <span style="padding:3px 6px 0px 6px;" class="input-group-addon">
+                                                    <label ><i class="fa fa-user-o "></i></label>
+                                                </span>
+                                                <input type="text" class="form-control" />										
+                                            </div>  
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>真实姓名</td>
+                                        <td>
+                                            <div class="input-group">
+                                                <span style="padding:3px 4px 0px 4px;" class="input-group-addon">
+                                                    <label ><i class="fa fa-vcard-o "></i></label>
+                                                </span>
+                                                <input type="text" class="form-control" />										
+                                            </div>  
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>性别</td>
+                                        <td>
+                                            <div class="input-group">
+                                                <span style="padding:4px 4px 0px 4px;" class="input-group-addon">
+                                                    <label ><i class="fa fa-venus-mars "></i></label>
+                                                </span>
+                                                <select type="text" class="form-control" >
+                                                    <option>男</option>
+                                                    <option>女</option>
+                                                </select>
+                                            </div> 
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>手机号</td>
+                                        <td>
+                                            <div class="input-group">
+                                                <span style="padding:3px 8px 0px 8px;" class="input-group-addon">
+                                                    <label ><i class="fa fa-mobile-phone fa-lg"></i></label>
+                                                </span>
+                                                <input type="text" class="form-control" />										
+                                            </div>  
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>上次登陆时间</td>
+                                        <td>
+                                            <div class="input-group">
+                                                <span style="padding:3px 6px 0px 6px;" class="input-group-addon">
+                                                    <label ><i class="fa fa-clock-o "></i></label>
+                                                </span>
+                                                <input type="text" class="form-control" disabled/>										
+                                            </div>      
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>     
+            </div>   
+        </div>
+
+        <div class="row mt">
+            <div class="col-lg-11 col-md-12 col-sm-12">
+                <div class="content-panel">
+                    <h4><i class="fa fa-angle-right"></i> 安全设置</h4>
+                    <hr>
+                    <table class="table safe-table">
+                        <tbody>
+                            <tr>
+                                <td>安全邮箱</td>
+                                <td colspan="3" style="position: relative">
+                                    <div class="input-group">
+                                        <span style="padding:3px 6px 0px 6px;" class="input-group-addon">
+                                            <label><i class="fa fa-envelope-o "></i></label>
+                                        </span>
+                                        <input type="text" class="form-control" disabled/>										
+                                    </div>
+                                    <button class="btn btn-default btn-sm email-btn">修改安全邮箱</button>
+                                </td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>安全问题设置</td>
+                                <td>
+                                    <div class="input-group">
+                                        <span style="padding:3px 6px 0px 6px;" class="input-group-addon">
+                                            <label >问1</label>
+                                        </span>
+                                        <select type="text" class="form-control" >
+                                            <option>你父亲的名字</option>
+                                            <option>你母亲的名字</option>
+                                            <option>你小学班主任名字</option>
+                                            <option>你配偶的名字 </option>
+                                        </select>										
+                                    </div>     
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <span style="padding:3px 6px 0px 6px;" class="input-group-addon">
+                                            <label >答1</label>
+                                        </span>
+                                        <input type="text" class="form-control" />										
+                                    </div>     
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <div class="input-group">
+                                        <span style="padding:3px 6px 0px 6px;" class="input-group-addon">
+                                            <label >问2</label>
+                                        </span>
+                                        <select type="text" class="form-control" >
+                                            <option>你的学号</option>
+                                            <option>你的工号</option>
+                                            <option>你的出生地</option>
+                                            <option>你就读过的学校</option>
+                                        </select>										
+                                    </div>     
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <span style="padding:3px 6px 0px 6px;" class="input-group-addon">
+                                            <label >答2</label>
+                                        </span>
+                                        <input type="text" class="form-control" />										
+                                    </div>     
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <div class="input-group">
+                                        <span style="padding:3px 6px 0px 6px;" class="input-group-addon">
+                                            <label >问3</label>
+                                        </span>
+                                        <select type="text" class="form-control" >
+                                            <option>你父亲的生日</option>
+                                            <option>你母亲的生日</option>
+                                            <option>你的生日</option>
+                                            <option>你配偶的生日</option>
+                                        </select>										
+                                    </div>     
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <span style="padding:3px 6px 0px 6px;" class="input-group-addon">
+                                            <label >答3</label>
+                                        </span>
+                                        <input type="text" class="form-control" />										
+                                    </div>     
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><button class="btn btn-default btn-sm pwd-btn">提交安全问题</button></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>修改密码</td>
+                                <td colspan="3"><button class="btn btn-default btn-sm pwd-btn">修改密码</button></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>     
+            </div>   
+        </div>
+
+        <div class="row mt">
+            <div class="col-lg-11 col-md-12 col-sm-12">
+                <div class="content-panel" style="margin-bottom: 50px;">
+                    <h4><i class="fa fa-angle-right"></i> 报告设置</h4>
+                    <hr>
+                    <table class="table report-table">
+                        <tbody>
+                            <tr>
+                                <td>接收邮箱</td>
+                                <td colspan="3" style="position: relative">
+                                    <div class="input-group">
+                                        <span style="padding:3px 6px 0px 6px;" class="input-group-addon">
+                                            <label><i class="fa fa-envelope-o "></i></label>
+                                        </span>
+                                        <input type="text" class="form-control" disabled/>										
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>报告设置</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>发送频率</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><button class="btn btn-default btn-sm pwd-btn">提交设置</button></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>     
+            </div>   
+        </div>
+        
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel">模态框（Modal）标题</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="imageBox">
+                                <div class="thumbBox"></div>
+                                <div class="spinner" style="display: none"></div>
+                            </div>
+                            <div class="action"> 
+                                <div class="new-contentarea tc"> 
+                                    <a href="javascript:void(0)" class="upload-img">
+                                        <label for="upload-file">请先选择图片...</label>
+                                    </a>
+                                    <input type="file" class="" name="upload-file" id="upload-file" />
+                                </div>
+                                <input type="button"   class="Btnsty_peyton" value="OK">
+                                <input type="button" id="btnZoomIn" class="Btnsty_peyton" value="+"  >
+                                <input type="button" id="btnZoomOut" class="Btnsty_peyton" value="-" >
+                            </div>
+                            <div class="cropped"></div>
+                        </div>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+    </section>
+</section>
+
+<script type="text/javascript" src="/dist/js/cropbox.js"></script>
+<script type="text/javascript">
+function changeIcon(){
+    $("#myModal").modal({backdrop:false});
+}
+$().ready(function() {
+	//$('#btnCrop').click();$("#idName").css("cssText","background-color:red!important");
+	//$(".imageBox").css("cssText","background-position:88px 88px!important");$(".imageBox").css("cssText","background-size:222px 222px!important");
+	var options =
+	{
+		thumbBox: '.thumbBox',
+		spinner: '.spinner',
+		imgSrc: ''
+	}
+	var cropper = $('.imageBox').cropbox(options);
+	var img="";
+	$('#upload-file').on('change', function(){
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			options.imgSrc = e.target.result;
+			cropper = $('.imageBox').cropbox(options);
+			getImg();
+		}
+		reader.readAsDataURL(this.files[0]);
+		this.files = [];
+		//getImg();
+	})
+	$('#btnCrop').on('click', function(){
+		alert("图片上传喽");
+	})
+	function getImg(){
+		img = cropper.getDataURL();
+		$('.cropped').html('');
+		$('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:180px;margin-top:4px;border-radius:180px;box-shadow:0px 0px 12px #7E7E7E;"><p>180px*180px</p>');
+		$('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:128px;margin-top:4px;border-radius:128px;box-shadow:0px 0px 12px #7E7E7E;"><p>128px*128px</p>');
+		$('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:64px;margin-top:4px;border-radius:64px;box-shadow:0px 0px 12px #7E7E7E;" ><p>64px*64px</p>');
+		}
+	$(".imageBox").on("mouseup",function(){
+ 		getImg();
+  		});
+	$('#btnZoomIn').on('click', function(){
+		cropper.zoomIn();
+	})
+	$('#btnZoomOut').on('click', function(){
+		cropper.zoomOut();
+	})
+});
+</script>
