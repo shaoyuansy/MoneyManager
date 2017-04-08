@@ -12,15 +12,21 @@ use think\Request;
 class Home extends Controller
 {
     public function index(){
-		
+		$this->assign('pagetitle','概览 - F.M');
+		$this->fetch('/layout');
         return view('index');
 		
     }
 	
-	public function get_username(){
-		$username = session ('user_auth.username');
-		if(!empty($username)){
-			$jsonData = array('success'=>true,'data'=>$username);
+	public function get_user(){
+		$nikename = session ('user_auth.nikename');
+		$icon = session ('user_auth.icon');
+		$data = [
+			'nikename' => $nikename,
+			'icon' => $icon,
+		];
+		if(!empty($data)){
+			$jsonData = array('success'=>true,'data'=>$data);
 			return json($jsonData);
 		}
 	}

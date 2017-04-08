@@ -11,10 +11,70 @@ use app\index\model\AccountModel;
 use app\index\model\MemberModel;
 use think\Request;
 
-class Account extends Controller
-{
-    public function _empty($name){
-        return view($name);
+class Account extends Controller{
+
+	public function _empty($name){
+        return redirect('errorpage/index');
+    }
+	
+	public function in(){	
+		if(is_login() == 0){
+            $username = session('user_auth.username');
+            $this->assign('username',$username);
+           	return redirect('login/index');
+        }else{
+			$this->assign('pagetitle','记账 > 收入 - F.M');
+			$this->fetch('/layout');
+			return view('in');
+		}
+    }
+
+	public function out(){	
+		if(is_login() == 0){
+            $username = session('user_auth.username');
+            $this->assign('username',$username);
+           	return redirect('login/index');
+        }else{
+			$this->assign('pagetitle','记账 > 支出 - F.M');
+			$this->fetch('/layout');
+			return view('out');
+		}
+    }
+
+	public function budget(){	
+		if(is_login() == 0){
+            $username = session('user_auth.username');
+            $this->assign('username',$username);
+           	return redirect('login/index');
+        }else{
+			$this->assign('pagetitle','记账 > 预算 - F.M');
+			$this->fetch('/layout');
+			return view('budget');
+		}
+    }
+
+	public function debtee(){	
+		if(is_login() == 0){
+            $username = session('user_auth.username');
+            $this->assign('username',$username);
+           	return redirect('login/index');
+        }else{
+			$this->assign('pagetitle','记账 > 还款 - F.M');
+			$this->fetch('/layout');
+			return view('debtee');
+		}
+    }
+
+	public function debtor(){	
+		if(is_login() == 0){
+            $username = session('user_auth.username');
+            $this->assign('username',$username);
+           	return redirect('login/index');
+        }else{
+			$this->assign('pagetitle','记账 > 收债 - F.M');
+			$this->fetch('/layout');
+			return view('debtor');
+		}
     }
 	//收入
 	public function set_income(){
@@ -58,8 +118,9 @@ class Account extends Controller
 			return json($jsonData);
 		}
 	}
+
 	//删除收入记录
-		public function del_income(){
+	public function del_income(){
 		if(request()->isPost()){
 			$del = input('post.del');
 			$delArr = explode(",",$del);
@@ -75,6 +136,7 @@ class Account extends Controller
 			}
 		}
 	}	
+
 	//支出
 	public function set_outgo(){
 		if(request()->isPost()){
@@ -123,7 +185,7 @@ class Account extends Controller
 	}
 
 		//删除支出记录
-		public function del_outgo(){
+	public function del_outgo(){
 		if(request()->isPost()){
 			$del = input('post.del');
 			$delArr = explode(",",$del);
@@ -139,8 +201,7 @@ class Account extends Controller
 			}
 		}
 	}
-
-	//分类	
+	
 	//收入分类
 	public function in_type(){
 		$uid = session('user_auth.uid');
@@ -151,6 +212,7 @@ class Account extends Controller
 			return json($jsonData);
 		}
 	}
+
 	//支出分类
 	public function out_type(){
 		$uid = session('user_auth.uid');
@@ -161,6 +223,7 @@ class Account extends Controller
 			return json($jsonData);
 		}
 	}
+
 	//账户分类
 	public function account_type(){
 		$uid = session('user_auth.uid');
@@ -171,6 +234,7 @@ class Account extends Controller
 			return json($jsonData);
 		}
 	}
+
 	//成员分类
 	public function member_type(){
 		$uid = session('user_auth.uid');
@@ -224,8 +288,9 @@ class Account extends Controller
 			return json($jsonData);
 		}
 	}
+
 	//删除还款记录
-		public function del_debtee(){
+	public function del_debtee(){
 		if(request()->isPost()){
 			$del = input('post.del');
 			$delArr = explode(",",$del);
@@ -284,8 +349,9 @@ class Account extends Controller
 			return json($jsonData);
 		}
 	}
+
 	//删除还款记录
-		public function del_debtor(){
+	public function del_debtor(){
 		if(request()->isPost()){
 			$del = input('post.del');
 			$delArr = explode(",",$del);

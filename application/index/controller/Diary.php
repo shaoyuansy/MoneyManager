@@ -7,20 +7,29 @@ use think\Db;
 
 class Diary extends Controller
 {
-    // public function _empty($name){
-    //     return view($name);
-    // }
+    public function _empty($name){
+        return redirect('errorpage/index');
+    }
+
     public function index(){
-        $uid = session('user_auth.uid');
-        $diary = new DiaryModel;
-        $count = $diary->get_count($uid);
-        $list = $diary->select_list($uid);
-        $page = $list->render();
-        $this->assign('list', $list);
-        $this->assign('page', $page);
-        $this->assign('month_count', $count['month_count']);
-        $this->assign('all_count', $count['all_count']);
-        return $this->fetch();
+        if(is_login() == 0){
+            $username = session('user_auth.username');
+            $this->assign('username',$username);
+           	return redirect('login/index');
+        }else{
+            $uid = session('user_auth.uid');
+            $diary = new DiaryModel;
+            $count = $diary->get_count($uid);
+            $list = $diary->select_list($uid);
+            $page = $list->render();
+            $this->assign('list', $list);
+            $this->assign('page', $page);
+            $this->assign('month_count', $count['month_count']);
+            $this->assign('all_count', $count['all_count']);
+            $this->assign('pagetitle','理财日记 - F.M');
+			$this->fetch('/layout');
+            return $this->fetch();
+        }
     }
     public function save_diary(){
         $uid = session('user_auth.uid');

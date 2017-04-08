@@ -104,7 +104,7 @@ function createGritter(){
 	var unique_id = $.gritter.add({
 		title: '今天是您第'+ days +'天记账!',
 		text: '本月预算额度'+ budget +'元，已使用'+ used +'元'+ over,
-		image: '/static/img/ui-sam.jpg',
+		image: $(".get_icon").attr("src"),
 		sticky: true,
 		time: '1000',
 		class_name: 'welcome-msg'

@@ -1,7 +1,9 @@
 <?php
 namespace app\index\controller;
+use app\index\model\UserModel;
 use think\Controller;
 use think\Request;
+use think\Session;
 
 class Tools extends Controller{
 
@@ -9,9 +11,20 @@ class Tools extends Controller{
         $file = request()->file('image');
         $result = upload($file,2097152);//头像大小不可超过2Mb
         if($result["success"]===true){
-            return $result["data"];
+            $path = "../../uploads/".$result["data"];
+            $uid = session('user_auth.uid');
+            $user = new UserModel;
+            $result = $user->save_icon($uid,$path);
+            if($result){
+                session('user_auth.icon',$path);
+                $jsonData = array('success'=>true,'data'=>$path);
+            }else{
+                $jsonData = array('success'=>false,'errorMessage'=>'头像保存失败','data'=>'');
+            }
+            return json($jsonData);
         }else{
-            return $result["errorMessage"];
+            $jsonData = array('success'=>false,'errorMessage'=>$result["errorMessage"],'data'=>'');
+            return json($jsonData);
         }
     }
 

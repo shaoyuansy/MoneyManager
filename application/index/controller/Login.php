@@ -5,6 +5,7 @@ use think\View;
 use think\Controller;
 use think\Session;
 use think\Request;
+use think\Cache;
 class Login extends Controller
 {
     public function index(){
@@ -19,12 +20,19 @@ class Login extends Controller
 			}
 			if($uid > 0){
 				$hash_pass = $user->get_user_hash($uid);
-				$username = $user->get_user_name($uid);
+				$userArr = $user->get_user($uid);
+				if($userArr){
+					$username = $userArr['username'] ? $userArr['username'] : '';
+					$nikename = $userArr['nikename'] ? $userArr['nikename'] : '';
+					$icon = $userArr['icon'] ? $userArr['icon'] : '';
+				}
 				/*登陆成功后User签字*/
 				$auth = array(
-				'uid'       => $uid,
-				'username'  => $username,
-				'time'      => think_now_time()
+					'uid'       => $uid,
+					'username'  => $username,
+					'nikename'  => $nikename,
+					'time'      => think_now_time(),
+					'icon'		=> $icon
 				);
 				session('user_auth',$auth);
 				session('user_auth_sign',data_auth_sign($auth));
@@ -85,7 +93,7 @@ class Login extends Controller
 		return view('index');
 	}
 	
-	public function reset_code(){
+	public function reset_password(){
 		if(request()->isGet()){
 			$hash = input('get.hash');
 			if(!Cache::get('uid') || !Cache::get('hash')){
@@ -93,14 +101,14 @@ class Login extends Controller
 				Cache::rm('hash'); 
 				return view('timeout');
 			}else if($hash == Cache::get('hash')){ 
-				return view('reset_code');
+				return view('reset_password');
 			}
 		}
 	}
 	
 	public function sendmail($to,$hash){
 		$subject = 'mk.manager.com - 密码找回';
-		$message = "尊敬的".$to."您好："."\r\n\t"."欢迎使用找回密码功能。"."\r\n\t"."请您复制此链接到浏览器继续下一步操作："."\r\n\t"."http://".$_SERVER['HTTP_HOST']."/index/Login/reset_code.html?hash=".$hash."\r\n\t"."链接只可访问一次，10分钟内有效。"."\r\n\t"."如果您并未发过此请求，则可能是因为其他用户在尝试重设密码时误输入了您的电子邮件地址而使您收到这封邮件，那么您可以放心的忽略此邮件，无需进一步采取任何操作。"."\r\n"."此致"."\r\n\t".date("Y年m月d日");
+		$message = "尊敬的".$to."您好："."\r\n\t"."欢迎使用找回密码功能。"."\r\n\t"."请您复制此链接到浏览器继续下一步操作："."\r\n\t"."http://".$_SERVER['HTTP_HOST']."/index/Login/reset_password.html?hash=".$hash."\r\n\t"."链接只可访问一次，10分钟内有效。"."\r\n\t"."如果您并未发过此请求，则可能是因为其他用户在尝试重设密码时误输入了您的电子邮件地址而使您收到这封邮件，那么您可以放心的忽略此邮件，无需进一步采取任何操作。"."\r\n"."此致"."\r\n\t".date("Y年m月d日");
 		$headers = 'From: 钱管家<no-reply@mk.com>' ; 
 		$send=mail($to, $subject, $message, $headers);
 		if($send){
@@ -109,16 +117,26 @@ class Login extends Controller
 			return $send;
 		}
     }
-	
-	public function _empty($name)
-    {
-        //把所有空的操作解析到showfan方法
-        return $this->showFun($name);
-    }
 
-    //注意 本身是 protected 方法
-    protected function showFun($name)
-    {
-         return view($name);
-    }
+	public function reset_pwd(){ // 重置密码
+		if(request()->isPost()){     
+            $username = input('post.username');
+            $npwd = input('post.npwd');
+            $user = new UserModel;
+            $result = $user->uid_by_username($username);
+            if($result >= 0 ){
+                $result = $user->reset_pwd($username,$npwd);
+                if($result >= 0){
+                    $jsonData = array('success'=>true,'data'=>"");
+                }else{
+                    $jsonData = array('success'=>false,'errorMassage'=>"重置失败");
+                }
+                return json($jsonData);
+            }else{
+                $jsonData = array('success'=>false,'errorMassage'=>"该用户不存在");
+                return json($jsonData);
+            }
+        }
+	}
+	
 }

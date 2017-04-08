@@ -1,228 +1,7 @@
 {layout name="layout"}
-<style>
-.icon-btn{
-    display: block;
-    margin: 0 auto;
-    height: 24px;
-    padding: 0 10px;
-    margin-top: 10px;
-}
-.email-btn{
-    position: absolute;
-    left: 220px;
-    top: 9px;
-    margin: 0 auto;
-    height: 24px;
-    padding: 0 10px;
-}
-.pwd-btn{
-    margin: 0 auto;
-    height: 24px;
-    padding: 0 10px;
-}
-
-.icon{
-    margin-bottom: 20px;
-    margin-top: 30px;
-}
-.personal-table{
-    width: 80%;
-}
-.personal-table tbody tr td{
-    border-top: 0px;
-}
-.personal-table tbody tr td:first-child{
-    width: 40%;
-    text-align: right;
-    padding-right: 30px;
-    vertical-align: middle;
-}
-.form-control{
-    height: 26px;
-    padding: 0px 6px;
-}
-.safe-table tbody tr:first-child td {
-    padding-bottom: 20px;
-}
-.safe-table tbody tr:nth-child(2) td {
-    padding-top: 20px;
-}
-.safe-table tbody tr:nth-child(5) td {
-    padding-bottom: 20px;
-}
-.safe-table tbody tr:last-child td {
-    padding-top: 20px;
-}
-.safe-table tbody tr td:last-child{
-    width: 10%;
-}
-.safe-table tbody tr td:nth-child(2),
-.safe-table tbody tr td:nth-child(3){
-    width: 30%;
-}
-.safe-table tbody tr td{
-    border-top: 0px;
-}
-.safe-table tbody tr td:first-child{
-    width: 30%;
-    text-align: right;
-    padding-right: 30px;
-    vertical-align: middle;
-}
-.safe-table tbody tr:first-child td,
-.safe-table tbody tr:nth-child(5) td{
-    border-bottom: 1px solid #ddd;
-}
-.report-table tbody tr td:first-child{
-    width: 30%;
-    text-align: right;
-    padding-right: 30px;
-    vertical-align: middle;
-}
-.report-table tbody tr td:nth-child(2),
-.report-table tbody tr td:nth-child(3){
-    width: 30%;
-}
-report-table tbody tr td:nth-child(4){
-    width: 10%;
-}
-.report-table tbody tr td{
-    border-top: 0px;
-}
-.report-table{
-
-}
-@charset "utf-8";
-.container {
-	width: 400px;
-	margin: 40px auto 0 auto;
-	position: relative;
-	font-family: 微软雅黑;
-	font-size: 12px;
-}
-.container p {
-	line-height: 12px;
-	line-height: 0px;
-	height: 0px;
-	margin: 10px;
-	color: #bbb
-}
-.action {
-	width: 400px;
-	height: 30px;
-	margin: 10px 0;
-}
-.cropped {
-	position: absolute;
-	right: -230px;
-	top: 0;
-	width: 200px;
-	border: 1px #ddd solid;
-	height: 460px;
-	padding: 4px;
-	box-shadow: 0px 0px 12px #ddd;
-	text-align: center;
-}
-.imageBox {
-	position: relative;
-	height: 400px;
-	width: 400px;
-	border: 1px solid #aaa;
-	background: #fff;
-	overflow: hidden;
-	background-repeat: no-repeat;
-	cursor: move;
-	box-shadow: 4px 4px 12px #B0B0B0; 
-}
-.imageBox .thumbBox {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	width: 200px;
-	height: 200px;
-	margin-top: -100px;
-	border-radius:200px;
-	margin-left: -100px;
-	box-sizing: border-box;
-	border: 1px solid rgb(102, 102, 102);
-	box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.5);
-	background: none repeat scroll 0% 0% transparent;
-}
-.imageBox .spinner {
-	position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  text-align: center;
-  line-height: 400px;
-  color: #2F2A2A;
-  background: rgba(213, 211, 211, 0.7);
-}
-.Btnsty_peyton{ float: right;
-   width: 66px;
-  display: inline-block;
-  margin-bottom: 10px;
-  height: 57px;
-  line-height: 57px;
-  font-size: 20px;
-  color: #FFFFFF;
-  margin:0px 2px;
-  background-color: #f38e81;
-  border-radius: 3px;
-  text-decoration: none;
-  cursor: pointer;
-  box-shadow: 0px 0px 5px #B0B0B0;
-  border: 0px #fff solid;}
-/*选择文件上传*/
-.new-contentarea {
-	width: 165px;
-	overflow:hidden;
-	margin: 0 auto;
-	position:relative;float:left;
-}
-.new-contentarea label {
-	width:100%;
-	height:100%;
-	display:block;
-}
-.new-contentarea input[type=file] {
-	width:188px;
-	height:60px;
-	background:#333;
-	margin: 0 auto;
-	position:absolute;
-	right:50%;
-	margin-right:-94px;
-	top:0;
-	right/*\**/:0px\9;
-	margin-right/*\**/:0px\9;
-	width/*\**/:10px\9;
-	opacity:0;
-	filter:alpha(opacity=0);
-	z-index:2;
-}
-a.upload-img{
-	width:165px;
-	display: inline-block;
-	margin-bottom: 10px;
-	height:57px;
-	line-height: 57px;
-	font-size: 20px;
-	color: #FFFFFF;
-	background-color: #f38e81;
-	border-radius: 3px;
-	text-decoration:none;
-	cursor:pointer;
-	border: 0px #fff solid;
-	box-shadow: 0px 0px 5px #B0B0B0;
-}
-a.upload-img:hover{
-	background-color: #ec7e70;
-}
-
-.tc{text-align:center;}
-</style>
+<head>
+	<link href="/static/css/personal.css" rel="stylesheet">
+</head>
 <section id="main-content">
 	<section class="wrapper">
         <h3><i class="fa fa-angle-right"></i> 个人中心</h3>
@@ -234,8 +13,8 @@ a.upload-img:hover{
                     <hr>
                     <form class="form-horizontal style-form row">
                         <div class="col-lg-4 col-md-4 col-sm-12 centered icon">
-                            <img src="/static/img/ui-sam.jpg" class="img-circle" style="width: 120px">
-                            <button class="btn btn-default btn-sm icon-btn" onclick="changeIcon()">修改头像</button>
+                            <img src="/static/img/ui-sam.jpg" class="img-circle get-icon" style="width: 120px;border: 1px solid #797979">
+                            <a type="button" class="icon-btn" onclick="changeIcon()">修改头像</a>
                         </div>
                         <div class="row col-lg-7 col-md-7 col-sm-12" >
                             <table class="table personal-table">
@@ -247,7 +26,7 @@ a.upload-img:hover{
                                                 <span style="padding:3px 6px 0px 6px;" class="input-group-addon">
                                                     <label ><i class="fa fa-user-o "></i></label>
                                                 </span>
-                                                <input type="text" class="form-control" />										
+                                                <input type="text" class="form-control" id="nikename"/>										
                                             </div>  
                                         </td>
                                     </tr>
@@ -258,7 +37,7 @@ a.upload-img:hover{
                                                 <span style="padding:3px 4px 0px 4px;" class="input-group-addon">
                                                     <label ><i class="fa fa-vcard-o "></i></label>
                                                 </span>
-                                                <input type="text" class="form-control" />										
+                                                <input type="text" class="form-control" id="realname"/>										
                                             </div>  
                                         </td>
                                     </tr>
@@ -269,7 +48,7 @@ a.upload-img:hover{
                                                 <span style="padding:4px 4px 0px 4px;" class="input-group-addon">
                                                     <label ><i class="fa fa-venus-mars "></i></label>
                                                 </span>
-                                                <select type="text" class="form-control" >
+                                                <select type="text" class="form-control" id="sex">
                                                     <option>男</option>
                                                     <option>女</option>
                                                 </select>
@@ -283,7 +62,7 @@ a.upload-img:hover{
                                                 <span style="padding:3px 8px 0px 8px;" class="input-group-addon">
                                                     <label ><i class="fa fa-mobile-phone fa-lg"></i></label>
                                                 </span>
-                                                <input type="text" class="form-control" />										
+                                                <input type="text" class="form-control" id="phone" />										
                                             </div>  
                                         </td>
                                     </tr>
@@ -294,9 +73,13 @@ a.upload-img:hover{
                                                 <span style="padding:3px 6px 0px 6px;" class="input-group-addon">
                                                     <label ><i class="fa fa-clock-o "></i></label>
                                                 </span>
-                                                <input type="text" class="form-control" disabled/>										
+                                                <input type="text" class="form-control" id="last_time" disabled/>										
                                             </div>      
                                         </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td><button type="button" onclick="save_person()" class="btn btn-default btn-sm person-btn">提交资料</button></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -320,9 +103,11 @@ a.upload-img:hover{
                                         <span style="padding:3px 6px 0px 6px;" class="input-group-addon">
                                             <label><i class="fa fa-envelope-o "></i></label>
                                         </span>
-                                        <input type="text" class="form-control" disabled/>										
+                                        <input type="text" class="form-control" id="email" disabled/>										
                                     </div>
-                                    <button class="btn btn-default btn-sm email-btn">修改安全邮箱</button>
+                                    <button type="button" onclick="show_change()" class="btn btn-default btn-sm emailshow-btn">修改安全邮箱</button>
+                                    <button type="button" onclick="change_email()" class="btn btn-default btn-sm email-btn">确认修改</button>
+                                    <p class="email-error" style="position: absolute;left: 330px;top: 9px;margin: 0px;color: red;"></p>
                                 </td>
                                 <td></td>
                                 <td></td>
@@ -334,7 +119,7 @@ a.upload-img:hover{
                                         <span style="padding:3px 6px 0px 6px;" class="input-group-addon">
                                             <label >问1</label>
                                         </span>
-                                        <select type="text" class="form-control" >
+                                        <select type="text" class="form-control" id="safe_q_1">
                                             <option>你父亲的名字</option>
                                             <option>你母亲的名字</option>
                                             <option>你小学班主任名字</option>
@@ -347,7 +132,7 @@ a.upload-img:hover{
                                         <span style="padding:3px 6px 0px 6px;" class="input-group-addon">
                                             <label >答1</label>
                                         </span>
-                                        <input type="text" class="form-control" />										
+                                        <input type="text" class="form-control" id="safe_a_1"/>										
                                     </div>     
                                 </td>
                                 <td></td>
@@ -359,7 +144,7 @@ a.upload-img:hover{
                                         <span style="padding:3px 6px 0px 6px;" class="input-group-addon">
                                             <label >问2</label>
                                         </span>
-                                        <select type="text" class="form-control" >
+                                        <select type="text" class="form-control" id="safe_q_2">
                                             <option>你的学号</option>
                                             <option>你的工号</option>
                                             <option>你的出生地</option>
@@ -372,7 +157,7 @@ a.upload-img:hover{
                                         <span style="padding:3px 6px 0px 6px;" class="input-group-addon">
                                             <label >答2</label>
                                         </span>
-                                        <input type="text" class="form-control" />										
+                                        <input type="text" class="form-control" id="safe_a_2" />										
                                     </div>     
                                 </td>
                                 <td></td>
@@ -384,7 +169,7 @@ a.upload-img:hover{
                                         <span style="padding:3px 6px 0px 6px;" class="input-group-addon">
                                             <label >问3</label>
                                         </span>
-                                        <select type="text" class="form-control" >
+                                        <select type="text" class="form-control" id="safe_q_3" >
                                             <option>你父亲的生日</option>
                                             <option>你母亲的生日</option>
                                             <option>你的生日</option>
@@ -397,14 +182,14 @@ a.upload-img:hover{
                                         <span style="padding:3px 6px 0px 6px;" class="input-group-addon">
                                             <label >答3</label>
                                         </span>
-                                        <input type="text" class="form-control" />										
+                                        <input type="text" class="form-control" id="safe_a_3" />										
                                     </div>     
                                 </td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td></td>
-                                <td><button class="btn btn-default btn-sm pwd-btn">提交安全问题</button></td>
+                                <td><button type="button" onclick="save_person()" class="btn btn-default btn-sm pwd-btn">提交安全问题</button></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -412,7 +197,7 @@ a.upload-img:hover{
                             </tr>
                             <tr>
                                 <td>修改密码</td>
-                                <td colspan="3"><button class="btn btn-default btn-sm pwd-btn">修改密码</button></td>
+                                <td colspan="3"><button type="button" onclick="show_change_pwd()" class="btn btn-default btn-sm pwd-btn">修改密码</button></td>
                                 <td></td>
                                 <td></td>
                             </tr>
@@ -436,25 +221,65 @@ a.upload-img:hover{
                                         <span style="padding:3px 6px 0px 6px;" class="input-group-addon">
                                             <label><i class="fa fa-envelope-o "></i></label>
                                         </span>
-                                        <input type="text" class="form-control" disabled/>										
+                                        <input type="text" class="form-control" id="send_email" disabled/>										
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>报告设置</td>
-                                <td></td>
-                                <td></td>
+                                <td>
+                                    <div class="checkbox">
+                                        <label>
+                                        <input type="checkbox" checked>收入
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="checkbox">
+                                        <label>
+                                        <input type="checkbox" checked>支出
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="checkbox">
+                                        <label>
+                                        <input type="checkbox">月预算
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="checkbox">
+                                        <label>
+                                        <input type="checkbox">债权债务
+                                        </label>
+                                    </div>
+                                </td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td>发送频率</td>
+                                <td>
+                                    <div class="checkbox">
+                                        <label>
+                                        <input type="checkbox">每周
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="checkbox">
+                                        <label>
+                                        <input type="checkbox" checked>每月
+                                        </label>
+                                    </div>
+                                </td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
                             </tr>
                             <tr>
                                 <td></td>
-                                <td><button class="btn btn-default btn-sm pwd-btn">提交设置</button></td>
+                                <td><button type="button" onclick="show_success()" class="btn btn-default btn-sm pwd-btn">提交设置</button></td>
                                 <td></td>
                                 <td></td>
                             </tr>
@@ -464,12 +289,12 @@ a.upload-img:hover{
             </div>   
         </div>
         
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal fade" id="change-icon" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">模态框（Modal）标题</h4>
+                        <h4 class="modal-title" id="myModalLabel">修改头像</h4>
                     </div>
                     <div class="modal-body">
                         <div class="container">
@@ -478,70 +303,94 @@ a.upload-img:hover{
                                 <div class="spinner" style="display: none"></div>
                             </div>
                             <div class="action"> 
-                                <div class="new-contentarea tc"> 
+                                <div class="new-contentarea tc">
                                     <a href="javascript:void(0)" class="upload-img">
                                         <label for="upload-file">请先选择图片...</label>
                                     </a>
                                     <input type="file" class="" name="upload-file" id="upload-file" />
                                 </div>
-                                <input type="button"   class="Btnsty_peyton" value="OK">
+                                <input type="button" id="btnCrop"  class="Btnsty_peyton" value="OK">
                                 <input type="button" id="btnZoomIn" class="Btnsty_peyton" value="+"  >
                                 <input type="button" id="btnZoomOut" class="Btnsty_peyton" value="-" >
                             </div>
                             <div class="cropped"></div>
                         </div>
                     </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal -->
+                </div>
+            </div>
+        </div>
+        <!-- 提示框 -->
+        <div class="modal fade" id="success" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" style="width: 300px;">
+                <div class="modal-content" style="margin-top:200px;">
+                    <div class="modal-header" style="padding:5px;padding-left:10px;border-top-left-radius:5px;border-top-right-radius:5px;">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" style="font-size:15px;">
+                            提示
+                        </h4>
+                    </div>
+                    <div class="modal-body" style="text-align:center;height:70px;padding-top:30px;">
+                        操作成功
+                    </div>
+                    <div class="modal-footer" style="padding: 5px;text-align: center">
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 修改密码 -->
+        <div class="modal fade" id="changepwd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" style="width: 450px;">
+                <div class="modal-content" style="margin-top:200px;">
+                    <div class="modal-header" style="padding:5px;padding-left:10px;border-top-left-radius:5px;border-top-right-radius:5px;">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" style="font-size:15px;">
+                            修改密码
+                        </h4>
+                    </div>
+                    <div class="modal-body" style="padding-top:30px;padding-bottom: 10px;">
+                        <table class="table table-bordered pwd-table">
+                            <tbody>
+                                <tr>
+                                    <td>原密码</td>
+                                    <td>
+                                        <input type="password" class="form-control" id="opassword" placeholder="输入原密码"/>
+                                        <label>*必填</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>新密码</td>
+                                    <td>
+                                        <input type="password" class="form-control" id="npassword" placeholder="6~8个字符"/>
+                                        <label>*必填</label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>重复新密码</td>
+                                    <td>
+                                        <input type="password" class="form-control" id="rpassword" placeholder="再次输入新密码"/>
+                                        <label>*必填</label>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="error_msg"></div>
+                    </div>
+                    <div class="modal-footer" style="padding: 5px;text-align: center">
+                        <button type="button" onclick="change_pwd()" class="btn btn-default btn-sm">确认</button>
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 </section>
 
 <script type="text/javascript" src="/dist/js/cropbox.js"></script>
-<script type="text/javascript">
-function changeIcon(){
-    $("#myModal").modal({backdrop:false});
-}
-$().ready(function() {
-	//$('#btnCrop').click();$("#idName").css("cssText","background-color:red!important");
-	//$(".imageBox").css("cssText","background-position:88px 88px!important");$(".imageBox").css("cssText","background-size:222px 222px!important");
-	var options =
-	{
-		thumbBox: '.thumbBox',
-		spinner: '.spinner',
-		imgSrc: ''
-	}
-	var cropper = $('.imageBox').cropbox(options);
-	var img="";
-	$('#upload-file').on('change', function(){
-		var reader = new FileReader();
-		reader.onload = function(e) {
-			options.imgSrc = e.target.result;
-			cropper = $('.imageBox').cropbox(options);
-			getImg();
-		}
-		reader.readAsDataURL(this.files[0]);
-		this.files = [];
-		//getImg();
-	})
-	$('#btnCrop').on('click', function(){
-		alert("图片上传喽");
-	})
-	function getImg(){
-		img = cropper.getDataURL();
-		$('.cropped').html('');
-		$('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:180px;margin-top:4px;border-radius:180px;box-shadow:0px 0px 12px #7E7E7E;"><p>180px*180px</p>');
-		$('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:128px;margin-top:4px;border-radius:128px;box-shadow:0px 0px 12px #7E7E7E;"><p>128px*128px</p>');
-		$('.cropped').append('<img src="'+img+'" align="absmiddle" style="width:64px;margin-top:4px;border-radius:64px;box-shadow:0px 0px 12px #7E7E7E;" ><p>64px*64px</p>');
-		}
-	$(".imageBox").on("mouseup",function(){
- 		getImg();
-  		});
-	$('#btnZoomIn').on('click', function(){
-		cropper.zoomIn();
-	})
-	$('#btnZoomOut').on('click', function(){
-		cropper.zoomOut();
-	})
-});
-</script>
+<script type="text/javascript" src="/static/js/personal.js"></script>
+
+
