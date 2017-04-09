@@ -173,4 +173,17 @@ class UserModel extends Model{
 				->update(['password' => md5(crypt($npwd,substr($npwd,0,2)))]);
 		return $result;
 	}
+
+	public function unlocked($uid,$unlock){
+		$user = Db::table('user')->where('uid',$uid)->find();
+		if(is_array($user)){
+			if(md5(crypt($unlock,substr($unlock,0,2))) === $user['password']){
+		        return $user['uid']; 
+			}else{
+		        return -2;
+			}
+		}else{
+            return -1;
+		}
+    }
 }

@@ -1,0 +1,30 @@
+.row{
+    margin-left: -5px;
+    margin-right: 0px;
+}
+.form-group label{
+    font-size: 16px;
+    padding: 0px;
+    vertical-align: middle;
+    line-height: 26px;
+}
+.input-group input{
+    height: 26px;
+    padding: 0px 6px;
+}
+.input-group span {
+    padding: 3px 12px;
+}
+.table{
+    font-size: 14px;
+    text-align: center;
+}
+.table thead th{
+    text-align: center;
+}
+.table tbody tr td a{
+    cursor: pointer;
+}
+.add-btn{
+	cursor: pointer;
+}
