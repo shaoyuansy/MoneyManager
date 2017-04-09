@@ -4,6 +4,7 @@ use think\Controller;
 use app\index\model\IncomeModel;
 use app\index\model\OutgoModel;
 use app\index\model\BudgetModel;
+use app\index\model\AccountModel;
 use think\Request;
 
 class Chart extends Controller{
@@ -352,5 +353,42 @@ class Chart extends Controller{
         $jsonData = array('success'=>true,'data'=>$data);
         return json($jsonData);
     } 
+
+    public function accountstatus(){ //账户概况图
+        if(is_login() == 0){
+            $username = session('user_auth.username');
+            $this->assign('username',$username);
+           	return redirect('login/index');
+        }else{
+            $uid = session('user_auth.uid');
+            $account = new AccountModel;
+            $accountlist = $account->get_account_status($uid);
+            $this->assign('accountlist', $accountlist);
+            $this->assign('pagetitle','报表 > 账户概况图 - F.M');
+			$this->fetch('/layout');
+            return $this->fetch();
+        }
+    } 
+
+    public function get_account(){ //账户统计表
+        $uid = session('user_auth.uid');
+        $account = new AccountModel;
+        $accountlist = $account->get_account_status($uid);
+        if(count($accountlist)>0){
+            $type = [];
+            $money = [];
+            foreach($accountlist as $account){
+                $type[] = $account["a_type"];
+                $money[] = $account["a_money"];
+            }
+            $data["type"] = $type;
+            $data["money"] = $money;
+            $jsonData = array('success'=>true,'data'=>$data);
+            return json($jsonData);
+        }else{
+            $jsonData = array('success'=>false,'errorMassage'=>"暂无数据");
+            return json($jsonData);
+        }
+    }
 
 }

@@ -44,6 +44,13 @@ class AccountModel extends Model{
 			return $type[0];
 		}
 	}
+
+	public function get_account_status($uid){ //获取一个用户的账户信息
+		$data = Db::table('account')->where('uid',$uid)->select();
+		if(count($data)>0){
+			return $data;
+		}
+	}
 	
 	public function add_money($uid,$account,$money){
 		$moneydata = Db::table('account')->where('uid',$uid)->where('a_type',$account)->field('a_money')->select();

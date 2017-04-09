@@ -1,0 +1,129 @@
+{layout name="layout"}
+<head>
+    <link href="/static/css/chart.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="all" href="/dist/css/daterangepicker-bs3.css" />
+</head>
+<section id="main-content">
+    <section class="wrapper site-min-height">
+    <h3><i class="fa fa-bar-chart"></i> 账户概况图</h3>
+        <div class="row mt">
+            <div class="col-lg-8">
+                <div class="content-panel">
+                    <h4><i class="fa fa-angle-right"></i> 账户堆积表</h4>
+                    <div class="panel-body row">
+                        <div id="account-chart">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="content-panel">
+                    <h4><i class="fa fa-angle-right"></i> 账户统计表</h4>
+                    <div class="panel-body">
+                        <table class="table table-hover table-all">
+                            <thead>
+                                <tr>
+                                    <th>账户分类</th>
+                                    <th>金额</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {volist name='accountlist' id='account'}
+								<tr>
+									<td>{$account.a_type}</td>
+									<td>￥{$account.a_money}</td>
+								</tr>	
+								{/volist}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+
+<script type="text/javascript" src="/dist/js/moment.js"></script>
+<script type="text/javascript" src="/dist/js/daterangepicker.js"></script>
+<script type="text/javascript" src="/static/js/chart.js"></script>
+<script src="/dist/js/highcharts.js"></script>	
+<script>
+$().ready(function(){
+    get_account();
+})
+function get_account(){
+    var account_type = [];
+    var account_money = [];
+    $.ajax({
+        type: "get",
+        url: '/index/chart/get_account',
+        async: false,
+        success: function (msg) {
+            if(msg.success){        
+                account_type = msg.data.type;
+                account_money = msg.data.money;
+            }
+        },
+        error: function (e) {
+            console.log(e);
+        }
+    });
+    $('#account-chart').highcharts({
+        chart: {
+            type: 'column',
+            marginTop:50,
+			marginRight:20
+        },
+        title: {
+            text: ''
+        },
+        xAxis: {
+            categories: account_type,
+            labels:{
+				style:{
+					fontFamily:"Microsoft YaHei"
+				}
+			}
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '金额/元'
+            },
+            labels:{
+				style:{
+					fontFamily:"Microsoft YaHei"
+				}
+			},
+            stackLabels: {
+                enabled: true,
+                style: {
+                    fontWeight: 'bold',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                }
+            }
+        },
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.x + '</b><br/>'+
+                    this.series.name + ': ' + this.y + '元';
+            }
+        },
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+                pointPadding: 0.2,
+                borderWidth: 0
+            }
+        },
+        series: [{
+            name: '账户金额',
+            data: account_money,
+            showInLegend: false // 设置为 false 即为不显示在图例中
+        }]
+    });
+}
+   
+</script>
+
+

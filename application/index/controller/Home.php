@@ -230,7 +230,7 @@ class Home extends Controller
 		$outgo = new OutgoModel;
 		$data = $outgo->get_month_outgo($uid,$month);
 		if($data != 0 && array_key_exists("outgo",$data)){
-			$used = $data["outgo"];
+			$used = $data["outgo"] == null ? 0 : $data["outgo"];
 		}else{
 			$used = 0.00;
 		}

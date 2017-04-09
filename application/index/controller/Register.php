@@ -47,6 +47,13 @@ class Register extends Controller
 					}else{
 						$uid = $user->regist($username,$password,$phone,$email);
 						if($uid >= 0){
+							//给新注册用户添加默认分类配置
+							$result_account = $user->add_account($uid); //插入6条 返回6
+							$result_t_out = $user->add_t_out($uid); //返回1
+							$result_t_in = $user->add_t_in($uid); //返回1
+							$result_t_member = $user->add_t_member($uid); //返回1
+							$result_t_account = $user->add_t_account($uid); //返回1
+							// $user->new_user($uid);
 							return view('registok');
 						}else{
 							$infor['username'] = $username;
