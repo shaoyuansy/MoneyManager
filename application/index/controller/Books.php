@@ -1,7 +1,7 @@
 <?php
 namespace app\index\controller;
 use think\Controller;
-use app\index\model\UserModel;
+use app\index\model\BooksModel;
 use think\Request;
 
 class Books extends Controller{
@@ -20,6 +20,23 @@ class Books extends Controller{
 			$this->fetch('/layout');
             return view('index');
         }
+    }
+
+    public function get_events_in(){
+        $start = input('get.start');
+        $end = input('get.end');
+        $uid = session('user_auth.uid');
+        $books = new BooksModel;
+        $data = $books->get_in($uid,$start,$end);
+        foreach($data as &$in){
+            $in['start'] = date('Y-m-d H:m:i',$in['start']);
+            $in['end'] = date('Y-m-d H:m:i',$in['end']);
+        }
+        return $data;
+    }
+
+    public function get_events_out(){
+
     }
 
 }

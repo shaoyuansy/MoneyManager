@@ -101,6 +101,8 @@ class Login extends Controller
 				Cache::rm('hash'); 
 				return view('timeout');
 			}else if($hash == Cache::get('hash')){ 
+				Cache::rm('uid'); 
+				Cache::rm('hash'); 
 				return view('reset_password');
 			}
 		}

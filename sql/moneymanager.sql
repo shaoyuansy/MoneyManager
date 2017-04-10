@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-04-10 18:01:51
+Date: 2017-04-10 22:20:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -43,6 +43,28 @@ INSERT INTO `account` VALUES ('9', '债务账户', '0', '5', null);
 INSERT INTO `account` VALUES ('10', '信用卡账户', '0', '5', null);
 INSERT INTO `account` VALUES ('11', '银行卡账户', '0', '5', null);
 INSERT INTO `account` VALUES ('20', '银行卡账户', '100', '4', null);
+
+-- ----------------------------
+-- Table structure for books
+-- ----------------------------
+DROP TABLE IF EXISTS `books`;
+CREATE TABLE `books` (
+  `id` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL,
+  `start` varchar(255) DEFAULT NULL,
+  `end` varchar(255) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `uid` int(11) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of books
+-- ----------------------------
+INSERT INTO `books` VALUES ('00000000001', '电费', '1491832194', '1491832200', null, '4', 'out');
+INSERT INTO `books` VALUES ('00000000002', '水费', '1491832194', '1491832200', null, '4', 'out');
+INSERT INTO `books` VALUES ('00000000003', '工资', '1492264194', '1492264194', null, '4', 'in');
 
 -- ----------------------------
 -- Table structure for budget
@@ -207,12 +229,13 @@ CREATE TABLE `sign` (
   `count` int(11) DEFAULT '0',
   `sign_time` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sign
 -- ----------------------------
 INSERT INTO `sign` VALUES ('15', '4', '1', '2017-04-10 15:19:30');
+INSERT INTO `sign` VALUES ('16', '5', '1', '2017-04-10 20:36:38');
 
 -- ----------------------------
 -- Table structure for t_account
@@ -311,7 +334,7 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('4', 'admin', '89f0b495890138511edbca8d446aa63e', '123@123.COM', null, '', '../../uploads/20170410\\dfe03c75162dac7f7117fbfb3d677930.png', null, '2017-04-10 15:24:54', '39', '2017-03-26 20:27:18', null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('4', 'admin', '89f0b495890138511edbca8d446aa63e', '123@123.COM', null, '', '../../uploads/20170410\\f573d9b701ab2fedab612739704e780f.png', null, '2017-04-10 22:03:26', '43', '2017-03-26 20:27:18', null, '', '', '', '', '', '');
 INSERT INTO `user` VALUES ('5', 'shaoyuan', '89f0b495890138511edbca8d446aa63e', '492843280@qq.com', null, '', '/static/img/no-icon.jpg', 'shaoyuan', '2017-04-10 16:04:33', '2', '2017-04-10 13:45:22', null, null, null, null, null, null, null);
 
 -- ----------------------------
