@@ -60,64 +60,50 @@ class UserModel extends Model{
 			return -1;
 		}
 	}
-	// public function new_user($uid){
-	// 	Db::transaction(function($uid){
-	// 		$data = [
-	// 			['a_type'=>'现金账户','a_money'=>0.00,'uid'=>$uid],
-	// 			['a_type'=>'虚拟账户','a_money'=>0.00,'uid'=>$uid],
-	// 			['a_type'=>'债权账户','a_money'=>0.00,'uid'=>$uid],
-	// 			['a_type'=>'债务账户','a_money'=>0.00,'uid'=>$uid],
-	// 			['a_type'=>'信用卡账户','a_money'=>0.00,'uid'=>$uid],
-	// 			['a_type'=>'银行卡账户','a_money'=>0.00,'uid'=>$uid]		
-	// 		];
-	// 		Db::name('account')->insertAll($data);
-	// 		$data = ['uid' => $uid, 'type' => '{"type":["衣服饰品","食品酒水","居家物业","行车交通","交流通讯","休闲娱乐","学习进修","人情往来","医疗保健","金融保险","其他款项"]}'];
-	// 		Db::table('t_out')->insert($data);
-	// 		$data = ['uid' => $uid, 'type' => '{"type":["工作收入","其他收入"]}'];
-	// 		Db::table('t_in')->insert($data);
-	// 		$data = ['uid' => $uid, 'type' => '{"type":["本人","丈夫","妻子","子女","父母","家庭公用"]}'];
-	// 		Db::table('t_member')->insert($data);
-	// 		$data = ['uid' => $uid, 'type' => '{"type":["信用卡账户","银行卡账户","虚拟账户","现金账户","债权账户","债务账户"]}'];
-	// 		Db::table('t_account')->insert($data);
-	// 	});
+
+	//调用存储过程 初始化注册用户信息
+	public function init_user($uid){
+		Db::query('call register('.$uid.')');
+	}
+
+
+	// ↓ 注释部分直接使用存储过程代替，初始化注册用户信息
+	// public function add_account($uid){ //注册用户添加默认账户
+	// 	$data = [
+	// 		['a_type'=>'现金账户','a_money'=>0.00,'uid'=>$uid],
+	// 		['a_type'=>'虚拟账户','a_money'=>0.00,'uid'=>$uid],
+	// 		['a_type'=>'债权账户','a_money'=>0.00,'uid'=>$uid],
+	// 		['a_type'=>'债务账户','a_money'=>0.00,'uid'=>$uid],
+	// 		['a_type'=>'信用卡账户','a_money'=>0.00,'uid'=>$uid],
+	// 		['a_type'=>'银行卡账户','a_money'=>0.00,'uid'=>$uid]		
+	// 	];
+	// 	$result = Db::name('account')->insertAll($data);
+	// 	return $result;
 	// }
 
-	public function add_account($uid){ //注册用户添加默认账户
-		$data = [
-			['a_type'=>'现金账户','a_money'=>0.00,'uid'=>$uid],
-			['a_type'=>'虚拟账户','a_money'=>0.00,'uid'=>$uid],
-			['a_type'=>'债权账户','a_money'=>0.00,'uid'=>$uid],
-			['a_type'=>'债务账户','a_money'=>0.00,'uid'=>$uid],
-			['a_type'=>'信用卡账户','a_money'=>0.00,'uid'=>$uid],
-			['a_type'=>'银行卡账户','a_money'=>0.00,'uid'=>$uid]		
-		];
-		$result = Db::name('account')->insertAll($data);
-		return $result;
-	}
+	// public function add_t_out($uid){ //注册用户添加默认支出分类
+	// 	$data = ['uid' => $uid, 'type' => '{"type":["衣服饰品","食品酒水","居家物业","行车交通","交流通讯","休闲娱乐","学习进修","人情往来","医疗保健","金融保险","其他款项"]}'];
+	// 	$result = Db::table('t_out')->insert($data);
+	// 	return $result;
+	// }
 
-	public function add_t_out($uid){ //注册用户添加默认支出分类
-		$data = ['uid' => $uid, 'type' => '{"type":["衣服饰品","食品酒水","居家物业","行车交通","交流通讯","休闲娱乐","学习进修","人情往来","医疗保健","金融保险","其他款项"]}'];
-		$result = Db::table('t_out')->insert($data);
-		return $result;
-	}
+	// public function add_t_in($uid){ //注册用户添加默认收入分类
+	// 	$data = ['uid' => $uid, 'type' => '{"type":["工作收入","其他收入"]}'];
+	// 	$result = Db::table('t_in')->insert($data);
+	// 	return $result;
+	// }
 
-	public function add_t_in($uid){ //注册用户添加默认收入分类
-		$data = ['uid' => $uid, 'type' => '{"type":["工作收入","其他收入"]}'];
-		$result = Db::table('t_in')->insert($data);
-		return $result;
-	}
+	// public function add_t_member($uid){ //注册用户添加默认成员分类
+	// 	$data = ['uid' => $uid, 'type' => '{"type":["本人","丈夫","妻子","子女","父母","家庭公用"]}'];
+	// 	$result = Db::table('t_member')->insert($data);
+	// 	return $result;
+	// }
 
-	public function add_t_member($uid){ //注册用户添加默认成员分类
-		$data = ['uid' => $uid, 'type' => '{"type":["本人","丈夫","妻子","子女","父母","家庭公用"]}'];
-		$result = Db::table('t_member')->insert($data);
-		return $result;
-	}
-
-	public function add_t_account($uid){ //注册用户添加默认账户分类
-		$data = ['uid' => $uid, 'type' => '{"type":["信用卡账户","银行卡账户","虚拟账户","现金账户","债权账户","债务账户"]}'];
-		$result = Db::table('t_account')->insert($data);
-		return $result;
-	}
+	// public function add_t_account($uid){ //注册用户添加默认账户分类
+	// 	$data = ['uid' => $uid, 'type' => '{"type":["信用卡账户","银行卡账户","虚拟账户","现金账户","债权账户","债务账户"]}'];
+	// 	$result = Db::table('t_account')->insert($data);
+	// 	return $result;
+	// }
 	
 	public function save_icon($uid,$path){
 		$result = db('user')->where('uid',$uid)->update(['icon' =>$path]);

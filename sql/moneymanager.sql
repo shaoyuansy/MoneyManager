@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-04-06 16:19:46
+Date: 2017-04-10 18:01:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -22,20 +22,27 @@ DROP TABLE IF EXISTS `account`;
 CREATE TABLE `account` (
   `aid` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `a_type` varchar(255) DEFAULT NULL,
-  `a_money` varchar(255) DEFAULT NULL,
+  `a_money` float(255,0) DEFAULT NULL,
   `uid` int(11) DEFAULT NULL,
   `a_remark` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`aid`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of account
 -- ----------------------------
 INSERT INTO `account` VALUES ('1', '现金账户', '100', '4', '我的现金账户');
-INSERT INTO `account` VALUES ('2', '虚拟账户', '0.00', '4', '我的虚拟账户');
+INSERT INTO `account` VALUES ('2', '虚拟账户', '0', '4', '我的虚拟账户');
 INSERT INTO `account` VALUES ('3', '债权账户', '100', '4', '我的债权账户');
 INSERT INTO `account` VALUES ('4', '债务账户', '100', '4', '我的债务账户');
-INSERT INTO `account` VALUES ('5', '信用卡账户', '5400.01', '4', '我的信用卡账户');
+INSERT INTO `account` VALUES ('5', '信用卡账户', '5400', '4', '我的信用卡账户');
+INSERT INTO `account` VALUES ('6', '现金账户', '0', '5', null);
+INSERT INTO `account` VALUES ('7', '虚拟账户', '0', '5', null);
+INSERT INTO `account` VALUES ('8', '债权账户', '0', '5', null);
+INSERT INTO `account` VALUES ('9', '债务账户', '0', '5', null);
+INSERT INTO `account` VALUES ('10', '信用卡账户', '0', '5', null);
+INSERT INTO `account` VALUES ('11', '银行卡账户', '0', '5', null);
+INSERT INTO `account` VALUES ('20', '银行卡账户', '100', '4', null);
 
 -- ----------------------------
 -- Table structure for budget
@@ -45,7 +52,7 @@ CREATE TABLE `budget` (
   `bid` int(11) NOT NULL AUTO_INCREMENT,
   `b_time` date DEFAULT NULL COMMENT '预算时间',
   `b_month` varchar(255) DEFAULT NULL COMMENT '预算期限',
-  `b_money` varchar(255) DEFAULT NULL,
+  `b_money` float(255,0) DEFAULT NULL,
   `b_remark` varchar(255) DEFAULT NULL COMMENT '备注',
   `uid` int(11) DEFAULT NULL,
   PRIMARY KEY (`bid`)
@@ -54,9 +61,9 @@ CREATE TABLE `budget` (
 -- ----------------------------
 -- Records of budget
 -- ----------------------------
-INSERT INTO `budget` VALUES ('3', '2017-04-05', '1', '300.00', '', '4');
-INSERT INTO `budget` VALUES ('4', '2017-04-05', '2', '300.00', '', '4');
-INSERT INTO `budget` VALUES ('5', '2017-04-06', '3', '500.00', '', '4');
+INSERT INTO `budget` VALUES ('3', '2017-04-05', '1', '300', '', '4');
+INSERT INTO `budget` VALUES ('4', '2017-04-05', '2', '300', '', '4');
+INSERT INTO `budget` VALUES ('5', '2017-04-06', '3', '500', '', '4');
 INSERT INTO `budget` VALUES ('6', '2017-04-06', '4', '600', null, '4');
 INSERT INTO `budget` VALUES ('7', '2017-04-06', '5', '300', null, '4');
 
@@ -69,7 +76,7 @@ CREATE TABLE `debtee` (
   `e_time` datetime DEFAULT NULL,
   `e_debtee` varchar(255) DEFAULT NULL,
   `e_debtor` varchar(255) DEFAULT NULL,
-  `e_money` varchar(255) DEFAULT NULL,
+  `e_money` float(255,0) DEFAULT NULL,
   `e_remark` varchar(255) DEFAULT NULL,
   `uid` int(11) DEFAULT NULL,
   PRIMARY KEY (`eid`)
@@ -78,10 +85,10 @@ CREATE TABLE `debtee` (
 -- ----------------------------
 -- Records of debtee
 -- ----------------------------
-INSERT INTO `debtee` VALUES ('1', '2017-03-26 15:42:33', '本人', '李四', '200.00', null, '4');
-INSERT INTO `debtee` VALUES ('2', '2017-04-05 20:59:00', '本人', '张三', '100.00', '还了，当面还的', '4');
-INSERT INTO `debtee` VALUES ('3', '2017-04-05 21:01:00', '本人', '我妈', '100.00', '', '4');
-INSERT INTO `debtee` VALUES ('4', '2017-04-05 21:01:00', '丈夫', '我爸', '200.00', '', '4');
+INSERT INTO `debtee` VALUES ('1', '2017-03-26 15:42:33', '本人', '李四', '200', null, '4');
+INSERT INTO `debtee` VALUES ('2', '2017-04-05 20:59:00', '本人', '张三', '100', '还了，当面还的', '4');
+INSERT INTO `debtee` VALUES ('3', '2017-04-05 21:01:00', '本人', '我妈', '100', '', '4');
+INSERT INTO `debtee` VALUES ('4', '2017-04-05 21:01:00', '丈夫', '我爸', '200', '', '4');
 
 -- ----------------------------
 -- Table structure for debtor
@@ -92,7 +99,7 @@ CREATE TABLE `debtor` (
   `r_time` datetime DEFAULT NULL,
   `r_debtee` varchar(255) DEFAULT NULL,
   `r_debtor` varchar(255) DEFAULT NULL,
-  `r_money` varchar(255) DEFAULT NULL,
+  `r_money` float(255,0) DEFAULT NULL,
   `r_remark` varchar(255) DEFAULT NULL,
   `uid` int(11) DEFAULT NULL,
   PRIMARY KEY (`rid`)
@@ -101,9 +108,9 @@ CREATE TABLE `debtor` (
 -- ----------------------------
 -- Records of debtor
 -- ----------------------------
-INSERT INTO `debtor` VALUES ('1', '2017-03-26 15:42:37', '张三', '本人', '100.00', null, '4');
-INSERT INTO `debtor` VALUES ('2', '2017-04-05 21:08:00', '王五', '本人', '50.00', '收钱了', '4');
-INSERT INTO `debtor` VALUES ('3', '2017-04-05 21:09:00', '溜溜', '本人', '50.00', '', '4');
+INSERT INTO `debtor` VALUES ('1', '2017-03-26 15:42:37', '张三', '本人', '100', null, '4');
+INSERT INTO `debtor` VALUES ('2', '2017-04-05 21:08:00', '王五', '本人', '50', '收钱了', '4');
+INSERT INTO `debtor` VALUES ('3', '2017-04-05 21:09:00', '溜溜', '本人', '50', '', '4');
 
 -- ----------------------------
 -- Table structure for diary
@@ -116,7 +123,7 @@ CREATE TABLE `diary` (
   `date` date DEFAULT NULL,
   `title` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of diary
@@ -136,7 +143,7 @@ CREATE TABLE `income` (
   `i_time` datetime DEFAULT NULL,
   `i_type` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `i_account` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `i_money` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `i_money` float(255,0) DEFAULT NULL,
   `i_member` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `i_remark` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `uid` int(11) DEFAULT NULL,
@@ -146,15 +153,15 @@ CREATE TABLE `income` (
 -- ----------------------------
 -- Records of income
 -- ----------------------------
-INSERT INTO `income` VALUES ('31', '2017-04-04 17:40:00', '职业收入', '信用卡账户', '100.00', '本人', '', '4');
-INSERT INTO `income` VALUES ('32', '2017-04-07 17:40:00', '职业收入', '信用卡账户', '200.00', '丈夫', '', '4');
-INSERT INTO `income` VALUES ('33', '2017-04-05 18:02:00', '职业收入', '信用卡账户', '200.00', '父母', '', '4');
-INSERT INTO `income` VALUES ('34', '2017-04-05 18:02:00', '职业收入', '信用卡账户', '200.00', '子女', '', '4');
-INSERT INTO `income` VALUES ('58', '2017-04-05 18:25:00', '职业收入', '现金账户', '100.00', '家庭公用', '', '4');
-INSERT INTO `income` VALUES ('59', '2017-04-05 20:44:00', '其他收入', '债务账户', '300.00', '本人', '', '4');
-INSERT INTO `income` VALUES ('60', '2017-02-08 15:10:00', '职业收入', '信用卡账户', '600.00', '本人', '', '4');
-INSERT INTO `income` VALUES ('61', '2017-01-03 14:25:00', '职业收入', '信用卡账户', '3000.00', '本人', '', '4');
-INSERT INTO `income` VALUES ('62', '2017-03-15 18:35:00', '职业收入', '信用卡账户', '600.00', '本人', '', '4');
+INSERT INTO `income` VALUES ('31', '2017-04-04 17:40:00', '职业收入', '信用卡账户', '100', '本人', '', '4');
+INSERT INTO `income` VALUES ('32', '2017-04-07 17:40:00', '职业收入', '信用卡账户', '200', '丈夫', '', '4');
+INSERT INTO `income` VALUES ('33', '2017-04-05 18:02:00', '职业收入', '信用卡账户', '200', '父母', '', '4');
+INSERT INTO `income` VALUES ('34', '2017-04-05 18:02:00', '职业收入', '信用卡账户', '200', '子女', '', '4');
+INSERT INTO `income` VALUES ('58', '2017-04-05 18:25:00', '职业收入', '现金账户', '100', '家庭公用', '', '4');
+INSERT INTO `income` VALUES ('59', '2017-04-05 20:44:00', '其他收入', '债务账户', '300', '本人', '', '4');
+INSERT INTO `income` VALUES ('60', '2017-02-08 15:10:00', '职业收入', '信用卡账户', '600', '本人', '', '4');
+INSERT INTO `income` VALUES ('61', '2017-01-03 14:25:00', '职业收入', '信用卡账户', '3000', '本人', '', '4');
+INSERT INTO `income` VALUES ('62', '2017-03-15 18:35:00', '职业收入', '信用卡账户', '600', '本人', '', '4');
 
 -- ----------------------------
 -- Table structure for outgo
@@ -165,7 +172,7 @@ CREATE TABLE `outgo` (
   `o_time` datetime DEFAULT NULL,
   `o_type` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `o_account` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `o_money` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `o_money` float(255,0) DEFAULT NULL,
   `o_member` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `o_remark` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `uid` int(11) DEFAULT NULL,
@@ -184,11 +191,11 @@ INSERT INTO `outgo` VALUES ('6', '2017-04-01 14:35:22', '休闲娱乐', '现金'
 INSERT INTO `outgo` VALUES ('7', '2017-03-29 14:35:42', '学习进修', '信用卡', '500', '妻子', null, '4');
 INSERT INTO `outgo` VALUES ('8', '2017-04-04 14:35:59', '医疗保健', '现金', '999', '本人', null, '4');
 INSERT INTO `outgo` VALUES ('9', '2017-04-05 14:40:03', '行车交通', '现金', '30', '妻子', null, '4');
-INSERT INTO `outgo` VALUES ('10', '2017-04-05 20:25:00', '居家物业', '信用卡账户', '100.00', '本人', '', '4');
-INSERT INTO `outgo` VALUES ('11', '2017-04-04 18:40:00', '衣服饰品', '债权账户', '200.00', '妻子', '', '4');
-INSERT INTO `outgo` VALUES ('12', '2017-04-05 20:43:00', '其他款项', '债权账户', '300.00', '本人', '', '4');
-INSERT INTO `outgo` VALUES ('13', '2017-02-22 14:20:00', '衣服饰品', '信用卡账户', '900.00', '子女', '', '4');
-INSERT INTO `outgo` VALUES ('14', '2017-01-19 23:30:00', '衣服饰品', '信用卡账户', '500.00', '子女', '', '4');
+INSERT INTO `outgo` VALUES ('10', '2017-04-05 20:25:00', '居家物业', '信用卡账户', '100', '本人', '', '4');
+INSERT INTO `outgo` VALUES ('11', '2017-04-04 18:40:00', '衣服饰品', '债权账户', '200', '妻子', '', '4');
+INSERT INTO `outgo` VALUES ('12', '2017-04-05 20:43:00', '其他款项', '债权账户', '300', '本人', '', '4');
+INSERT INTO `outgo` VALUES ('13', '2017-02-22 14:20:00', '衣服饰品', '信用卡账户', '900', '子女', '', '4');
+INSERT INTO `outgo` VALUES ('14', '2017-01-19 23:30:00', '衣服饰品', '信用卡账户', '500', '子女', '', '4');
 
 -- ----------------------------
 -- Table structure for sign
@@ -205,7 +212,7 @@ CREATE TABLE `sign` (
 -- ----------------------------
 -- Records of sign
 -- ----------------------------
-INSERT INTO `sign` VALUES ('15', '4', '1', '2017-04-02 15:38:10');
+INSERT INTO `sign` VALUES ('15', '4', '1', '2017-04-10 15:19:30');
 
 -- ----------------------------
 -- Table structure for t_account
@@ -216,12 +223,13 @@ CREATE TABLE `t_account` (
   `type` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `uid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of t_account
 -- ----------------------------
-INSERT INTO `t_account` VALUES ('1', '{\"type\":[\"信用卡账户\",\"虚拟账户\",\"现金账户\",\"债权账户\",\"债务账户\"]}', '4');
+INSERT INTO `t_account` VALUES ('1', '{\"type\":[\"银行卡账户\",\"信用卡账户\",\"虚拟账户\",\"现金账户\",\"债权账户\",\"债务账户\"]}', '4');
+INSERT INTO `t_account` VALUES ('2', '{\"type\":[\"信用卡账户\",\"银行卡账户\",\"虚拟账户\",\"现金账户\",\"债权账户\",\"债务账户\"]}', '5');
 
 -- ----------------------------
 -- Table structure for t_in
@@ -232,12 +240,13 @@ CREATE TABLE `t_in` (
   `type` varchar(255) DEFAULT NULL,
   `uid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_in
 -- ----------------------------
 INSERT INTO `t_in` VALUES ('1', '{\"type\":[\"职业收入\",\"其他收入\"]}', '4');
+INSERT INTO `t_in` VALUES ('2', '{\"type\":[\"工作收入\",\"其他收入\"]}', '5');
 
 -- ----------------------------
 -- Table structure for t_member
@@ -248,12 +257,13 @@ CREATE TABLE `t_member` (
   `type` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `uid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf32;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf32;
 
 -- ----------------------------
 -- Records of t_member
 -- ----------------------------
 INSERT INTO `t_member` VALUES ('1', '{\"type\":[\"本人\",\"丈夫\",\"妻子\",\"子女\",\"父母\",\"家庭公用\"]}', '4');
+INSERT INTO `t_member` VALUES ('2', '{\"type\":[\"本人\",\"丈夫\",\"妻子\",\"子女\",\"父母\",\"家庭公用\"]}', '5');
 
 -- ----------------------------
 -- Table structure for t_out
@@ -264,12 +274,13 @@ CREATE TABLE `t_out` (
   `type` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `uid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf32;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf32;
 
 -- ----------------------------
 -- Records of t_out
 -- ----------------------------
 INSERT INTO `t_out` VALUES ('1', '{\"type\":[\"衣服饰品\",\"食品酒水\",\"居家物业\",\"行车交通\",\"交流通讯\",\"休闲娱乐\",\"学习进修\",\"人情往来\",\"医疗保健\",\"金融保险\",\"其他款项\"]}', '4');
+INSERT INTO `t_out` VALUES ('2', '{\"type\":[\"衣服饰品\",\"食品酒水\",\"居家物业\",\"行车交通\",\"交流通讯\",\"休闲娱乐\",\"学习进修\",\"人情往来\",\"医疗保健\",\"金融保险\",\"其他款项\"]}', '5');
 
 -- ----------------------------
 -- Table structure for user
@@ -295,9 +306,33 @@ CREATE TABLE `user` (
   `safe_a_2` varchar(255) DEFAULT NULL COMMENT '答案2',
   `safe_a_3` varchar(255) DEFAULT NULL COMMENT '答案3',
   PRIMARY KEY (`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('4', 'admin', '89f0b495890138511edbca8d446aa63e', '123@123.COM', null, '', null, null, '2017-04-05 21:49:49', '36', '2017-03-26 20:27:18', null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('4', 'admin', '89f0b495890138511edbca8d446aa63e', '123@123.COM', null, '', '../../uploads/20170410\\dfe03c75162dac7f7117fbfb3d677930.png', null, '2017-04-10 15:24:54', '39', '2017-03-26 20:27:18', null, null, null, null, null, null, null);
+INSERT INTO `user` VALUES ('5', 'shaoyuan', '89f0b495890138511edbca8d446aa63e', '492843280@qq.com', null, '', '/static/img/no-icon.jpg', 'shaoyuan', '2017-04-10 16:04:33', '2', '2017-04-10 13:45:22', null, null, null, null, null, null, null);
+
+-- ----------------------------
+-- Procedure structure for register
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `register`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `register`(IN `idnum` int)
+BEGIN
+	declare v1 int;
+	set v1 = idnum;
+	insert into account(uid,a_type,a_money) values(v1,"现金账户",0.00);
+	insert into account(uid,a_type,a_money) values(v1,"虚拟账户",0.00);
+	insert into account(uid,a_type,a_money) values(v1,"债权账户",0.00);
+	insert into account(uid,a_type,a_money) values(v1,"债务账户",0.00);
+	insert into account(uid,a_type,a_money) values(v1,"信用卡账户",0.00);
+	insert into account(uid,a_type,a_money) values(v1,"银行卡账户",0.00);
+	insert into t_account(uid,type) values(v1,'{"type":["银行卡账户","信用卡账户","现金账户","虚拟账户","债权账户","债务账户"]}');
+	insert into t_out(uid,type) values(v1,'{"type":["衣服饰品","食品酒水","居家物业","行车交通","交流通讯","休闲娱乐","学习进修","人情往来","医疗保健","金融保险","其他款项"]}');
+	insert into t_in(uid,type) values(v1,'{"type":["工作收入","其他收入"]}');
+	insert into t_member(uid,type) values(v1,'{"type":["丈夫","妻子","子女","父母","家庭公用","本人"]}');
+END
+;;
+DELIMITER ;
