@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2017-04-10 22:20:36
+Date: 2017-04-11 17:03:44
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -26,7 +26,7 @@ CREATE TABLE `account` (
   `uid` int(11) DEFAULT NULL,
   `a_remark` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`aid`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of account
@@ -52,19 +52,93 @@ CREATE TABLE `books` (
   `id` int(11) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `title` varchar(255) DEFAULT NULL,
   `start` varchar(255) DEFAULT NULL,
+  `delmark` varchar(255) DEFAULT NULL,
   `end` varchar(255) DEFAULT NULL,
-  `url` varchar(255) DEFAULT NULL,
   `uid` int(11) DEFAULT NULL,
   `type` varchar(255) DEFAULT NULL,
+  `money` float DEFAULT NULL,
+  `round` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=260 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of books
 -- ----------------------------
-INSERT INTO `books` VALUES ('00000000001', '电费', '1491832194', '1491832200', null, '4', 'out');
-INSERT INTO `books` VALUES ('00000000002', '水费', '1491832194', '1491832200', null, '4', 'out');
-INSERT INTO `books` VALUES ('00000000003', '工资', '1492264194', '1492264194', null, '4', 'in');
+INSERT INTO `books` VALUES ('00000000167', '发工资了今天开心', '1491321600', '1491897235', null, '4', 'in', '4000', 'month');
+INSERT INTO `books` VALUES ('00000000168', '发工资了今天开心', '1493913600', '1491897235', null, '4', 'in', '4000', 'month');
+INSERT INTO `books` VALUES ('00000000169', '发工资了今天开心', '1496592000', '1491897235', null, '4', 'in', '4000', 'month');
+INSERT INTO `books` VALUES ('00000000170', '发工资了今天开心', '1499184000', '1491897235', null, '4', 'in', '4000', 'month');
+INSERT INTO `books` VALUES ('00000000171', '发工资了今天开心', '1501862400', '1491897235', null, '4', 'in', '4000', 'month');
+INSERT INTO `books` VALUES ('00000000172', '发工资了今天开心', '1504540800', '1491897235', null, '4', 'in', '4000', 'month');
+INSERT INTO `books` VALUES ('00000000173', '发工资了今天开心', '1507132800', '1491897235', null, '4', 'in', '4000', 'month');
+INSERT INTO `books` VALUES ('00000000174', '发工资了今天开心', '1509811200', '1491897235', null, '4', 'in', '4000', 'month');
+INSERT INTO `books` VALUES ('00000000175', '发工资了今天开心', '1512403200', '1491897235', null, '4', 'in', '4000', 'month');
+INSERT INTO `books` VALUES ('00000000176', '发工资了今天开心', '1515081600', '1491897235', null, '4', 'in', '4000', 'month');
+INSERT INTO `books` VALUES ('00000000177', '发工资了今天开心', '1517760000', '1491897235', null, '4', 'in', '4000', 'month');
+INSERT INTO `books` VALUES ('00000000178', '发工资了今天开心', '1520179200', '1491897235', null, '4', 'in', '4000', 'month');
+INSERT INTO `books` VALUES ('00000000179', '发工资了今天开心', '1522857600', '1491897235', null, '4', 'in', '4000', 'month');
+INSERT INTO `books` VALUES ('00000000180', '发工资了今天开心', '1525449600', '1491897235', null, '4', 'in', '4000', 'month');
+INSERT INTO `books` VALUES ('00000000181', '发工资了今天开心', '1528128000', '1491897235', null, '4', 'in', '4000', 'month');
+INSERT INTO `books` VALUES ('00000000182', '发工资了今天开心', '1530720000', '1491897235', null, '4', 'in', '4000', 'month');
+INSERT INTO `books` VALUES ('00000000183', '发工资了今天开心', '1533398400', '1491897235', null, '4', 'in', '4000', 'month');
+INSERT INTO `books` VALUES ('00000000184', '发工资了今天开心', '1536076800', '1491897235', null, '4', 'in', '4000', 'month');
+INSERT INTO `books` VALUES ('00000000185', '发工资了今天开心', '1538668800', '1491897235', null, '4', 'in', '4000', 'month');
+INSERT INTO `books` VALUES ('00000000186', '发工资了今天开心', '1541347200', '1491897235', null, '4', 'in', '4000', 'month');
+INSERT INTO `books` VALUES ('00000000187', '发工资了今天开心', '1543939200', '1491897235', null, '4', 'in', '4000', 'month');
+INSERT INTO `books` VALUES ('00000000188', '发工资了今天开心', '1546617600', '1491897235', null, '4', 'in', '4000', 'month');
+INSERT INTO `books` VALUES ('00000000189', '发工资了今天开心', '1549296000', '1491897235', null, '4', 'in', '4000', 'month');
+INSERT INTO `books` VALUES ('00000000190', '发工资了今天开心', '1551715200', '1491897235', null, '4', 'in', '4000', 'month');
+INSERT INTO `books` VALUES ('00000000191', '发工资了今天开心', '1554393600', '1491897235', null, '4', 'in', '4000', 'month');
+INSERT INTO `books` VALUES ('00000000198', '交房租了卧槽难过', '1492444800', '1491897270', null, '4', 'out', '1060', 'month');
+INSERT INTO `books` VALUES ('00000000199', '交房租了卧槽难过', '1495036800', '1491897270', null, '4', 'out', '1060', 'month');
+INSERT INTO `books` VALUES ('00000000200', '交房租了卧槽难过', '1497715200', '1491897270', null, '4', 'out', '1060', 'month');
+INSERT INTO `books` VALUES ('00000000201', '交房租了卧槽难过', '1500307200', '1491897270', null, '4', 'out', '1060', 'month');
+INSERT INTO `books` VALUES ('00000000202', '交房租了卧槽难过', '1502985600', '1491897270', null, '4', 'out', '1060', 'month');
+INSERT INTO `books` VALUES ('00000000203', '交房租了卧槽难过', '1505664000', '1491897270', null, '4', 'out', '1060', 'month');
+INSERT INTO `books` VALUES ('00000000204', '交房租了卧槽难过', '1508256000', '1491897270', null, '4', 'out', '1060', 'month');
+INSERT INTO `books` VALUES ('00000000205', '交房租了卧槽难过', '1510934400', '1491897270', null, '4', 'out', '1060', 'month');
+INSERT INTO `books` VALUES ('00000000206', '交房租了卧槽难过', '1513526400', '1491897270', null, '4', 'out', '1060', 'month');
+INSERT INTO `books` VALUES ('00000000207', '交房租了卧槽难过', '1516204800', '1491897270', null, '4', 'out', '1060', 'month');
+INSERT INTO `books` VALUES ('00000000208', '交房租了卧槽难过', '1518883200', '1491897270', null, '4', 'out', '1060', 'month');
+INSERT INTO `books` VALUES ('00000000209', '交房租了卧槽难过', '1521302400', '1491897270', null, '4', 'out', '1060', 'month');
+INSERT INTO `books` VALUES ('00000000210', '交房租了卧槽难过', '1523980800', '1491897270', null, '4', 'out', '1060', 'month');
+INSERT INTO `books` VALUES ('00000000211', '交房租了卧槽难过', '1526572800', '1491897270', null, '4', 'out', '1060', 'month');
+INSERT INTO `books` VALUES ('00000000212', '交房租了卧槽难过', '1529251200', '1491897270', null, '4', 'out', '1060', 'month');
+INSERT INTO `books` VALUES ('00000000213', '交房租了卧槽难过', '1531843200', '1491897270', null, '4', 'out', '1060', 'month');
+INSERT INTO `books` VALUES ('00000000214', '交房租了卧槽难过', '1534521600', '1491897270', null, '4', 'out', '1060', 'month');
+INSERT INTO `books` VALUES ('00000000215', '交房租了卧槽难过', '1537200000', '1491897270', null, '4', 'out', '1060', 'month');
+INSERT INTO `books` VALUES ('00000000216', '交房租了卧槽难过', '1539792000', '1491897270', null, '4', 'out', '1060', 'month');
+INSERT INTO `books` VALUES ('00000000217', '交房租了卧槽难过', '1542470400', '1491897270', null, '4', 'out', '1060', 'month');
+INSERT INTO `books` VALUES ('00000000218', '交房租了卧槽难过', '1545062400', '1491897270', null, '4', 'out', '1060', 'month');
+INSERT INTO `books` VALUES ('00000000219', '交房租了卧槽难过', '1547740800', '1491897270', null, '4', 'out', '1060', 'month');
+INSERT INTO `books` VALUES ('00000000220', '交房租了卧槽难过', '1550419200', '1491897270', null, '4', 'out', '1060', 'month');
+INSERT INTO `books` VALUES ('00000000221', '交房租了卧槽难过', '1552838400', '1491897270', null, '4', 'out', '1060', 'month');
+INSERT INTO `books` VALUES ('00000000222', '交房租了卧槽难过', '1555516800', '1491897270', null, '4', 'out', '1060', 'month');
+INSERT INTO `books` VALUES ('00000000229', '还花呗', '1491667200', '1491900997', null, '4', 'er', '1000', 'month');
+INSERT INTO `books` VALUES ('00000000230', '还花呗', '1494259200', '1491900997', null, '4', 'er', '1000', 'month');
+INSERT INTO `books` VALUES ('00000000231', '还花呗', '1496937600', '1491900997', null, '4', 'er', '1000', 'month');
+INSERT INTO `books` VALUES ('00000000232', '还花呗', '1499529600', '1491900997', null, '4', 'er', '1000', 'month');
+INSERT INTO `books` VALUES ('00000000233', '还花呗', '1502208000', '1491900997', null, '4', 'er', '1000', 'month');
+INSERT INTO `books` VALUES ('00000000234', '还花呗', '1504886400', '1491900997', null, '4', 'er', '1000', 'month');
+INSERT INTO `books` VALUES ('00000000235', '还花呗', '1507478400', '1491900997', null, '4', 'er', '1000', 'month');
+INSERT INTO `books` VALUES ('00000000236', '还花呗', '1510156800', '1491900997', null, '4', 'er', '1000', 'month');
+INSERT INTO `books` VALUES ('00000000237', '还花呗', '1512748800', '1491900997', null, '4', 'er', '1000', 'month');
+INSERT INTO `books` VALUES ('00000000238', '还花呗', '1515427200', '1491900997', null, '4', 'er', '1000', 'month');
+INSERT INTO `books` VALUES ('00000000239', '还花呗', '1518105600', '1491900997', null, '4', 'er', '1000', 'month');
+INSERT INTO `books` VALUES ('00000000240', '还花呗', '1520524800', '1491900997', null, '4', 'er', '1000', 'month');
+INSERT INTO `books` VALUES ('00000000241', '还花呗', '1523203200', '1491900997', null, '4', 'er', '1000', 'month');
+INSERT INTO `books` VALUES ('00000000242', '还花呗', '1525795200', '1491900997', null, '4', 'er', '1000', 'month');
+INSERT INTO `books` VALUES ('00000000243', '还花呗', '1528473600', '1491900997', null, '4', 'er', '1000', 'month');
+INSERT INTO `books` VALUES ('00000000244', '还花呗', '1531065600', '1491900997', null, '4', 'er', '1000', 'month');
+INSERT INTO `books` VALUES ('00000000245', '还花呗', '1533744000', '1491900997', null, '4', 'er', '1000', 'month');
+INSERT INTO `books` VALUES ('00000000246', '还花呗', '1536422400', '1491900997', null, '4', 'er', '1000', 'month');
+INSERT INTO `books` VALUES ('00000000247', '还花呗', '1539014400', '1491900997', null, '4', 'er', '1000', 'month');
+INSERT INTO `books` VALUES ('00000000248', '还花呗', '1541692800', '1491900997', null, '4', 'er', '1000', 'month');
+INSERT INTO `books` VALUES ('00000000249', '还花呗', '1544284800', '1491900997', null, '4', 'er', '1000', 'month');
+INSERT INTO `books` VALUES ('00000000250', '还花呗', '1546963200', '1491900997', null, '4', 'er', '1000', 'month');
+INSERT INTO `books` VALUES ('00000000251', '还花呗', '1549641600', '1491900997', null, '4', 'er', '1000', 'month');
+INSERT INTO `books` VALUES ('00000000252', '还花呗', '1552060800', '1491900997', null, '4', 'er', '1000', 'month');
+INSERT INTO `books` VALUES ('00000000253', '还花呗', '1554739200', '1491900997', null, '4', 'er', '1000', 'month');
 
 -- ----------------------------
 -- Table structure for budget
@@ -145,7 +219,7 @@ CREATE TABLE `diary` (
   `date` date DEFAULT NULL,
   `title` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=94 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of diary
@@ -246,7 +320,7 @@ CREATE TABLE `t_account` (
   `type` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `uid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of t_account
@@ -263,7 +337,7 @@ CREATE TABLE `t_in` (
   `type` varchar(255) DEFAULT NULL,
   `uid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_in
@@ -280,7 +354,7 @@ CREATE TABLE `t_member` (
   `type` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `uid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf32;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf32;
 
 -- ----------------------------
 -- Records of t_member
@@ -297,7 +371,7 @@ CREATE TABLE `t_out` (
   `type` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `uid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf32;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf32;
 
 -- ----------------------------
 -- Records of t_out
@@ -329,12 +403,12 @@ CREATE TABLE `user` (
   `safe_a_2` varchar(255) DEFAULT NULL COMMENT '答案2',
   `safe_a_3` varchar(255) DEFAULT NULL COMMENT '答案3',
   PRIMARY KEY (`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('4', 'admin', '89f0b495890138511edbca8d446aa63e', '123@123.COM', null, '', '../../uploads/20170410\\f573d9b701ab2fedab612739704e780f.png', null, '2017-04-10 22:03:26', '43', '2017-03-26 20:27:18', null, '', '', '', '', '', '');
+INSERT INTO `user` VALUES ('4', 'admin', '89f0b495890138511edbca8d446aa63e', '123@123.COM', null, '', '../../uploads/20170410\\f573d9b701ab2fedab612739704e780f.png', null, '2017-04-11 14:21:39', '44', '2017-03-26 20:27:18', null, '', '', '', '', '', '');
 INSERT INTO `user` VALUES ('5', 'shaoyuan', '89f0b495890138511edbca8d446aa63e', '492843280@qq.com', null, '', '/static/img/no-icon.jpg', 'shaoyuan', '2017-04-10 16:04:33', '2', '2017-04-10 13:45:22', null, null, null, null, null, null, null);
 
 -- ----------------------------

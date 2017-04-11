@@ -4,6 +4,100 @@
 #calendar{
     color: #000000;
 }
+.fc-state-default .fc-button-inner{
+    background: rgba(242, 242, 242, 0);
+}
+.fc-state-active .fc-button-inner{
+   background: #CCCCCC;
+}
+.fc-grid .fc-day-number{
+    padding:0px;
+}
+.look-table,
+.books-table{
+    margin-bottom:0px;
+}
+.look-table tbody tr td:first-child{
+    width: 50%;
+    padding-left: 80px;
+}
+.look-table tbody tr:first-child td:first-child{
+    padding-left: 30px;
+}
+.look-table tbody tr:first-child td{
+    border-bottom: 1px solid #ddd;
+}
+.look-table tbody tr td{
+    border:0px;
+}
+.look_title{
+    font-size:20px; 
+}
+.books-table tbody tr td{
+    border-top: 0px;
+}
+.books-table tbody tr td:first-child{
+    width: 25%;
+    text-align: right;
+    padding-right: 20px;
+    vertical-align: middle;
+}
+.form-control{
+    height: 26px;
+    padding: 0px 6px;
+    width: 85%;
+}
+.input-group {
+    width: 85%;
+}
+.btn-danger,
+.btn-default{
+    padding: 3px 12px;
+    font-size: 13px;
+    line-height: 14px;
+}
+.event_css{
+    cursor: pointer;
+    border-bottom-left-radius:3px;
+    border-bottom-right-radius:3px;
+    border-top-left-radius:3px;
+    border-top-right-radius:3px;
+}
+.msgs{
+    min-width: 150px;
+    max-width: 200px;
+    min-height: 50px;
+    font: 100 13px/1 "微软雅黑";
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    z-index: 10;
+    border: 1px solid #FDE4C8;
+    background-color: #fff4e8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.msghead{
+    background-color: #FDE4C8;
+    height: 18px;
+    color: #797979;
+    padding: 3px 10px;
+}
+.msgbody{
+    padding-left: 10px;
+}
+.con1, .con2{
+    padding:10px;
+}
+.con2{
+    padding-top:0px;
+}
+p{
+    margin: 0px;
+}
 </style>
 <section id="main-content">
     <section class="wrapper">
@@ -17,12 +111,160 @@
                 </section>
             </aside>
         </div>
+        <!-- 添加框 -->
+        <div class="modal fade" id="addbook" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" style="width: 400px;">
+                <div class="modal-content" style="margin-top:300px;">
+                    <div class="modal-header" style="padding:5px;padding-left:10px;border-top-left-radius:5px;border-top-right-radius:5px;">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" style="font-size:15px;">
+                            添加周期账本
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                       <table class="table books-table">
+                            <tbody>
+                                <tr>
+                                    <td>名称</td>
+                                    <td>
+                                        <div class="input-group">
+                                            <span style="padding:3px 4px 0px 4px;" class="input-group-addon">
+                                                <label ><i class="fa fa-vcard-o "></i></label>
+                                            </span>
+                                            <input data-container="body" data-toggle="popover" data-trigger="manual" data-placement="bottom" 
+                                                type="text" class="form-control" id="title"/>										
+                                        </div>  
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>类型</td>
+                                    <td>
+                                        <div class="input-group">
+                                            <span style="padding:3px 6px 0px 6px;" class="input-group-addon">
+                                                <label ><i class="fa fa-user-o "></i></label>
+                                            </span>
+                                            <select type="text" class="form-control" id="type">		
+                                                <option value="in">收入</option>
+                                                <option value="out">支出</option>
+                                                <option value="er">还债</option>
+                                                <option value="or">收债</option>
+                                            </select>								
+                                        </div>  
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>金额</td>
+                                    <td>
+                                        <div class="input-group">
+                                            <span style="padding:3px 4px 0px 4px;" class="input-group-addon">
+                                                <label ><i class="fa fa-vcard-o "></i></label>
+                                            </span>
+                                            <input type="number" min="0" step="10" class="form-control" id="money"/>										
+                                        </div>  
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>时间</td>
+                                    <td>
+                                        <div class="input-group">
+                                            <span style="padding:4px 4px 0px 4px;" class="input-group-addon">
+                                                <label ><i class="fa fa-venus-mars "></i></label>
+                                            </span>
+                                            <input type="text" class="form-control" id="date"/>
+                                        </div> 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>周期</td>
+                                    <td>
+                                        <div class="input-group">
+                                            <span style="padding:3px 8px 0px 8px;" class="input-group-addon">
+                                                <label ><i class="fa fa-mobile-phone fa-lg"></i></label>
+                                            </span>
+                                            <select type="text" class="form-control" id="round">		
+                                                <option value="month">每月</option>
+                                                <option value="quarter">每季度</option>
+                                                <option value="halfyear">每半年</option>
+                                                <option value="year">每年</option>
+                                            </select>									
+                                        </div>  
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer" style="padding: 5px;text-align: center">
+                        <button type="button" class="btn btn-default" onclick="submitBooks()">确 定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 查看框 -->
+        <div class="modal fade" id="lookbook" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" style="width: 400px;">
+                <div class="modal-content" style="margin-top:300px;">
+                    <div class="modal-header" style="padding:5px;padding-left:10px;border-top-left-radius:5px;border-top-right-radius:5px;">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" style="font-size:15px;">
+                            查看周期账本
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                       <table class="table look-table">
+                            <tbody>
+                                <tr>
+                                    <td colspan="2" class="look_title"></td>
+                                    <input type="hidden" id="delmark">
+                                </tr>
+                                <tr>
+                                    <td>类型</td>
+                                    <td class="look_type"></td>
+                                </tr>
+                                <tr>
+                                    <td>金额</td>
+                                    <td class="look_money"></td>
+                                </tr>
+                                <tr>
+                                    <td>时间</td>
+                                    <td class="look_date"></td>
+                                </tr>
+                                <tr>
+                                    <td>周期</td>
+                                    <td class="look_round"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer" style="padding: 5px;text-align: center">
+                        <button type="button" class="btn btn-danger " onclick="delBooks()">删 除</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="msgs">
+            <div class="msghead"></div>
+            <div class="msgbody">
+                <p class="con1"></p>
+                <p class="con2"></p>
+            </div>
+        </div>
 	</section>
 </section>
 
 <script src="/dist/js/fullcalendar/fullcalendar.min.js"></script>
 <script>
 $(document).ready(function() {
+    $('#date').datetimepicker({
+        format: 'yyyy-mm-dd',
+        language:'zh-CN',
+        todayBtn:'linked',
+        minView:2,
+        autoclose:true
+    });
     // 页面加载完毕，初始化Canlendar
     $('#calendar').fullCalendar({
         // 你的配置和回调函数
@@ -52,40 +294,192 @@ $(document).ready(function() {
         header: {
             left: 'prev,next today',
             center: 'title',
-            right: 'month,agendaWeek,agendaDay'
+            right: 'month'
         },
         dayClick: function (date, allDay, jsEvent, view) {
-            if (allDay) {
-                alert('Clicked on the entire day: ' + date);
-            }else{
-                alert('Clicked on the slot: ' + date);
-            }
-    
-            alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-
+            date = FormatDate(date);
+            $("#date").val(date);
+            $("#addbook").modal({backdrop:false});
         },
         eventSources: [
             {
                 url: '/index/books/get_events_in',
-                color: 'yellow',   // a non-ajax option
-                textColor: 'black' // a non-ajax option
+                backgroundColor:'#95D195',
+                borderColor:'#5cb85c',
+                textColor: '#ffffff', 
+                className: 'event_css'
+            },
+            {
+                url: '/index/books/get_events_out',
+                backgroundColor:'#F5CA8C',
+                borderColor:'#f0ad4e',
+                textColor: '#ffffff', 
+                className: 'event_css'
+            },
+            {
+                url: '/index/books/get_events_or',
+                backgroundColor:'#7BA9D0',
+                borderColor:'#337ab7',
+                textColor: '#ffffff', 
+                className: 'event_css'
+            },
+            {
+                url: '/index/books/get_events_er',
+                backgroundColor:'#E68F8D',
+                borderColor:'#c9302c',
+                textColor: '#ffffff', 
+                className: 'event_css'
             }
-    
-            // any other sources...
     
         ],
-        eventClick: function(event) {
-            if (event.url) {
-                window.open(event.url);
-            }
+        eventClick: function(event, jsEvent, view) {
+            let obj = [event][0];
+            let title = obj.title;
+            var type = obj.type;
+            switch(type){
+                case 'in':
+                    type = '收入';
+                    break;
+                case 'out':
+                    type = '支出';
+                    break;
+                case 'or':
+                    type = '收债';
+                    break;
+                case 'er':
+                    type = '还债';
+                    break;
+            };
+            let money = obj.money;
+            let date = FormatDate(obj.start);
+            let round = obj.round;
+            switch(round){
+                case 'month':
+                    round = '每月';
+                    break;
+                case 'quarter':
+                    round = '每季度';
+                    break;
+                case 'halfyear':
+                    round = '每半年';
+                    break;
+                case 'year':
+                    round = '每年';
+                    break;
+            };
+            let delmark = obj.delmark;
+            showBook(title,type,money,date,round,delmark);
         },
         eventMouseout :function( event, jsEvent, view ) { 
-            console.log(event.title);
+            $(".msgs").hide();
         },
         eventMouseover :function( event, jsEvent, view ) { 
-            alert(event.title);
-        },
+            var clientX = jsEvent.clientX;
+            var clientY = jsEvent.clientY;
+            setTimeout(function () {
+                $(".msgs").css("left", clientX).css("top", clientY);
+                if (event.title == "") {
+                    $(".msgs").hide();
+                } else {
+                    var type = event.type;
+                    switch(type){
+                        case 'in':
+                            type = '收入';
+                            break;
+                        case 'out':
+                            type = '支出';
+                            break;
+                        case 'or':
+                            type = '收债';
+                            break;
+                        case 'er':
+                            type = '还债';
+                            break;
+                    };
+                    $(".msghead").text(event.title);
+                    $(".con1").text("类型:"+type);
+                    $(".con2").text("金额:"+event.money);
+                    $(".msgs").show();
+                }
+            }, 300);
+        }
     });
+    
 })
+function submitBooks(){ // 添加周期账本
+    var title = $("#title").val().replace(/\s/g, "");
+    var type = $("#type").val().replace(/\s/g, "");
+    var money = $("#money").val().replace(/\s/g, "");
+    var date = $("#date").val().replace(/\s/g, "");
+    var round = $("#round").val().replace(/\s/g, "");
+    if(title.length>16){
+        $("#title").attr('data-content','描述太多啦');
+        $("#title").popover('show');
+        setTimeout(function(){					
+            $("#title").popover('hide');
+        },500);
+        return false;
+    }
+    $.ajax({
+        type: "post",
+        url: '/index/books/add_book',
+        dataType: "json",
+        data: {title:title,type:type,money:money,date:date,round:round},
+        cache: true,
+        async: false,
+        success: function (msg) {
+            if(msg.success){
+                freshData();
+                $("#addbook").modal("hide");
+                $('#calendar').fullCalendar('refetchEvents');
+            }
+        },
+        error: function (e) {
+            console.log(e);
+        }
+    });
+}
+function showBook(title,type,money,date,round,delmark){ // 查看周期账本
+    $(".look_title").text(title);
+    $(".look_type").text(type);
+    $(".look_money").text(money);
+    $(".look_date").text(date);
+    $(".look_round").text(round);
+    $("#delmark").val(delmark);
+    $("#lookbook").modal({backdrop:false});
+}
+function delBooks(){
+    let delmark = $("#delmark").val();
+    $.ajax({
+        type: "post",
+        url: '/index/books/del_books',
+        dataType: "json",
+        data: {delmark:delmark},
+        cache: true,
+        async: false,
+        success: function (msg) {
+            if(msg.success){
+                $("#lookbook").modal("hide");
+                $('#calendar').fullCalendar('refetchEvents');
+            }
+        },
+        error: function (e) {
+            console.log(e);
+        }
+    });
+    
+};
+function FormatDate (strTime) { //格式化日期
+    var date = new Date(strTime);
+    return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
+}
+function freshData(){ //添加周期账本后清空modal数据
+    $("#title").val("");
+    $("#type").val("");
+    $("#money").val("");
+    $("#date").val("");
+    $("#round").val("");
+}
+
 </script>
 

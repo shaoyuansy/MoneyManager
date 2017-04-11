@@ -185,8 +185,7 @@ function getOutdata(start,end){
         tooltip: {
             formatter: function () {
                 return '<b>' + this.x + '</b><br/>'+
-                    this.series.name + ': ' + this.y + '元 ' + '<br/>' +
-                    '合计: ' + this.point.stackTotal + '元';
+                    this.series.name + ': ' + this.y + '元 ';
             }
         },
         plotOptions: {
@@ -256,8 +255,7 @@ function getIndata(start,end){
         tooltip: {
             formatter: function () {
                 return '<b>' + this.x + '</b><br/>'+
-                    this.series.name + ': ' + this.y + '元 ' + '<br/>' +
-                    '合计: ' + this.point.stackTotal + '元';
+                    this.series.name + ': ' + this.y + '元 ';
             }
         },
         plotOptions: {
@@ -268,8 +266,9 @@ function getIndata(start,end){
         series: [{
             name: '收入',
             data: money,
-            showInLegend: false // 设置为 false 即为不显示在图例中
-        }]
+            showInLegend: false, // 设置为 false 即为不显示在图例中
+        }],
+        plotOptions: { column: { pointPadding: 0.2, borderWidth: 0, pointWidth: 30 } }
     });
 }
 
