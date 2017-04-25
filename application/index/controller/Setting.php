@@ -44,7 +44,7 @@ class Setting extends Controller
 			'icon'      => $userArr['icon'],
             'sex'       => $userArr['sex'],
             'phone'     => $userArr['phone'],
-            'email'  => $userArr['email'],
+            'email'     => $userArr['email'],
             'last_time' => $userArr['last_login_time'],
             'realname'  => $userArr['realname'],
             'safe_q_1'  => $userArr['safe_q_1'],
@@ -57,7 +57,7 @@ class Setting extends Controller
 		}
 	}
 
-    public function set_user(){ //保存个人资料
+    public function set_user(){ // 设置个人资料
         if(request()->isPost()){     
             $uid = session('user_auth.uid');  
             $nikename = input('post.nikename');
@@ -75,7 +75,7 @@ class Setting extends Controller
         }
     }
 
-    public function set_safe(){
+    public function set_safe(){ // 设置安全问题
         if(request()->isPost()){     
             $uid = session('user_auth.uid');  
             $safe_q_1 = input('post.safe_q_1');
@@ -116,7 +116,7 @@ class Setting extends Controller
         }
     }
 
-    public function change_password(){ //修改密码
+    public function change_password(){ // 修改密码
         if(request()->isPost()){     
             $uid = session('user_auth.uid');  
             $opwd = input('post.opwd');

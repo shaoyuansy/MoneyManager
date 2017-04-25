@@ -62,6 +62,7 @@ class Home extends Controller
 		}
 	}
 	
+	//首页近6个月收支
 	public function inout(){
 		$time = Array();
 		$in = Array(0,0,0,0,0,0);
@@ -70,7 +71,7 @@ class Home extends Controller
 		$income = new IncomeModel;
 		$data = $income->get_inout($uid);
 		for($i = 5 ; $i >= 0 ; $i--){
-			array_push($time,date("Y-m", strtotime("-".$i." month")));//获取格式
+			array_push($time,date("Y-m", strtotime("-".$i." month")));//获取格式  strtotime获取时间戳
 		};
 		for($n = 0 ; $n < count($time) ; $n++ ){
 			for($m = 0 ; $m < count($data['in']) ; $m++ ){

@@ -64,7 +64,7 @@ class AccountModel extends Model{
 		}
 	}
 
-	public function sub_money($uid,$account,$money){
+	public function sub_money($uid,$account,$money){//结余的钱
 		$moneydata = Db::table('account')->where('uid',$uid)->where('a_type',$account)->field('a_money')->select();
 		if(count($moneydata)>0){
 			$moneydata = $moneydata[0]['a_money'];

@@ -108,7 +108,7 @@ class Account extends Controller{
 		$result = $income->select_income($uid);
 		$data = [];
 		if(count($result) > 0){
-			foreach($result as &$arr){
+			foreach($result as &$arr){//魔术变量
 				array_push($data,array_values($arr));
 			}
 			$jsonData = array('success'=>true,'data'=>$data);
@@ -184,7 +184,7 @@ class Account extends Controller{
 		}
 	}
 
-		//删除支出记录
+	//删除支出记录
 	public function del_outgo(){
 		if(request()->isPost()){
 			$del = input('post.del');
