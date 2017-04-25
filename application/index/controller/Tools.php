@@ -16,7 +16,6 @@ class Tools extends Controller{
             $user = new UserModel;
             $result = $user->save_icon($uid,$path);
             if($result){
-                session('user_auth.icon',$path);
                 $jsonData = array('success'=>true,'data'=>$path);
             }else{
                 $jsonData = array('success'=>false,'errorMessage'=>'头像保存失败','data'=>'');

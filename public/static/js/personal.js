@@ -165,7 +165,7 @@ function change_email(){ //修改安全邮箱
 	});
 }
 
-function save_person(){ //修改安全问题
+function save_questions(){ //修改安全问题
 	var safe_q_1 = $("#safe_q_1").val();
 	var safe_q_2 = $("#safe_q_2").val();
 	var safe_q_3 = $("#safe_q_3").val();

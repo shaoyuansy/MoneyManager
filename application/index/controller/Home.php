@@ -19,14 +19,15 @@ class Home extends Controller
     }
 	
 	public function get_user(){
-		$nikename = session ('user_auth.nikename');
-		$icon = session ('user_auth.icon');
-		$data = [
-			'nikename' => $nikename,
-			'icon' => $icon,
+		$uid = session('user_auth.uid');
+		$user = new UserModel;
+		$data = $user->get_user($uid);
+		$arr = [
+			'nikename' => $data['nikename'],
+			'icon' => $data['icon'],
 		];
 		if(!empty($data)){
-			$jsonData = array('success'=>true,'data'=>$data);
+			$jsonData = array('success'=>true,'data'=>$arr);
 			return json($jsonData);
 		}
 	}

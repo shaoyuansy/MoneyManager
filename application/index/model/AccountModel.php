@@ -27,13 +27,16 @@ class AccountModel extends Model{
 				if($account['a_type'] === "债权账户"){
 					$asset += floatval($account['a_money']);
 				}
+				if($account['a_type'] === "银行卡账户"){
+					$asset += floatval($account['a_money']);
+				}
 				if($account['a_type'] === "债务账户"){
 					$debtee += floatval($account['a_money']);
 				}
 			}
 			$all['asset'] = sprintf("%1\$.2f",$asset);
 			$all['debtee'] = sprintf("%1\$.2f",$debtee);
-			$all['netasset'] = sprintf("%1\$.2f",$asset - $debtee);
+			$all['netasset'] = $debtee < 0 ? sprintf("%1\$.2f",$asset + $debtee) : sprintf("%1\$.2f",$asset - $debtee);
 			return $all;
 		}
 	}

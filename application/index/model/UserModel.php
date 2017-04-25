@@ -65,8 +65,6 @@ class UserModel extends Model{
 	public function init_user($uid){
 		Db::query('call register('.$uid.')');
 	}
-
-
 	// ↓ 注释部分直接使用存储过程代替，初始化注册用户信息
 	// public function add_account($uid){ //注册用户添加默认账户
 	// 	$data = [
