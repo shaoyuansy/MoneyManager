@@ -51,6 +51,7 @@
 $().ready(function(){
     get_account();
 })
+
 function get_account(){
     var account_type = [];
     var account_money = [];
@@ -68,6 +69,7 @@ function get_account(){
             console.log(e);
         }
     });
+
     $('#account-chart').highcharts({
         chart: {
             type: 'column',
@@ -86,7 +88,6 @@ function get_account(){
 			}
         },
         yAxis: {
-            min: 0,
             title: {
                 text: '金额/元'
             },
@@ -115,6 +116,9 @@ function get_account(){
                 pointPadding: 0.2,
                 borderWidth: 0
             }
+        },
+        credits: {
+            enabled: false
         },
         series: [{
             name: '账户金额',
